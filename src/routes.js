@@ -11,9 +11,8 @@ class Routes extends Component {
   render() {
 
     return (
-      <Switch>
-        <Routes path="/" component={Home} />
-      </Switch>
+      <Routes path="/" component={Home} />
+    
     )
   }
 }
@@ -40,5 +39,4 @@ class Routes extends Component {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(
-  null, null)(Routes))
+export default Routes;
