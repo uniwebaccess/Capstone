@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+const puppeteer = require ('puppeteer');
 
 async function checkHeders(page){
   let headers = await page.$$eval('h1, h2, h3, h4, h5, h6', (headers)=>{

@@ -1,6 +1,6 @@
-import puppeteer from 'puppeteer';
-import checkHeders from './checkHtag';
-import checkImgAlt from './checkImg'
+const puppeteer = require ('puppeteer');
+const checkHeders = require ('./checkHtag');
+const checkImgAlt = require ('./checkImg');
 
 async function checkPage(url) {
   const browser = await puppeteer.launch();
@@ -21,7 +21,7 @@ async function checkPage(url) {
 
 async function main(url) {
   let score = await checkPage(url);
-  console.log(score);
+  return score;
 }
 
 export default main;

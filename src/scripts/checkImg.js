@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+const puppeteer = require ('puppeteer');
 
 async function checkImgAlt(page) {
   let result = await page.$$eval("img", imgs => {

@@ -1,12 +1,14 @@
 import React from "react";
 import database from "./Firebase/firebase";
-//import main from '../scripts'
+//import puppeteer from 'puppeteer';
+//import main from '../scripts/index.js'
 
 class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       scrapeId: "",
+
     };
     this.onAdd = this.onAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -18,13 +20,13 @@ class Input extends React.Component {
     });
   }
 
-  onAdd(evt) {
+  async onAdd(evt) {
     evt.preventDefault();
     database.ref("/scans/").push({
       url: this.state.scrapeId,
     });
     this.setState({ scrapeId: "" });
-   // main("https://en.wikipedia.org/wiki/Penguin")
+    const res = await axios.get('/api/url', {url: this.state.scrapeId})
   }
   render() {
     return (
