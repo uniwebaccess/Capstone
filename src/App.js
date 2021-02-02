@@ -1,26 +1,26 @@
-
-import './style/App.css';
-import React from 'react'
-import Routes from './routes'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Home from './components/Home'
-import NavBar from './components/Navbar'
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import "./style/App.css";
+import React from "react";
+import Routes from "./routes";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import NavBar from "./components/Navbar";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import Input from "./components/Input";
+import TestResults from "./components/TestResults";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#44ff00',
+      main: "#44ff00",
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#66ffff',
-      main: '#0044ff',
+      light: "#66ffff",
+      main: "#0044ff",
       // dark: will be calculated from palette.secondary.main,
     },
     // Used by `getContrastText()` to maximize the contrast between
@@ -36,16 +36,17 @@ const theme = createMuiTheme({
 function App() {
   return (
     //<ThemeProvider theme={theme}>
-      <div className="App">
-          <div className="main">
-            <NavBar />
-            <h1>Hello World</h1>
-            <Home />
-             <Routes />
-          </div>
-           <Input />
-          <Footer />
+    <div className="App">
+      <div className="main">
+        <NavBar />
+        <h1>Hello World</h1>
+        <Home />
+        {/* <Routes /> */}
       </div>
+      <Input />
+      <Footer />
+      <TestResults />
+    </div>
     //</ThemeProvider>
   );
 }

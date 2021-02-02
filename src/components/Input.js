@@ -27,9 +27,15 @@ class Input extends React.Component {
   render() {
     return (
       <div className="Input">
-        <form onSubmit={this.onAdd} onChange={this.handleChange}>
+        <form onSubmit={this.onAdd}>
           <label className="scrapeId">Scrape Id</label>
-          <input type="text" name="scrapeId" id="scrapeId" />
+          <input
+            type="text"
+            name="scrapeId"
+            id="scrapeId"
+            value={this.state.scrapeId}
+            onChange={this.handleChange}
+          />
           <br />
           <button id="addBtn" type="submit">
             Add
