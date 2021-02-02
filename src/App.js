@@ -41,7 +41,7 @@ function App() {
             <NavBar />
             <h1>Hello World</h1>
             <Home />
-             <Routes />
+
           </div>
            <Input />
           <Footer />
