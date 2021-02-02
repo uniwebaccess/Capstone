@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import database from "./Firebase/firebase";
+import React, { Component } from 'react';
+import database from './Firebase/firebase';
 /*
  * Page to render results of tests
  */
@@ -21,25 +21,21 @@ class TestResult extends Component {
     this.retrieveData();
   }
 
-  //Change url to make it only characters that Firebase allows
-  //Temporarily in the component, but this function should be moved higher up in component tree and passed down as a property
-  substituteUrl() {}
-
   retrieveData() {
     //call the retrieve data function on database retrieving the data where the url is this.props.url
     let resultObject = {};
 
     //Sets the reference of where in firebase we are pulling data
     // '/scans/' + this.props.url brings us to  scans -> url and returns object of all of the data stored under that url
-    var ref = database.ref("scans");
+    var ref = database.ref('scans');
 
     // .once retrieves data once wheras .on would continuously update
-    ref.once("value", (snapshot) => {
+    ref.once('value', (snapshot) => {
       if (snapshot.exists()) {
         resultObject = snapshot.val();
-        console.log("the snapshot of the data returns ", resultObject);
+        console.log('the snapshot of the data returns ', resultObject);
       } else {
-        console.log("could not find scrape for the url");
+        console.log('could not find scrape for the url');
       }
     });
   }
