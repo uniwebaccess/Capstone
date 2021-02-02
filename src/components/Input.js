@@ -1,5 +1,6 @@
 import React from "react";
 import database from "./Firebase/firebase";
+//import main from '../scripts'
 
 class Input extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Input extends React.Component {
       url: this.state.scrapeId,
     });
     this.setState({ scrapeId: "" });
+   // main("https://en.wikipedia.org/wiki/Penguin")
   }
   render() {
     return (
