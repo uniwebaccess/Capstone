@@ -52,26 +52,26 @@ class TestResult extends Component {
         {this.state.data !== null ? (
           <div>
             <ul>
-              <li>Total images: {this.state.data.imgAltScore.allImages}</li>
+              <li>Total images: {this.state.data.imagesResult.allImages}</li>
               <li>
                 Images with valid atribute alt:{" "}
-                {this.state.data.imgAltScore.imagesWithAlt}
+                {this.state.data.imagesResult.imagesWithAlt}
               </li>
               <li>
                 Test passed:{" "}
-                {this.state.data.imgAltScore.passed
+                {this.state.data.imagesResult.passed
                   ? "Test passed"
                   : "Test failed"}
               </li>
               <li>
-                Percent passed images: {this.state.data.imgAltScore.percent}
+                Percent passed images: {this.state.data.imagesResult.percent}
               </li>
               <li>Total Score: {this.state.data.score}</li>
             </ul>
           </div>
         ) : (
-          <div />
-        )}
+            <div />
+          )}
       </div>
     );
   }
