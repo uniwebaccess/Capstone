@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import TestResults from './components/TestResults';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
+import TestResults from "./components/TestResults";
 
 class Routes extends Component {
   // componentDidMount() {
@@ -13,7 +13,7 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path="/" component={Home} />
-        <Route exact path="/testresults" component={TestResults} />
+        <Route exact path="/testresults/:urlKey" component={TestResults} />
       </div>
     );
   }

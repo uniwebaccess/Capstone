@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import database from './Firebase/firebase';
+import React, { Component } from "react";
+import database from "./Firebase/firebase";
 /*
  * Page to render results of tests
  */
@@ -14,6 +14,10 @@ class TestResult extends Component {
   //{url: inputUrl} -> this.props.url
   constructor(props) {
     super(props);
+    this.state = {
+      data: null,
+    };
+    // this.props.urlKey = "https:\\\\en,wikipedia,org\\wiki\\Penguin";
     this.retrieveData = this.retrieveData.bind(this);
   }
 
@@ -27,15 +31,16 @@ class TestResult extends Component {
 
     //Sets the reference of where in firebase we are pulling data
     // '/scans/' + this.props.url brings us to  scans -> url and returns object of all of the data stored under that url
-    var ref = database.ref('scans');
+    var ref = database.ref("scans" + this.props.match.params.urlKey);
 
     // .once retrieves data once wheras .on would continuously update
-    ref.once('value', (snapshot) => {
+    ref.once("value", (snapshot) => {
       if (snapshot.exists()) {
         resultObject = snapshot.val();
-        console.log('the snapshot of the data returns ', resultObject);
+        console.log("the snapshot of the data returns ", resultObject);
+        this.setState({ data: resultObject });
       } else {
-        console.log('could not find scrape for the url');
+        console.log("could not find scrape for the url");
       }
     });
   }
@@ -44,6 +49,29 @@ class TestResult extends Component {
     return (
       <div>
         <h1>Test result page</h1>
+        {this.state.data !== null ? (
+          <div>
+            <ul>
+              <li>Total images: {this.state.data.imgAltScore.allImages}</li>
+              <li>
+                Images with valid atribute alt:{" "}
+                {this.state.data.imgAltScore.imagesWithAlt}
+              </li>
+              <li>
+                Test passed:{" "}
+                {this.state.data.imgAltScore.passed
+                  ? "Test passed"
+                  : "Test failed"}
+              </li>
+              <li>
+                Percent passed images: {this.state.data.imgAltScore.percent}
+              </li>
+              <li>Total Score: {this.state.data.score}</li>
+            </ul>
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
     );
   }
