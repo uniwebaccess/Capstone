@@ -1,6 +1,6 @@
 
 
-async function checkHeders(page) {
+async function headingsCheck(page) {
   let headers = await page.$$eval('h1, h2, h3, h4, h5, h6', (headers) => {
     return headers.map(header => header.tagName)
   })
@@ -23,4 +23,4 @@ async function checkHeders(page) {
   }
 };
 
-module.exports = checkHeders;
+module.exports = headingsCheck;
