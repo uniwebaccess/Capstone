@@ -16,12 +16,13 @@ class TestResult extends Component {
     super(props);
     this.state = {
       data: null,
+      url: "",
     };
-    // this.props.urlKey = "https:\\\\en,wikipedia,org\\wiki\\Penguin";
     this.retrieveData = this.retrieveData.bind(this);
   }
 
   componentDidMount() {
+    console.log("url key propery is ", this.props.match.params.urlKey);
     this.retrieveData();
   }
 
@@ -30,15 +31,16 @@ class TestResult extends Component {
     let resultObject = {};
 
     //Sets the reference of where in firebase we are pulling data
-    // '/scans/' + this.props.url brings us to  scans -> url and returns object of all of the data stored under that url
-    var ref = database.ref("scans" + this.props.match.params.urlKey);
+    // '/scans/' + urlKey property brings us to  scans -> url and returns object of all of the data stored under that url
+    const urlKey = this.props.match.params.urlKey;
+    const ref = database.ref("/scans/" + urlKey);
 
     // .once retrieves data once wheras .on would continuously update
     ref.once("value", (snapshot) => {
       if (snapshot.exists()) {
         resultObject = snapshot.val();
         console.log("the snapshot of the data returns ", resultObject);
-        this.setState({ data: resultObject });
+        this.setState({ data: resultObject.data, url: resultObject.url });
       } else {
         console.log("could not find scrape for the url");
       }
@@ -48,7 +50,8 @@ class TestResult extends Component {
   render() {
     return (
       <div>
-        <h1>Test result page</h1>
+        <h1>Showing results for:</h1>
+        <p> {this.state.url}</p>
         {this.state.data !== null ? (
           <div>
             <ul>

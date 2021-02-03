@@ -13,7 +13,7 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path="/" component={Home} />
-        <Route exact path="/testresults/:urlKey" component={TestResults} />
+        <Route path="/testresults/:urlKey" component={TestResults} />
       </div>
     );
   }

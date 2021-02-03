@@ -35,11 +35,10 @@ class Input extends React.Component {
   }
 
   //Change url to make it only characters that Firebase allows
-  //Temporarily in the component, but this function should be moved higher up in component tree and passed down as a property
   keyifyUrl(inputUrl) {
     //replace . with ,
     //replace / with \
-    let urlKey = inputUrl.replace(/\./g, ",").replace(/\//g, "\\");
+    let urlKey = inputUrl.replace(/\./g, ",").replace(/\//g, "=");
     return urlKey;
   }
 
