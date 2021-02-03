@@ -9,7 +9,7 @@ class Input extends React.Component {
     this.state = {
       inputUrl: "",
     };
-    this.onAdd = this.onAdd.bind(this);
+    this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.keyifyUrl = this.keyifyUrl.bind(this);
   }
@@ -20,24 +20,28 @@ class Input extends React.Component {
     });
   }
 
-  async onAdd(evt) {
+  //Function for onSubmit
+  async onInput(evt) {
     evt.preventDefault();
     console.log("url", this.state.inputUrl);
+
+    //Makes backend call to perform scrape
     const res = await axios.post("/api/url", { url: this.state.inputUrl });
+
+    //Changes input url to firebase key
     const urlKey = this.keyifyUrl(this.state.inputUrl);
+
+    //Adds response data and url to "/scans" in db
     database
       .ref("/scans/" + urlKey)
       .set({ url: this.state.inputUrl, data: res.data })
       .then(history.push(`/testresults/${urlKey}`));
-    // this.setState({ inputUrl: "" });
-    // console.log("our state:", this.state);
-    // console.log("res", res.data);
   }
 
-  //Change url to make it only characters that Firebase allows
+  //Function to change url to characters that Firebase allows
   keyifyUrl(inputUrl) {
     //replace . with ,
-    //replace / with \
+    //replace / with =
     let urlKey = inputUrl.replace(/\./g, ",").replace(/\//g, "=");
     return urlKey;
   }
@@ -45,7 +49,7 @@ class Input extends React.Component {
   render() {
     return (
       <div className="Input">
-        <form onSubmit={this.onAdd}>
+        <form onSubmit={this.onInput}>
           <label className="inputUrl">Url to Test</label>
           <input
             type="text"
@@ -56,28 +60,9 @@ class Input extends React.Component {
           />
           <br />
           <button id="addBtn" type="submit">
-            Add
+            Test Url
           </button>
         </form>
-        {/* {this.state.data !== null ? (<div>
-          <ul>
-            <li>
-              Total images: {this.state.data.imgAltScore.allImages}
-            </li>
-            <li>
-              Images with valid atribute alt: {this.state.data.imgAltScore.imagesWithAlt}
-            </li>
-            <li>
-              Test passed: {this.state.data.imgAltScore.passed ? "Test passed":"Test failed"}
-            </li>
-            <li>
-              Percent passed images: {this.state.data.imgAltScore.percent}
-            </li>
-            <li>
-              Total Score: {this.state.data.score}
-            </li>
-          </ul>
-        </div>): (<div/>)} */}
       </div>
     );
   }
