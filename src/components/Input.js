@@ -23,17 +23,19 @@ class Input extends React.Component {
 
   async onAdd(evt) {
     evt.preventDefault();
-    database.ref("/scans/").push({
-      url: this.state.scrapeId,
-    });
-    //url
+    // database.ref("/scans/").push({
+    //   url: this.state.scrapeId,
+    // });
+    // url
     console.log("url", this.state.scrapeId)
     const res = await axios.post('/api/url',
       { url: this.state.scrapeId }
     )
+    const urlKey = this.substituteUrl(this.state.scrapeId);
+    database.ref('/scans/' + urlKey).set({url: this.state.scrapeId, data: res.data});
     this.setState({...this.state, data: res.data});
     console.log("our state:",this.state.data.score)
-    //console.log("res", res.data);
+    console.log("res", res.data);
     /*
     const urlKey = this.substituteUrl(this.state.scrapeId);
     database.ref('/scans/' + urlKey).set({ url: this.state.scrapeId });
