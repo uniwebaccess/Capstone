@@ -7,7 +7,6 @@ import Home from './components/Home';
 import NavBar from './components/Navbar';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import Input from './components/Input';
 import TestResults from './components/TestResults';
 
 const theme = createMuiTheme({
@@ -40,8 +39,8 @@ function App() {
       <div className="main">
         <NavBar />
         <Routes />
-        <Footer />
       </div>
+      <Footer />
     </div>
     //</ThemeProvider>
   );
