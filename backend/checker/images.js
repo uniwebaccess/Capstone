@@ -1,5 +1,5 @@
 
-async function checkImgAlt(page) {
+async function imagesCheck(page) {
   let result = await page.$$eval("img", imgs => {
     let count = imgs.length;
 
@@ -16,7 +16,7 @@ async function checkImgAlt(page) {
     }
   })
   let percent;
-  if(result.count == 0) {
+  if (result.count == 0) {
     percent = 100;
   } else {
     percent = Math.floor(result.withAlt * 100 / result.count)
@@ -30,4 +30,4 @@ async function checkImgAlt(page) {
 }
 
 
-module.exports = checkImgAlt;
+module.exports = imagesCheck;
