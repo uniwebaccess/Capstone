@@ -25,3 +25,4 @@ yarn-error.log*
 
 #add bundle.js if using webpack
 .eslintcache
+.package-lock
