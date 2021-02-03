@@ -1,5 +1,3 @@
-const puppeteer = require('puppeteer');
-
 
 async function checkImgAlt(page) {
   let result = await page.$$eval("img", imgs => {
@@ -17,12 +15,17 @@ async function checkImgAlt(page) {
       withAlt: withAlt
     }
   })
-  let percent = Math.floor(result.withAlt * 100 / result.count);
+  let percent;
+  if(result.count == 0) {
+    percent = 100;
+  } else {
+    percent = Math.floor(result.withAlt * 100 / result.count)
+  }
   return {
     allImages: result.count,
     imagesWithAlt: result.withAlt,
     percent: percent,
-    passed: percent > 60
+    passed: percent > 10
   }
 }
 

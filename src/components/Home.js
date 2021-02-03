@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
-
+import Input from "./Input";
 
 export default class Home extends Component {
   render() {
@@ -8,8 +8,8 @@ export default class Home extends Component {
     return (
       <div>
       <Button color="primary" variant="contained">Primary</Button>
-      <Button color="secondary" >Secondary</Button>
-        <input placeholder="URL here"></input>
+      <p>"https://en.wikipedia.org/wiki/Penguin"</p>
+      <Input />
       </div>
     )
   }

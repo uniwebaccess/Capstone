@@ -26,13 +26,12 @@ class Input extends React.Component {
     database.ref("/scans/").push({
       url: this.state.scrapeId,
     });
-    this.setState({ scrapeId: "" });
     //url
     console.log("url", this.state.scrapeId)
     const res = await axios.post('/api/url',
       { url: this.state.scrapeId }
     )
-    this.setState({data: res.data});
+    this.setState({...this.state, data: res.data});
     console.log("our state:",this.state.data.score)
     //console.log("res", res.data);
   }
@@ -57,7 +56,7 @@ class Input extends React.Component {
               Images with valid atribute alt: {this.state.data.imgAltScore.imagesWithAlt}
             </li>
             <li>
-              Test passed: {this.state.data.imgAltScore.passed}
+              Test passed: {this.state.data.imgAltScore.passed ? "Test passed":"Test failed"}
             </li>
             <li>
               Percent passed images: {this.state.data.imgAltScore.percent}
