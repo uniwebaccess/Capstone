@@ -9,7 +9,7 @@ class Input extends React.Component {
     super(props);
     this.state = {
       scrapeId: "",
-      data: null
+
     };
     this.onAdd = this.onAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,12 +32,9 @@ class Input extends React.Component {
     const res = await axios.post('/api/url',
       { url: this.state.scrapeId }
     )
-    this.setState({data: res.data});
-    console.log("our state:",this.state.data.score)
-    //console.log("res", res.data);
+    console.log("res", res.data)
   }
   render() {
-
     return (
       <div className="Input">
         <form onSubmit={this.onAdd} onChange={this.handleChange}>
@@ -48,25 +45,6 @@ class Input extends React.Component {
             Add
           </button>
         </form>
-        {this.state.data !== null ? (<div>
-          <ul>
-            <li>
-              Total images: {this.state.data.imgAltScore.allImages}
-            </li>
-            <li>
-              Images with valid atribute alt: {this.state.data.imgAltScore.imagesWithAlt}
-            </li>
-            <li>
-              Test passed: {this.state.data.imgAltScore.passed}
-            </li>
-            <li>
-              Percent passed images: {this.state.data.imgAltScore.percent}
-            </li>
-            <li>
-              Total Score: {this.state.data.score}
-            </li>
-          </ul>
-        </div>): (<div/>)}
       </div>
     );
   }
