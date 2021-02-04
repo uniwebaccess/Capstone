@@ -74,7 +74,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const { status, classes } = this.props;
+    const { status, error, classes } = this.props;
     return (
       <div>
         {!status && (
@@ -108,7 +108,12 @@ class SearchBar extends React.Component {
           </form>
         )}
         {status === "loading" && <p>Your results are loading</p>}
-        {status === "error" && <p>There was an error</p>}
+        {status === "error" && (
+          <div>
+            <p>There was an error</p>
+            <p>{error}</p>
+          </div>
+        )}
       </div>
     );
   }
@@ -119,6 +124,7 @@ const mapState = (state) => {
     data: state.data.data,
     url: state.data.url,
     status: state.status,
+    error: state.error,
   };
 };
 

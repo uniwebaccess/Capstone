@@ -12,7 +12,7 @@ class TestResult extends Component {
   }
 
   render() {
-    const { status, url, data } = this.props;
+    const { status, url, data, error } = this.props;
     return (
       <div>
         {status === "loading" && <h1>Loading Results</h1>}
@@ -35,7 +35,12 @@ class TestResult extends Component {
             </ul>
           </div>
         )}
-        {status === "error" && <h1>There was an error</h1>}
+        {status === "error" && (
+          <div>
+            <h1>There was an error</h1>
+            <p>{error}</p>
+          </div>
+        )}
       </div>
     );
   }
@@ -46,6 +51,7 @@ const mapState = (state) => {
     data: state.data.data,
     url: state.data.url,
     status: state.status,
+    error: state.error,
   };
 };
 

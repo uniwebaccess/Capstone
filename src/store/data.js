@@ -4,6 +4,7 @@ import {
   sendStatusSuccess,
   sendStatusError,
 } from "./status";
+import { setError } from "./error";
 
 const RUN_DATA = "RUN_DATA";
 const FETCH_DATA = "FETCH_DATA";
@@ -28,14 +29,14 @@ export const runData = (urlKey, url) => {
   return async (dispatch) => {
     dispatch(sendStatusLoading());
     try {
-      console.log("url", url);
-      const res = await axios.post("/api/test", { url: url, urlKey: urlKey });
-      console.log(res.data);
+      const res = await axios.post("/api/test", { url, urlKey });
       dispatch(ranData(res.data, url));
       dispatch(sendStatusSuccess());
     } catch (err) {
+      console.log(err);
       console.error(err);
       dispatch(sendStatusError());
+      dispatch(setError(err.message));
     }
   };
 };
@@ -50,10 +51,12 @@ export const fetchData = (urlKey) => {
         dispatch(sendStatusSuccess());
       } else {
         dispatch(sendStatusError());
+        dispatch(setError("Tests not found"));
       }
     } catch (err) {
       console.error(err);
       dispatch(sendStatusError());
+      dispatch(setError(err.message));
     }
   };
 };

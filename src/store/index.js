@@ -4,10 +4,12 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import data from "./data";
 import status from "./status";
+import error from "./error";
 
 const reducer = combineReducers({
   data,
   status,
+  error,
 });
 
 const middleware = composeWithDevTools(
