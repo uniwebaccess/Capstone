@@ -26,19 +26,19 @@ class TestResult extends Component {
         {this.props.data !== null ? (
           <div>
             <ul>
-              <li>Total images: {this.props.data.imgAltScore.allImages}</li>
+              <li>Total images: {this.props.data.imagesResult.allImages}</li>
               <li>
                 Images with valid atribute alt:{" "}
-                {this.props.data.imgAltScore.imagesWithAlt}
+                {this.props.data.imagesResult.imagesWithAlt}
               </li>
               <li>
                 Test passed:{" "}
-                {this.props.data.imgAltScore.passed
+                {this.props.data.imagesResult.passed
                   ? "Test passed"
                   : "Test failed"}
               </li>
               <li>
-                Percent passed images: {this.props.data.imgAltScore.percent}
+                Percent passed images: {this.props.data.imagesResult.percent}
 
               </li>
               <li>Total Score: {this.props.data.score}</li>
