@@ -2,6 +2,8 @@ import React from "react";
 import database from "./Firebase/firebase";
 import axios from "axios";
 import history from "../history";
+import { connect } from "react-redux";
+import { runData } from "../store/data";
 
 class Input extends React.Component {
   constructor(props) {
@@ -23,19 +25,12 @@ class Input extends React.Component {
   //Function for onSubmit
   async onInput(evt) {
     evt.preventDefault();
-    console.log("url", this.state.inputUrl);
-
-    //Makes backend call to perform scrape
-    const res = await axios.post("/api/url", { url: this.state.inputUrl });
 
     //Changes input url to firebase key
     const urlKey = this.keyifyUrl(this.state.inputUrl);
 
-    //Adds response data and url to "/scans" in db
-    database
-      .ref("/scans/" + urlKey)
-      .set({ url: this.state.inputUrl, data: res.data })
-      .then(history.push(`/testresults/${urlKey}`));
+    this.props.runData(urlKey, this.state.inputUrl);
+    history.push(`/testresults/${urlKey}`);
   }
 
   //Function to change url to characters that Firebase allows
@@ -68,4 +63,17 @@ class Input extends React.Component {
   }
 }
 
-export default Input;
+const mapState = (state) => {
+  return {
+    data: state.data.data,
+    url: state.data.url,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    runData: (urlKey, url) => dispatch(runData(urlKey, url)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Input);
