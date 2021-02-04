@@ -23,14 +23,16 @@ const fetchedData = (data, url) => {
 export const runData = (urlKey, url) => {
   return async (dispatch) => {
     try {
+      console.log("url", url)
       //Makes backend call to perform scrape
-      const res = await axios.post("/api/url", { url: url });
-
+      const res = await axios.post("/api/url", { url: url, urlKey: urlKey });
+      console.log(res.data)
+      dispatch(ranData(res.data, url))
       //Adds response data and url to "/scans" in db
-      database
-        .ref("/scans/" + urlKey)
-        .set({ url: url, data: res.data })
-        .then(dispatch(ranData(res.data, url)));
+      // database
+      //   .ref("/scans/" + urlKey)
+      //   .set({ url: url, data: res.data })
+      //   .then(dispatch(ranData(res.data, url)));
     } catch (err) {
       console.error(err);
     }
