@@ -1,12 +1,9 @@
-const firebase = require('firebase/app')
+const firebase = require("firebase/app");
+require("firebase/database");
 // require("firebase/database")
-
-
 
 // import firebase from "firebase/app";
 // import "firebase/database";
-
-
 
 const config = {
   apiKey: "AIzaSyAfpyLcY4yCvumsOOieL8pBrI6xLJ5mGaQ",
@@ -19,9 +16,9 @@ const config = {
   measurementId: "G-C63Y08YQ2K",
 };
 
-firebase.initializeApp(config);
+firebase.default.initializeApp(config);
 
-const database = firebase.database();
+const database = firebase.default.database();
 
 // export default database;
-module.exports = database
+module.exports = database;
