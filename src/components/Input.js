@@ -2,6 +2,8 @@ import React from "react";
 import database from "./Firebase/firebase";
 import axios from "axios";
 import history from "../history";
+import { connect } from "react-redux";
+import { runData } from "../store/data";
 import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
@@ -57,19 +59,12 @@ class SearchBar extends React.Component {
   //Function for onSubmit
   async onInput(evt) {
     evt.preventDefault();
-    console.log("url", this.state.inputUrl);
-
-    //Makes backend call to perform scrape
-    const res = await axios.post("/api/url", { url: this.state.inputUrl });
 
     //Changes input url to firebase key
     const urlKey = this.keyifyUrl(this.state.inputUrl);
 
-    //Adds response data and url to "/scans" in db
-    database
-      .ref("/scans/" + urlKey)
-      .set({ url: this.state.inputUrl, data: res.data })
-      .then(history.push(`/testresults/${urlKey}`));
+    this.props.runData(urlKey, this.state.inputUrl);
+    history.push(`/testresults/${urlKey}`);
   }
 
   //Function to change url to characters that Firebase allows
@@ -109,24 +104,19 @@ class SearchBar extends React.Component {
   }
 }
 
-export default withStyles(navStyles, { withTheme: true })(SearchBar);
+const mapState = (state) => {
+  return {
+    data: state.data.data,
+    url: state.data.url,
+  };
+};
 
+const mapDispatch = (dispatch) => {
+  return {
+    runData: (urlKey, url) => dispatch(runData(urlKey, url)),
+  };
+};
 
-/*
-<div className="Input">
-        <form onSubmit={this.onInput}>
-          <label className="inputUrl">Url to Test</label>
-          <input
-            type="text"
-            name="inputUrl"
-            id="inputUrl"
-            value={this.state.inputUrl}
-            onChange={this.handleChange}
-          />
-          <br />
-          <button id="addBtn" type="submit">
-            Test Url
-          </button>
-        </form>
-      </div>
-*/
+const styledComponent = withStyles(navStyles, { withTheme: true })(SearchBar);
+export default connect(mapState, mapDispatch)(styledComponent);
+
