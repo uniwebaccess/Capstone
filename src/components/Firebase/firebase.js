@@ -1,15 +1,15 @@
-import firebase from "firebase/app";
-import "firebase/database";
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 const config = {
-  apiKey: "AIzaSyAfpyLcY4yCvumsOOieL8pBrI6xLJ5mGaQ",
-  authDomain: "uniwebaccess.firebaseapp.com",
-  databaseURL: "https://uniwebaccess-default-rtdb.firebaseio.com",
-  projectId: "uniwebaccess",
-  storageBucket: "222663379711",
-  messagingSenderId: "222663379711",
-  appId: "1:222663379711:web:f4bbf2f0ba9fd594495aca",
-  measurementId: "G-C63Y08YQ2K",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: 'uniwebaccess.firebaseapp.com',
+  databaseURL: 'https://uniwebaccess-default-rtdb.firebaseio.com',
+  projectId: 'uniwebaccess',
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MSG_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 firebase.initializeApp(config);
