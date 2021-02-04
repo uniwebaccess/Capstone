@@ -1,9 +1,8 @@
 import React from "react";
-import database from "./Firebase/firebase";
-import axios from "axios";
 import history from "../history";
 import { connect } from "react-redux";
 import { runData } from "../store/data";
+import { clearStatus } from "../store/status";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
@@ -45,6 +44,7 @@ class SearchBar extends React.Component {
     this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.keyifyUrl = this.keyifyUrl.bind(this);
+    this.props.clearStatus();
   }
 
   handleChange(evt) {
@@ -131,6 +131,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     runData: (urlKey, url) => dispatch(runData(urlKey, url)),
+    clearStatus: () => dispatch(clearStatus()),
   };
 };
 

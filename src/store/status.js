@@ -1,6 +1,7 @@
 const STATUS_LOADING = "STATUS_LOADING";
 const STATUS_SUCCESS = "STATUS_SUCCESS";
 const STATUS_ERROR = "STATUS_ERROR";
+const STATUS_CLEAR = "STATUS_CLEAR";
 
 const initialState = null;
 
@@ -22,6 +23,12 @@ export function sendStatusError() {
   };
 }
 
+export function clearStatus() {
+  return {
+    type: STATUS_CLEAR,
+  };
+}
+
 const status = (state = initialState, action) => {
   switch (action.type) {
     case STATUS_LOADING:
@@ -30,6 +37,8 @@ const status = (state = initialState, action) => {
       return "success";
     case STATUS_ERROR:
       return "error";
+    case STATUS_CLEAR:
+      return null;
     default:
       return state;
   }
