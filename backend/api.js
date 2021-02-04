@@ -4,11 +4,8 @@ const checker = require("./checker");
 
 //ROUTE /API/
 router.get("/test/:urlKey", async (req, res, next) => {
-  console.log("outside of try catch in get route");
   try {
-    console.log("inside of try catch in get route");
     const ref = database.ref("/scans/" + req.params.urlKey);
-    console.log("req.body.urlKey", req.params.urlKey);
 
     // .once retrieves data once wheras .on would continuously update
     ref.once("value", (snapshot) => {
@@ -16,9 +13,7 @@ router.get("/test/:urlKey", async (req, res, next) => {
         const retrievedData = snapshot.val();
         res.json(retrievedData);
       } else {
-        console.log("snapshot not found");
         res.json({ url: "", data: null });
-        // res.sendStatus(500);
       }
     });
   } catch (err) {
