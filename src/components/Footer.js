@@ -1,6 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { sizing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
   footer: {

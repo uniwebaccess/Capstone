@@ -39,13 +39,14 @@ class TestResult extends Component {
               </li>
               <li>
                 Percent passed images: {this.props.data.imgAltScore.percent}
+
               </li>
               <li>Total Score: {this.props.data.score}</li>
             </ul>
           </div>
         ) : (
-          <div />
-        )}
+            <div />
+          )}
       </div>
     );
   }
