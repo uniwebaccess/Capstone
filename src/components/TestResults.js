@@ -12,40 +12,30 @@ class TestResult extends Component {
   }
 
   render() {
+    const { status, url, data } = this.props;
     return (
       <div>
-        {!this.props.data ? (
-          <h1>Loading Results</h1>
-        ) : (
+        {status === "loading" && <h1>Loading Results</h1>}
+        {status === "success" && url && data && (
           <div>
             <h1>Showing results for:</h1>
-            <p> {this.props.url}</p>
-          </div>
-        )}
-
-        {this.props.data !== null ? (
-          <div>
+            <p> {url}</p>
             <ul>
-              <li>Total images: {this.props.data.imagesResult.allImages}</li>
+              <li>Total images: {data.imagesResult.allImages}</li>
               <li>
                 Images with valid atribute alt:{" "}
-                {this.props.data.imagesResult.imagesWithAlt}
+                {data.imagesResult.imagesWithAlt}
               </li>
               <li>
                 Test passed:{" "}
-                {this.props.data.imagesResult.passed
-                  ? "Test passed"
-                  : "Test failed"}
+                {data.imagesResult.passed ? "Test passed" : "Test failed"}
               </li>
-              <li>
-                Percent passed images: {this.props.data.imagesResult.percent}
-              </li>
-              <li>Total Score: {this.props.data.score}</li>
+              <li>Percent passed images: {data.imagesResult.percent}</li>
+              <li>Total Score: {data.score}</li>
             </ul>
           </div>
-        ) : (
-          <div />
         )}
+        {status === "error" && <h1>There was an error</h1>}
       </div>
     );
   }
@@ -55,6 +45,7 @@ const mapState = (state) => {
   return {
     data: state.data.data,
     url: state.data.url,
+    status: state.status,
   };
 };
 
