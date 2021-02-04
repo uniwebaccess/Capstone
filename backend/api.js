@@ -13,7 +13,7 @@ router.get("/test/:urlKey", async (req, res, next) => {
         const retrievedData = snapshot.val();
         res.json(retrievedData);
       } else {
-        res.json({ url: "", data: null });
+        res.sendStatus(404);
       }
     });
   } catch (err) {
