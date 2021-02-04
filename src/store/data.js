@@ -23,14 +23,10 @@ const fetchedData = (data, url) => {
 export const runData = (urlKey, url) => {
   return async (dispatch) => {
     try {
-      //Makes backend call to perform scrape
-      const res = await axios.post("/api/url", { url: url });
-
-      //Adds response data and url to "/scans" in db
-      database
-        .ref("/scans/" + urlKey)
-        .set({ url: url, data: res.data })
-        .then(dispatch(ranData(res.data, url)));
+      console.log("url", url);
+      const res = await axios.post("/api/test", { url: url, urlKey: urlKey });
+      console.log(res.data);
+      dispatch(ranData(res.data, url));
     } catch (err) {
       console.error(err);
     }
@@ -38,17 +34,13 @@ export const runData = (urlKey, url) => {
 };
 
 export const fetchData = (urlKey) => {
-  return (dispatch) => {
-    const ref = database.ref("/scans/" + urlKey);
-    // .once retrieves data once wheras .on would continuously update
-    ref.once("value", (snapshot) => {
-      if (snapshot.exists()) {
-        const retrievedData = snapshot.val();
-        dispatch(fetchedData(retrievedData.data, retrievedData.url));
-      } else {
-        console.log("could not find scrape for the url");
-      }
-    });
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(`/api/test/${urlKey}`);
+      dispatch(fetchedData(res.data.data, res.data.url));
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
 
@@ -60,11 +52,12 @@ const initialState = {
 const data = (state = initialState, action) => {
   switch (action.type) {
     case RUN_DATA:
-      return { data: action.data, url: action.url };
+      return { ...state, data: action.data, url: action.url };
     case FETCH_DATA:
-      return { data: action.data, url: action.url };
+      return { ...state, data: action.data, url: action.url };
     default:
       return state;
   }
 };
+
 export default data;
