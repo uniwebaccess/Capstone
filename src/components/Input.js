@@ -2,8 +2,42 @@ import React from "react";
 import database from "./Firebase/firebase";
 import axios from "axios";
 import history from "../history";
+import {withStyles} from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
+import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import clsx from 'clsx';
+import { FormControl } from '@material-ui/core';
 
-class Input extends React.Component {
+
+const navStyles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+
+  margin: {
+    labelWidth: 60,
+  },
+  textField: {
+    width: '25ch',
+  },
+
+  searchIcon:{
+    color: '#bdbdbd',
+  }
+
+
+});
+
+class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,8 +81,39 @@ class Input extends React.Component {
   }
 
   render() {
+    const classes = this.props.classes;
     return (
-      <div className="Input">
+      <form onSubmit={this.onInput}>
+          <TextField
+            name="inputUrl"
+            placeholder="Search by URL "
+            id="standard-start-adornment"
+            className={clsx(classes.margin, classes.textField)}
+            InputProps={{
+              startAdornment: <InputAdornment position="start"><SearchIcon className={clsx(classes.searchIcon)} />
+              </InputAdornment>,
+            }}
+            variant="outlined"
+            value={this.state.inputUrl}
+            onChange={this.handleChange}
+          />
+        <Box>
+          <Button
+          color="secondary"
+          variant="contained"
+          id="addBtn"
+          type="submit">Primary</Button>
+        </Box>
+        </form>
+    )
+  }
+}
+
+export default withStyles(navStyles, { withTheme: true })(SearchBar);
+
+
+/*
+<div className="Input">
         <form onSubmit={this.onInput}>
           <label className="inputUrl">Url to Test</label>
           <input
@@ -64,8 +129,4 @@ class Input extends React.Component {
           </button>
         </form>
       </div>
-    );
-  }
-}
-
-export default Input;
+*/
