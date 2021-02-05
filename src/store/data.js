@@ -27,10 +27,10 @@ const fetchedData = (url, data, avgData) => {
   };
 };
 
-export const selectField = (field) => {
+export const selectField = (selectedField) => {
   return {
     type: SELECT_FIELD,
-    field,
+    selectedField,
   };
 };
 
@@ -74,7 +74,7 @@ const initialState = {
   url: "",
   data: null,
   avgData: null,
-  selectedField: null,
+  selectedField: "images",
 };
 
 const data = (state = initialState, action) => {
@@ -89,10 +89,7 @@ const data = (state = initialState, action) => {
         avgData: action.avgData,
       };
     case SELECT_FIELD:
-      // return { ...state, selectedField: action.field };
-
-      //Currently hard-coded for testing
-      return { ...state, selectedField: "images" };
+      return { ...state, selectedField: action.selectedField };
     default:
       return state;
   }

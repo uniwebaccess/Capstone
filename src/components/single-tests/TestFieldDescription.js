@@ -3,17 +3,20 @@ import { connect } from "react-redux";
 
 class TestFieldDescription extends Component {
   render() {
+    const { selectedField, descriptions } = this.props;
     return (
       <div id="single-test-field">
         <h2>Single Test Field Description:</h2>
-        <p id="single-field-description">{this.props.descriptions["images"]}</p>
+        <p id="single-field-description">{descriptions[selectedField]}</p>
       </div>
     );
   }
 }
 
 const mapState = (state) => {
-  return {};
+  return {
+    selectedField: state.data.selectedField,
+  };
 };
 
 const mapDispatch = (dispatch) => {

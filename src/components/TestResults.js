@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchData } from "../store/data";
+import { fetchData, selectField } from "../store/data";
 import { checkerDescriptions } from "../constants";
 import TestFieldDescription from "./single-tests/TestFieldDescription";
 
@@ -9,8 +9,21 @@ import TestFieldDescription from "./single-tests/TestFieldDescription";
  */
 //Through the route /testresults/:urlKey
 class TestResult extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: "images",
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
+  }
+
+  handleChange(evt) {
+    evt.preventDefault();
+    this.setState({ selected: evt.target.value });
+    this.props.selectField(evt.target.value);
   }
 
   render() {
@@ -39,6 +52,18 @@ class TestResult extends Component {
               This site was measured by a variety of fields. Select a test to
               learn more
             </p>
+            <form>
+              <select
+                name="testField"
+                id="field-select"
+                value={this.state.selected}
+                onChange={this.handleChange}
+              >
+                <option value="images">Images</option>
+                <option value="globalCode">Global Code</option>
+                <option value="headings">Headings</option>
+              </select>
+            </form>
             <TestFieldDescription descriptions={checkerDescriptions} />
           </div>
         )}
@@ -56,6 +81,7 @@ class TestResult extends Component {
 const mapState = (state) => {
   return {
     data: state.data.data,
+    avgData: state.data.avgData,
     url: state.data.url,
     status: state.status,
     error: state.error,
@@ -65,6 +91,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchData: (urlKey) => dispatch(fetchData(urlKey)),
+    selectField: (selectedField) => dispatch(selectField(selectedField)),
   };
 };
 
