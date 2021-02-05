@@ -8,24 +8,24 @@ export default function PieChart(props) {
     <div>
       <Pie
         data={{
-          labels: props.data.imagesData,
+          labels: props.data.imagesName,
           datasets: [{
             label: " Total Images",
             data: props.data.imagesData,
             backgroundColor: [
-              'rgba(255, 173, 128, 0.7)',
-              'rgba(227, 84, 85, 0.7)',
-              'rgba(230, 105,250, 0.7)',
-              'rgba(111, 84, 227, 0.7)',
-              'rgba(94, 169, 255, 0.7)',
+              'rgba(33, 158, 188, 0.7)',
+              'rgba(255, 183, 3, 0.7)',
+              'rgba(2, 48, 71, 0.7)',
+              'rgba(142, 202, 230, 0.7)',
+              'rgba(251, 133, 0, 0.7)',
               'rgba(166, 255, 245, 1)'
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
+              'rgba(33, 158, 188, 1)',
+              'rgba(255, 183, 3, 1)',
+              'rgba(2, 48, 71, 1)',
+              'rgba(142, 202, 230,1)',
+              'rgba(251, 133, 0, 1)',
               'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
