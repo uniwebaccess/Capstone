@@ -1,20 +1,18 @@
 import React from "react";
-import database from "./Firebase/firebase";
-import axios from "axios";
 import history from "../history";
 import { connect } from "react-redux";
 import { runData } from "../store/data";
-import {withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import clsx from 'clsx';
-import { FormControl } from '@material-ui/core';
+import { clearStatus } from "../store/status";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import clsx from "clsx";
+import { FormControl } from "@material-ui/core";
 
-
-const navStyles = theme => ({
+const navStyles = (theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -22,21 +20,19 @@ const navStyles = theme => ({
     flexGrow: 1,
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit",
   },
 
   margin: {
     labelWidth: 60,
   },
   textField: {
-    width: '25ch',
+    width: "25ch",
   },
 
-  searchIcon:{
-    color: '#bdbdbd',
-  }
-
-
+  searchIcon: {
+    color: "#bdbdbd",
+  },
 });
 
 class SearchBar extends React.Component {
@@ -48,6 +44,7 @@ class SearchBar extends React.Component {
     this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.keyifyUrl = this.keyifyUrl.bind(this);
+    this.props.clearStatus();
   }
 
   handleChange(evt) {
@@ -62,9 +59,10 @@ class SearchBar extends React.Component {
 
     //Changes input url to firebase key
     const urlKey = this.keyifyUrl(this.state.inputUrl);
-
-    this.props.runData(urlKey, this.state.inputUrl);
-    history.push(`/testresults/${urlKey}`);
+    await this.props.runData(urlKey, this.state.inputUrl);
+    if (this.props.status === "success") {
+      history.push(`/testresults/${urlKey}`);
+    }
   }
 
   //Function to change url to characters that Firebase allows
@@ -76,31 +74,48 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const classes = this.props.classes;
+    const { status, error, classes } = this.props;
     return (
-      <form onSubmit={this.onInput}>
-          <TextField
-            name="inputUrl"
-            placeholder="Search by URL "
-            id="standard-start-adornment"
-            className={clsx(classes.margin, classes.textField)}
-            InputProps={{
-              startAdornment: <InputAdornment position="start"><SearchIcon className={clsx(classes.searchIcon)} />
-              </InputAdornment>,
-            }}
-            variant="outlined"
-            value={this.state.inputUrl}
-            onChange={this.handleChange}
-          />
-        <Box>
-          <Button
-          color="secondary"
-          variant="contained"
-          id="addBtn"
-          type="submit">Primary</Button>
-        </Box>
-        </form>
-    )
+      <div>
+        {!status && (
+          <form onSubmit={this.onInput}>
+            <TextField
+              name="inputUrl"
+              placeholder="Search by URL "
+              id="standard-start-adornment"
+              className={clsx(classes.margin, classes.textField)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon className={clsx(classes.searchIcon)} />
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              value={this.state.inputUrl}
+              onChange={this.handleChange}
+            />
+            <Box>
+              <Button
+                color="secondary"
+                variant="contained"
+                id="addBtn"
+                type="submit"
+              >
+                Primary
+              </Button>
+            </Box>
+          </form>
+        )}
+        {status === "loading" && <p>Your results are loading</p>}
+        {status === "error" && (
+          <div>
+            <p>There was an error</p>
+            <p>{error}</p>
+          </div>
+        )}
+      </div>
+    );
   }
 }
 
@@ -108,15 +123,17 @@ const mapState = (state) => {
   return {
     data: state.data.data,
     url: state.data.url,
+    status: state.status,
+    error: state.error,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     runData: (urlKey, url) => dispatch(runData(urlKey, url)),
+    clearStatus: () => dispatch(clearStatus()),
   };
 };
 
 const styledComponent = withStyles(navStyles, { withTheme: true })(SearchBar);
 export default connect(mapState, mapDispatch)(styledComponent);
-

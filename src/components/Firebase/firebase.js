@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
+const firebase = require("firebase/app");
+require("firebase/database");
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,8 +12,8 @@ const config = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-firebase.initializeApp(config);
+firebase.default.initializeApp(config);
 
-const database = firebase.database();
+const database = firebase.default.database();
 
-export default database;
+module.exports = database;
