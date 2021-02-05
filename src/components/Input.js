@@ -11,7 +11,9 @@ import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import clsx from 'clsx';
-import { FormControl } from '@material-ui/core';
+import { Icon } from '@material-ui/core';
+
+
 
 
 const navStyles = theme => ({
@@ -26,16 +28,21 @@ const navStyles = theme => ({
   },
 
   margin: {
-    labelWidth: 60,
+    width:'60%',
+    height: '15%'
   },
   textField: {
-    width: '25ch',
+    widthItem: '25ch',
   },
 
   searchIcon:{
     color: '#bdbdbd',
-  }
+  },
 
+  buttonStyle:{
+    marginTop: '30px',
+
+  },
 
 });
 
@@ -43,7 +50,7 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputUrl: "",
+      inputUrl: "https://en.wikipedia.org/wiki/Penguin",
     };
     this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -94,14 +101,16 @@ class SearchBar extends React.Component {
           />
         <Box>
           <Button
+          className={clsx(classes.buttonStyle)}
           color="secondary"
           variant="contained"
           id="addBtn"
-          type="submit">Primary</Button>
+          type="submit"
+          endIcon={<Icon>send</Icon>}
+          >Scan</Button>
         </Box>
-        </form>
-    )
-  }
+    </form>
+  )}
 }
 
 const mapState = (state) => {

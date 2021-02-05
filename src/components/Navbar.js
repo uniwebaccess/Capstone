@@ -4,6 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 const navStyles = theme => ({
   root: {
@@ -11,8 +12,9 @@ const navStyles = theme => ({
   },
   title: {
     flexGrow: 1,
+    fontFamily: 'Potta One cursive'
   },
-  menuButton: {
+  homeButton: {
     marginRight: theme.spacing(2),
   },
   toolbarButtons: {
@@ -37,11 +39,13 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar color='primary' position="static">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
+            <IconButton href="/" edge="start" className={classes.homeButton} color="inherit" aria-label="home">
+            <SvgIcon>
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </SvgIcon>
+
             </IconButton>
-            <Typography  variant="h6" className={classes.title}>
-              My creative logo can be found here
+             <Typography  variant="h6" className={classes.title}>
             </Typography>
 
             <div className={classes.toolbarButtons}>
