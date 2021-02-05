@@ -2,18 +2,17 @@ import React from "react";
 import history from "../history";
 import { connect } from "react-redux";
 import { runData } from "../store/data";
-import {withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import clsx from 'clsx';
-import { Icon } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import clsx from "clsx";
+import { Icon } from "@material-ui/core";
 import { clearStatus } from "../store/status";
 import { FormControl } from "@material-ui/core";
-import LinearProgress from '@material-ui/core/LinearProgress';
-
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const navStyles = (theme) => ({
   root: {
@@ -27,17 +26,16 @@ const navStyles = (theme) => ({
   },
 
   margin: {
-    width:'60%',
-    height: '15%'
+    width: "60%",
+    height: "15%",
   },
   textField: {
-    widthItem: '25ch',
+    widthItem: "25ch",
   },
 
-  searchIcon:{
-    color: '#bdbdbd',
+  searchIcon: {
+    color: "#bdbdbd",
   },
-
 });
 
 class SearchBar extends React.Component {
@@ -49,6 +47,7 @@ class SearchBar extends React.Component {
     this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.keyifyUrl = this.keyifyUrl.bind(this);
+    this.tryAgain = this.tryAgain.bind(this);
     this.props.clearStatus();
   }
 
@@ -78,41 +77,59 @@ class SearchBar extends React.Component {
     return urlKey;
   }
 
+  //Clears status to return to input after error
+  tryAgain() {
+    this.props.clearStatus();
+  }
+
   render() {
     const { status, error, classes } = this.props;
     return (
       <div>
         {!status && (
           <form onSubmit={this.onInput}>
-          <TextField
-            name="inputUrl"
-            placeholder="Search by URL "
-            id="standard-start-adornment"
-            className={clsx(classes.margin, classes.textField)}
-            InputProps={{
-              startAdornment: <InputAdornment position="start"><SearchIcon className={clsx(classes.searchIcon)} />
-              </InputAdornment>,
-            }}
-            variant="outlined"
-            value={this.state.inputUrl}
-            onChange={this.handleChange}
-          />
-        <Box mt={5}>
-          <Button
-          color="secondary"
-          variant="contained"
-          id="addBtn"
-          type="submit"
-          endIcon={<Icon>send</Icon>}
-          >Scan</Button>
-        </Box>
-    </form>
+            <TextField
+              name="inputUrl"
+              placeholder="Search by URL "
+              id="standard-start-adornment"
+              className={clsx(classes.margin, classes.textField)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon className={clsx(classes.searchIcon)} />
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              value={this.state.inputUrl}
+              onChange={this.handleChange}
+            />
+            <Box mt={5}>
+              <Button
+                color="secondary"
+                variant="contained"
+                id="addBtn"
+                type="submit"
+                endIcon={<Icon>send</Icon>}
+              >
+                Scan
+              </Button>
+            </Box>
+          </form>
         )}
         {status === "loading" && <LinearProgress />}
         {status === "error" && (
           <div>
             <p>There was an error</p>
             <p>{error}</p>
+            <Button
+              color="secondary"
+              variant="contained"
+              type="submit"
+              onClick={this.tryAgain}
+            >
+              Try Again
+            </Button>
           </div>
         )}
       </div>

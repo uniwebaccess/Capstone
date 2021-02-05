@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchData } from "../store/data";
+import { checkerDescriptions } from "../constants";
+import TestFieldDescription from "./single-tests/TestFieldDescription";
 
 /*
  * Page to render results of tests
@@ -33,6 +35,11 @@ class TestResult extends Component {
               <li>Percent passed images: {data.imagesResult.percent}</li>
               <li>Total Score: {data.score}</li>
             </ul>
+            <p id="test-results-description">
+              This site was measured by a variety of fields. Select a test to
+              learn more
+            </p>
+            <TestFieldDescription descriptions={checkerDescriptions} />
           </div>
         )}
         {status === "error" && (
