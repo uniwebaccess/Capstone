@@ -2,6 +2,10 @@
 async function imagesCheck(page) {
   let result = await page.$$eval("img", imgs => {
     let count = imgs.length;
+    let imagesWithEmptyAlt = 0
+    if (imgs.alt !== "") {
+      imagesWithEmptyAlt++
+    }
 
     let withAlt = 0;
     for (let img of imgs) {
@@ -12,7 +16,8 @@ async function imagesCheck(page) {
     }
     return {
       count: count,
-      withAlt: withAlt
+      withAlt: withAlt,
+      imagesWithEmptyAlt: imagesWithEmptyAlt
     }
   })
   let percent;
@@ -24,8 +29,12 @@ async function imagesCheck(page) {
   return {
     allImages: result.count,
     imagesWithAlt: result.withAlt,
+    imagesWithEmptyAlt: result.imagesWithEmptyAlt,
     percent: percent,
-    passed: percent > 10
+    passed: percent > 25,
+    imagesData: [result.count, result.withAlt, result.imagesWithEmptyAlt],
+    imagesName: ["Total Images", "Images with alt attribute", "Decorative Images"]
+
   }
 }
 
