@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchData } from "../store/data";
 
+import HeadingsResult from '../components/HeadingsResult'
+
 /*
  * Page to render results of tests
  */
@@ -33,6 +35,7 @@ class TestResult extends Component {
               <li>Percent passed images: {data.imagesResult.percent}</li>
               <li>Total Score: {data.score}</li>
             </ul>
+            <HeadingsResult />
           </div>
         )}
         {status === "error" && (
