@@ -1,5 +1,10 @@
 import axios from "axios";
-import database from "../components/Firebase/firebase";
+import {
+  sendStatusLoading,
+  sendStatusSuccess,
+  sendStatusError,
+} from "./status";
+import { setError } from "./error";
 
 const RUN_DATA = "RUN_DATA";
 const FETCH_DATA = "FETCH_DATA";
@@ -22,33 +27,37 @@ const fetchedData = (data, url) => {
 
 export const runData = (urlKey, url) => {
   return async (dispatch) => {
+    dispatch(sendStatusLoading());
     try {
-      //Makes backend call to perform scrape
-      const res = await axios.post("/api/url", { url: url });
-
-      //Adds response data and url to "/scans" in db
-      database
-        .ref("/scans/" + urlKey)
-        .set({ url: url, data: res.data })
-        .then(dispatch(ranData(res.data, url)));
+      const res = await axios.post("/api/test", { url, urlKey });
+      dispatch(ranData(res.data, url));
+      dispatch(sendStatusSuccess());
     } catch (err) {
+      console.log(err);
       console.error(err);
+      dispatch(sendStatusError());
+      dispatch(setError(err.message));
     }
   };
 };
 
 export const fetchData = (urlKey) => {
-  return (dispatch) => {
-    const ref = database.ref("/scans/" + urlKey);
-    // .once retrieves data once wheras .on would continuously update
-    ref.once("value", (snapshot) => {
-      if (snapshot.exists()) {
-        const retrievedData = snapshot.val();
-        dispatch(fetchedData(retrievedData.data, retrievedData.url));
+  return async (dispatch) => {
+    dispatch(sendStatusLoading());
+    try {
+      const res = await axios.get(`/api/test/${urlKey}`);
+      dispatch(fetchedData(res.data.data, res.data.url));
+      if (res.data.data) {
+        dispatch(sendStatusSuccess());
       } else {
-        console.log("could not find scrape for the url");
+        dispatch(sendStatusError());
+        dispatch(setError("Tests not found"));
       }
-    });
+    } catch (err) {
+      console.error(err);
+      dispatch(sendStatusError());
+      dispatch(setError(err.message));
+    }
   };
 };
 
@@ -60,11 +69,12 @@ const initialState = {
 const data = (state = initialState, action) => {
   switch (action.type) {
     case RUN_DATA:
-      return { data: action.data, url: action.url };
+      return { ...state, data: action.data, url: action.url };
     case FETCH_DATA:
-      return { data: action.data, url: action.url };
+      return { ...state, data: action.data, url: action.url };
     default:
       return state;
   }
 };
+
 export default data;
