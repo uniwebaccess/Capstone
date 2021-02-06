@@ -4,6 +4,9 @@ import { fetchData, selectField } from "../store/data";
 import { checkerDescriptions } from "../constants";
 import TestFieldDescription from "./single-tests/TestFieldDescription";
 
+import HeadingsResult from "../components/HeadingsResult";
+import ImagesResult from "../components/ImagesResult";
+
 /*
  * Page to render results of tests
  */
@@ -65,6 +68,8 @@ class TestResult extends Component {
               </select>
             </form>
             <TestFieldDescription descriptions={checkerDescriptions} />
+            <ImagesResult />
+            <HeadingsResult />
           </div>
         )}
         {status === "error" && (

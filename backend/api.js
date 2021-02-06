@@ -7,7 +7,9 @@ router.get("/scan/:urlKey", async (req, res, next) => {
   try {
     const scanRef = database.ref("/scans/" + req.params.urlKey);
     const avgDataRef = database.ref("/average-results");
+
     let retrievedData = {};
+
     // Retrieves data of individual scan
     await scanRef.once("value", (snapshot) => {
       if (snapshot.exists()) {
@@ -42,6 +44,10 @@ router.post("/scan", async (req, res, next) => {
     await database
       .ref("/scans/" + req.body.urlKey)
       .set({ url: req.body.url, data: result });
+
+    //current average
+    //total number of scans
+    // (1/totalscans) * newscanscore  + ((totalscans-1) / totalscans ) *  current average
 
     res.json(result);
   } catch (err) {
