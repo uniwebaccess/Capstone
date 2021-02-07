@@ -174,7 +174,7 @@ class TestResult extends Component {
                 </Box>
               </Grid>
             </Grid>
-             <p id="test-results-description">
+             {/* <p id="test-results-description">
               This site was measured by a variety of fields. Select a test to
               learn more
             </p>
@@ -189,7 +189,7 @@ class TestResult extends Component {
                 <option value="globalCode">Global Code</option>
                 <option value="headings">Headings</option>
               </select>
-            </form>
+            </form> */}
             <TestFieldDescription descriptions={checkerDescriptions} />
           </Container>
         )}
