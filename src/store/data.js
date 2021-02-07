@@ -13,15 +13,16 @@ const ranData = (data, url) => {
   return {
     type: RUN_DATA,
     data,
-    url,
+    url
   };
 };
 
-const fetchedData = (data, url) => {
+const fetchedData = (data, url, urlKey) => {
   return {
     type: FETCH_DATA,
     data,
     url,
+    urlKey
   };
 };
 
@@ -30,7 +31,7 @@ export const runData = (urlKey, url) => {
     dispatch(sendStatusLoading());
     try {
       const res = await axios.post("/api/test", { url, urlKey });
-      dispatch(ranData(res.data, url));
+      dispatch(ranData(res.data, url, urlKey));
       dispatch(sendStatusSuccess());
     } catch (err) {
       console.log(err);
@@ -42,11 +43,16 @@ export const runData = (urlKey, url) => {
 };
 
 export const fetchData = (urlKey) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    let state = getState();
+    if (state.data && state.data.urlKey == urlKey) {
+      return;
+    }
+
     dispatch(sendStatusLoading());
     try {
       const res = await axios.get(`/api/test/${urlKey}`);
-      dispatch(fetchedData(res.data.data, res.data.url));
+      dispatch(fetchedData(res.data.data, res.data.url, urlKey));
       if (res.data.data) {
         dispatch(sendStatusSuccess());
       } else {
@@ -71,7 +77,7 @@ const data = (state = initialState, action) => {
     case RUN_DATA:
       return { ...state, data: action.data, url: action.url };
     case FETCH_DATA:
-      return { ...state, data: action.data, url: action.url };
+      return { ...state, data: action.data, url: action.url, urlKey: action.urlKey };
     default:
       return state;
   }

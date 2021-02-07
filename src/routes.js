@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Home from "./components/Home";
 import TestResults from "./components/TestResults";
-
+import ImagesResult from './components/ImagesResult';
+import HeadingsResult from './components/HeadingsResult';
 class Routes extends Component {
   // componentDidMount() {
   //   this.props.loadInitialData()
@@ -12,7 +13,9 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path="/" component={Home} />
-        <Route path="/testresults/:urlKey" component={TestResults} />
+        <Route path="/testresults/:urlKey" component={TestResults}/>
+        <Route path="/imagesresult/:urlKey" component={ImagesResult}/>
+        <Route path="/headingresult/:urlKey" component={HeadingsResult}/>
       </div>
     );
   }
