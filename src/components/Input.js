@@ -125,13 +125,14 @@ class SearchBar extends React.Component {
           </form>
         )}
         {status === "loading" && (
-          <p className={classes.paragraph}>
+          <div className={classes.paragraph}>
             Scanning... <LinearProgress />
-          </p>
+          </div>
         )}
         {status === "error" && (
           <div>
             <Alert severity="error">This web address is not valid!</Alert>
+            <br/>
             <Button
               color="secondary"
               variant="contained"
@@ -140,7 +141,7 @@ class SearchBar extends React.Component {
             >
               Try Again
             </Button>
-            {/*<p>{error}</p>*/}
+            <p>{error}</p>
           </div>
         )}
       </div>
