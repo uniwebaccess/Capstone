@@ -41,14 +41,41 @@ router.post("/scan", async (req, res, next) => {
   try {
     const result = await checker(req.body.url);
 
+    //Checks if url has been scanned previously
+    let urlExists = false;
+    await database
+      .ref("/scans/" + req.body.urlKey)
+      .once("value", (snapshot) => {
+        if (snapshot.exists()) {
+          urlExists = true;
+        }
+      });
+
+    //Set urlKey to contain checker results in database
     await database
       .ref("/scans/" + req.body.urlKey)
       .set({ url: req.body.url, data: result });
 
-    //current average
-    //total number of scans
+    //for every percentage i the o
     // (1/totalscans) * newscanscore  + ((totalscans-1) / totalscans ) *  current average
+    //Only changes average-results if url hasn't been scanned before
+    if (!urlExists) {
+      let avgResultsObj = {};
+      await database.ref("/average-results/").once("value", (snapshot) => {
+        if (snapshot.exists()) {
+          avgResultsObj = snapshot.val();
+        }
+      });
 
+      if (!avgResultsObj["total-scans"]) avgResultsObj["total-scans"] = 0;
+
+      const newTotal = avgResultsObj["total-scans"] + 1;
+      avgResultsObj = { ...avgResultsObj, "total-scans": newTotal };
+
+      await database.ref("/average-results/").set(avgResultsObj);
+
+      console.log("average results object in api is", avgResultsObj);
+    }
     res.json(result);
   } catch (err) {
     next(err);

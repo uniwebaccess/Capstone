@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import {Container, Link, Typography, Menu} from '@material-ui/core';
+import {Container, Link, Typography, Menu, Box, Grid} from '@material-ui/core';
 import SearchBar from "./Input";
-import Box from '@material-ui/core/Box';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 
 
 const navStyles = theme =>({
@@ -37,7 +35,7 @@ class Home extends Component {
           <img src= '/logo-uniweb.png' width='21%'/>
         </Box>
         <Typography  fontWeight="fontWeightBold" m={1} className={classes.header}>
-          Add your URL Link for scaning web page
+          Add your URL Link for scanning web page
         </Typography>
         <Box justifyContent="center"><SearchBar /></Box>
         <Grid container direction="row" spacing={6}>

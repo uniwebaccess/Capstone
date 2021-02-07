@@ -27,12 +27,10 @@ class NavBar extends Component {
   constructor(){
     super()
   }
-
   render() {
     // const handleProfileMenuOpen = (event) => {
     //   setAnchorEl(event.currentTarget);
     // };
-
     const classes = this.props.classes;
     const menuId = 'primary-search-account-menu';
     return (

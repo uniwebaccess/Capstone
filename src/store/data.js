@@ -18,10 +18,11 @@ const ranData = (url, data) => {
   };
 };
 
-const fetchedData = (url, data, avgData) => {
+const fetchedData = (url, urlKey, data, avgData) => {
   return {
     type: FETCH_DATA,
     url,
+    urlKey,
     data,
     avgData,
   };
@@ -39,10 +40,9 @@ export const runData = (urlKey, url) => {
     dispatch(sendStatusLoading());
     try {
       const res = await axios.post("/api/scan", { url, urlKey });
-      dispatch(ranData(url, res.data));
+      dispatch(ranData(url, res.data, urlKey));
       dispatch(sendStatusSuccess());
     } catch (err) {
-      console.log(err);
       console.error(err);
       dispatch(sendStatusError());
       dispatch(setError(err.message));
@@ -51,11 +51,17 @@ export const runData = (urlKey, url) => {
 };
 
 export const fetchData = (urlKey) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    let state = getState();
+    if (state.data && state.data.urlKey === urlKey) {
+      return;
+    }
     dispatch(sendStatusLoading());
     try {
       const res = await axios.get(`/api/scan/${urlKey}`);
-      dispatch(fetchedData(res.data.url, res.data.data, res.data.avgData));
+      dispatch(
+        fetchedData(res.data.url, urlKey, res.data.data, res.data.avgData)
+      );
       if (res.data.data) {
         dispatch(sendStatusSuccess());
       } else {
@@ -85,6 +91,7 @@ const data = (state = initialState, action) => {
       return {
         ...state,
         url: action.url,
+        urlKey: action.urlKey,
         data: action.data,
         avgData: action.avgData,
       };
