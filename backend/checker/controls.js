@@ -3,6 +3,7 @@ async function controlsCheck(page) {
     let count = links.length;
 
     let withHref = 0;
+    let withFocus = 0;
     let opensNewTabCount = 0;
     for (let link of links) {
       if (link.getAttribute('href')) {
@@ -10,6 +11,9 @@ async function controlsCheck(page) {
       }
       if (link.getAttribute('target') === '_blank') {
         opensNewTabCount++;
+      }
+      if (link.getAttribute('focus')) {
+        withFocus++;
       }
     }
 
@@ -20,6 +24,7 @@ async function controlsCheck(page) {
       withHref,
       percent,
       opensNewTabCount,
+      withFocus,
     };
   });
 
