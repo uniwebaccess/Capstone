@@ -2,17 +2,25 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { sizing } from '@material-ui/system';
+import { Component } from "react";
+import  {withStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+
+const navStyles = theme => ({
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",
     backgroundColor: theme.palette.grey[200],
+    height: '5px'
   },
-}));
+});
 
-export default function Footer() {
-  const classes = useStyles();
+class Footer extends Component {
+  constructor(){
+    super()
+  }
+  render(){
+  const classes = this.props.classes;
 
   return (
     <footer className={classes.footer}>
@@ -23,4 +31,7 @@ export default function Footer() {
       </Container>
     </footer>
   );
+  }
 }
+
+export default withStyles(navStyles, { withTheme: true })(Footer);

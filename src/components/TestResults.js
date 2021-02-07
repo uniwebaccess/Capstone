@@ -1,10 +1,45 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchData } from "../store/data";
-
 import HeadingsResult from '../components/HeadingsResult'
 import ImagesResult from '../components/ImagesResult'
+import Divider from '@material-ui/core/Divider';
+import {Grid, List, ListItem, ListItemText, Typography, Container, Box}from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
+
+const navStyles = theme =>({
+  root: {
+    marginTop: '20px',
+    alignItems: 'center',
+  },
+
+  header: {
+    text: 'bold',
+    variant: 'outlined',
+    color: '#1D3557',
+    marginTop: '20px'
+  },
+
+  paragraph:{
+    fontSize: '5px'
+  },
+
+  list:{
+    alignItems: 'center',
+    color: '#3a7ca5',
+    alignItems: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: '20px'
+  },
+  link:{
+    color: '#d90429',
+    fontSize: '16px'
+  },
+
+})
 /*
  * Page to render results of tests
  */
@@ -15,31 +50,60 @@ class TestResult extends Component {
   }
 
   render() {
+    const classes = this.props.classes;
     const { status, url, data, error } = this.props;
+    const urlKey = this.props.match.params.urlKey;
+
     return (
       <div>
         {status === "loading" && <h1>Loading Results</h1>}
         {status === "success" && url && data && (
-          <div>
-            <h1>Showing results for:</h1>
-            <p> {url}</p>
-            <ul>
-              <li>Total images: {data.imagesResult.allImages}</li>
-              <li>
-                Images with valid atribute alt:{" "}
-                {data.imagesResult.imagesWithAlt}
-              </li>
-              <li>
-                Test passed:{" "}
-                {data.imagesResult.passed ? "Test passed" : "Test failed"}
-              </li>
-              <li>Percent passed images: {data.imagesResult.percent}</li>
-              <li>Total Score: {data.score}</li>
-            </ul>
-            <ImagesResult />
-            <HeadingsResult />
+          <Container fixed>
+          <Typography variant="h4" fontWeight="fontWeightBold" m={1} className={classes.header}><br/>
+              <b>Showing results for website: </b>
+              <Typography variant='body1'><p className={classes.link}>{url}</p></Typography>
+            </Typography>
 
-          </div>
+          <Grid container direction="row"  justify="center"
+           className={classes.root}>
+          <Grid item xs={12} lg={8}>
+          <Box borderRadius="borderRadius" borderColor='#e0e0e0'
+          bgcolor='background.paper' border={1}>
+            <List component="nav" aria-label="list of checking" alignItems='center' alignItems='center'>
+              <ListItem button  component={RouterLink} to={"/imagesresult/" + urlKey}>
+                <ListItemText disableTypography className={classes.list} primary="Checking images. Images are a very common part of most websites. Help make sure they can be enjoyed by all."/>
+              </ListItem>
+              <Divider/>
+              <ListItem button  component={RouterLink} to={"/headingresult/" + urlKey}>
+                <ListItemText disableTypography className={classes.list} primary="Checking headings. Headings are incredibly important for helping people who use assistive technology to understand the meaning of a page or view." />
+              </ListItem>
+              <Divider/>
+              <ListItem button>
+                <ListItemText disableTypography className={classes.list} primary="Checking controls. Controls are interactive elements such as links and buttons that let a person navigate to a destination or perform an action."/>
+              </ListItem>
+              <Divider/>
+              <ListItem button>
+                <ListItemText disableTypography className={classes.list} primary="Percent passed images: " />
+              </ListItem>
+              <Divider/>
+              <ListItem button>
+                <ListItemText disableTypography className={classes.list} primary="Checking tables. Tables are a structured set of data that help people understand the relationships between different types of information." />
+              </ListItem>
+              <Divider/>
+              <ListItem button>
+                <ListItemText disableTypography className={classes.list} primary="Test: " />
+              </ListItem>
+              <Divider/>
+              <ListItem button>
+                <ListItemText disableTypography className={classes.list} primary="Some other test..." />
+              </ListItem>
+            </List>
+
+
+          </Box>
+          </Grid>
+          </Grid>
+          </Container>
         )}
         {status === "error" && (
           <div>
@@ -67,4 +131,6 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(TestResult);
+const styledComponent = withStyles(navStyles, { withTheme: true })(TestResult);
+
+export default connect(mapState, mapDispatch)(styledComponent);

@@ -5,14 +5,11 @@ import { runData } from "../store/data";
 import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import clsx from 'clsx';
-import { Icon } from '@material-ui/core';
+import { Icon, LinearProgress, Box, TextField, InputAdornment} from '@material-ui/core';
 import { clearStatus } from "../store/status";
-import { FormControl } from "@material-ui/core";
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 const navStyles = (theme) => ({
@@ -34,9 +31,13 @@ const navStyles = (theme) => ({
     widthItem: '25ch',
   },
 
-  searchIcon:{
+  searchIcon: {
     color: '#bdbdbd',
   },
+
+  paragraph: {
+    color: '#bdbdbd'
+  }
 
 });
 
@@ -69,6 +70,8 @@ class SearchBar extends React.Component {
       history.push(`/testresults/${urlKey}`);
     }
   }
+
+
 
   //Function to change url to characters that Firebase allows
   keyifyUrl(inputUrl) {
@@ -108,17 +111,19 @@ class SearchBar extends React.Component {
         </Box>
     </form>
         )}
-        {status === "loading" && <LinearProgress />}
+        {status === "loading" && <p className={classes.paragraph} >Scanning... <LinearProgress /></p>}
         {status === "error" && (
           <div>
-            <p>There was an error</p>
-            <p>{error}</p>
+
+          <Alert severity="error" >This web address is not valid!</Alert>
+           {/*<p>{error}</p>*/}
           </div>
         )}
       </div>
     );
   }
 }
+
 
 const mapState = (state) => {
   return {
