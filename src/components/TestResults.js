@@ -36,10 +36,7 @@ const navStyles = (theme) => ({
   },
 
   list: {
-    alignItems: "center",
     color: "#3a7ca5",
-    alignItems: "center",
-    alignItems: "center",
     fontWeight: "bold",
     fontSize: "20px",
   },
@@ -89,7 +86,7 @@ class TestResult extends Component {
               <br />
               <b>Showing results for website: </b>
               <Typography variant="body1">
-                <p className={classes.link}>{url}</p>
+                <span className={classes.link}>{url}</span>
               </Typography>
             </Typography>
 
@@ -109,8 +106,6 @@ class TestResult extends Component {
                   <List
                     component="nav"
                     aria-label="list of checking"
-                    alignItems="center"
-                    alignItems="center"
                   >
                     <ListItem
                       button
@@ -179,7 +174,7 @@ class TestResult extends Component {
                 </Box>
               </Grid>
             </Grid>
-            <p id="test-results-description">
+             <p id="test-results-description">
               This site was measured by a variety of fields. Select a test to
               learn more
             </p>
