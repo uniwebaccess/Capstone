@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const imagesCheck = require('./images');
 const headingsCheck = require('./headings');
 const globalCodeCheck = require('./globalCode');
-
+const controlsCheck = require('./controls');
 
 async function checkPage(url) {
   const browser = await puppeteer.launch();
@@ -12,15 +12,17 @@ async function checkPage(url) {
   let imagesResult = await imagesCheck(page);
   let headingsResult = await headingsCheck(page);
   let globalCodeResult = await globalCodeCheck(page);
+  let controlsResult = await controlsCheck(page);
 
   await browser.close();
 
   return {
-    score: 80,
+    score: 'TBD',
     imagesResult,
     headingsResult,
-    globalCodeResult
-  }
+    globalCodeResult,
+    controlsResult,
+  };
 }
 
 async function checker(url) {
@@ -30,9 +32,7 @@ async function checker(url) {
 
 module.exports = checker;
 
-
 //"https://en.wikipedia.org/wiki/Penguin"
 
 //LINK FOR DOCUMENTATION:
 //https://pptr.dev/#?product=Puppeteer&version=v5.5.0&show=api-class-page
-

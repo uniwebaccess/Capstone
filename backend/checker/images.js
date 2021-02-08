@@ -1,42 +1,54 @@
-
 async function imagesCheck(page) {
-  let result = await page.$$eval("img", imgs => {
+  // page.on('console', (msg) => {
+  //   for (let i = 0; i < msg._args.length; ++i)
+  //     console.log(`${i}: ${msg._args[i]}`);
+  // });
+  let result = await page.$$eval('img', (imgs) => {
     let count = imgs.length;
-    let imagesWithEmptyAlt = 0
-    if (imgs.alt !== "") {
-      imagesWithEmptyAlt++
-    }
-
+    let withEmptyAlt = 0;
     let withAlt = 0;
-    for (let img of imgs) {
-      if (img.getAttribute("alt")) {
-        withAlt++;
 
+    for (let img of imgs) {
+      if (img.getAttribute('alt') === '') {
+        withEmptyAlt++;
+      }
+      if (img.getAttribute('alt')) {
+        withAlt++;
       }
     }
+
     return {
-      count: count,
+      totalImages: count,
+      noAlt: count - withAlt - withEmptyAlt,
       withAlt: withAlt,
-      imagesWithEmptyAlt: imagesWithEmptyAlt
-    }
-  })
+      withEmptyAlt: withEmptyAlt,
+    };
+  });
+
   let percent;
-  if (result.count == 0) {
+  if (result.noAlt === 0) {
     percent = 100;
   } else {
-    percent = Math.floor(result.withAlt * 100 / result.count)
+    percent = Math.floor(
+      ((result.withAlt + result.withEmptyAlt) / result.totalImages) * 100
+    );
   }
+
+  console.log('images w/ empty alt: ', result.withEmptyAlt);
+
   return {
-    allImages: result.count,
+    allImages: result.totalImages,
     imagesWithAlt: result.withAlt,
-    imagesWithEmptyAlt: result.imagesWithEmptyAlt,
+    withEmptyAlt: result.withEmptyAlt,
     percent: percent,
-    passed: percent > 25,
-    imagesData: [result.count, result.withAlt, result.imagesWithEmptyAlt],
-    imagesName: ["Total Images", "Images with alt attribute", "Decorative Images"]
-
-  }
+    passed: percent > 80,
+    imagesData: [result.noAlt, result.withAlt, result.withEmptyAlt],
+    imagesName: [
+      'Images without alt attribute',
+      'Images with alt attribute',
+      'Decorative Images',
+    ],
+  };
 }
-
 
 module.exports = imagesCheck;
