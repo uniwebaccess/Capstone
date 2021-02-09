@@ -1,12 +1,9 @@
-
-
 async function headingsCheck(page) {
   let headers = await page.$$eval('h1, h2, h3, h4, h5, h6', (headers) => {
-    return headers.map(header => header.tagName)
-  })
+    return headers.map((header) => header.tagName);
+  });
 
-
-  let numbers = headers.map(header => header[1] * 1);
+  let numbers = headers.map((header) => header[1] * 1);
 
   let wrongHeaders = 0;
   let currentLevel = 0;
@@ -17,43 +14,39 @@ async function headingsCheck(page) {
     currentLevel = level;
   }
   const logicSequenceFunc = () => {
-    if (wrongHeaders !== 0) return false
-    return true
-  }
+    if (wrongHeaders !== 0) return false;
+    return true;
+  };
 
-  const checkH1 = await page.$$('h1')
+  const checkH1 = await page.$$('h1');
   const h1 = () => {
-
-    if (checkH1.length === 1)
-      return true
-    return false
-  }
+    if (checkH1.length === 1) return true;
+    return false;
+  };
 
   // const checkHeaderTag = await page.$('header')
   // const checkSectionTag = await page.$('section')
 
-  const h1OnlyOne = h1()
+  const h1OnlyOne = h1();
   // const skipHeader = skipHeaderFunc()
-  const logicSequence = logicSequenceFunc()
+  const logicSequence = logicSequenceFunc();
   //order is important!! and based on testNames(should match)
-  let calculateEachTest = []
-
-
+  let calculateEachTest = [];
 
   const totalScore = () => {
-    let total = 100
+    let total = 100;
     if (h1OnlyOne === false) {
-      total -= 30
-      calculateEachTest.push(10)
+      total -= 30;
+      calculateEachTest.push(10);
     } else {
-      calculateEachTest.push(100)
+      calculateEachTest.push(100);
     }
 
     if (logicSequence === false) {
-      total -= 30
-      calculateEachTest.push(10)
+      total -= 30;
+      calculateEachTest.push(10);
     } else {
-      calculateEachTest.push(100)
+      calculateEachTest.push(100);
     }
 
     // if (checkHeaderTag === null) {
@@ -70,25 +63,26 @@ async function headingsCheck(page) {
     //   calculateEachTest.push(100)
     // }
 
-    return total
-  }
-  const totalPercent = totalScore()
-  calculateEachTest.push(totalPercent)
+    return total;
+  };
+  const totalPercent = totalScore();
+  calculateEachTest.push(totalPercent);
   return {
     onlyOneH1: h1OnlyOne,
     logicSequence: logicSequence,
-    total: totalPercent,
+    percent: totalPercent,
+    passed: totalPercent > 75,
     // checkHeaderTag: checkHeaderTag,
     // checkSectionTag: checkSectionTag,
-    testNames: ["H1 Tag",
+    testNames: [
+      'H1 Tag',
       // "Correct Order of H-Tags",
-      "Logic Sequence",
+      'Logic Sequence',
       // "Header Tag", "Section Tag",
-      "total"],
+      'total',
+    ],
     eachTest: calculateEachTest,
-
-  }
-};
+  };
+}
 
 module.exports = headingsCheck;
-
