@@ -5,7 +5,7 @@ const globalCodeCheck = require('./globalCode');
 const controlsCheck = require('./controls');
 
 async function checkPage(url) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] } );
   const page = await browser.newPage();
   await page.goto(url);
   //add different tasks
