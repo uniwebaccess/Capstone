@@ -17,6 +17,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api', require('./api'))
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+})
+
+app.use(express.static(path.join(__dirname, '/../client/build')))
 
 app.use((req, res, next) => {
   if (path.extname(req.path).length) {
@@ -34,14 +39,14 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
 
-
+//ksenia cool!
 // main("https://en.wikipedia.org/wiki/Penguin");
 
 
 
-
-app.listen(5000, () => {
-  console.log('server is running on 5000');
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server is running on ${port}`);
 });
 
 module.exports = app

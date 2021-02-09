@@ -1,11 +1,11 @@
-const puppeteer = require('puppeteer');
-const imagesCheck = require('./images');
-const headingsCheck = require('./headings');
-const globalCodeCheck = require('./globalCode');
-const controlsCheck = require('./controls');
+const puppeteer = require("puppeteer");
+const imagesCheck = require("./images");
+const headingsCheck = require("./headings");
+const globalCodeCheck = require("./globalCode");
+const controlsCheck = require("./controls");
 
 async function checkPage(url) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] } );
   const page = await browser.newPage();
   await page.goto(url);
   //add different tasks
@@ -17,7 +17,7 @@ async function checkPage(url) {
   await browser.close();
 
   return {
-    score: 'TBD',
+    score: { percent: 100, passed: 0 },
     imagesResult,
     headingsResult,
     globalCodeResult,
