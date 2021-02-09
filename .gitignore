@@ -12,6 +12,7 @@ client/.pnp.js
 client/build
 client/node_modules
 
+
 # misc
 .DS_Store
 .env.local
