@@ -1,10 +1,9 @@
-import "./style/App.css";
-import React from "react";
-import Routes from "./routes";
-import Footer from "./components/Footer";
-import NavBar from "./components/Navbar";
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-
+import './style/App.css';
+import React from 'react';
+import Routes from './routes';
+import Footer from './components/Footer';
+import NavBar from './components/Navbar';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
@@ -12,7 +11,7 @@ const theme = createMuiTheme({
       // light: will be calculated from palette.primary.main,
       main: '#b2ebf2',
       // dark: will be calculated from palette.primary.main,
-      contrastText: '#0097a7'
+      contrastText: '#0097a7',
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
@@ -33,14 +32,14 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
-      <div className="main">
-        <NavBar />
-        <Routes />
+      <div className="App">
+        <div className="main">
+          <NavBar />
+          <Routes />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  </ThemeProvider>
+    </ThemeProvider>
   );
 }
 

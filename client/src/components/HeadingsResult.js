@@ -1,27 +1,27 @@
-import React from 'react'
+import React from 'react';
 import { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import BarChart from '../visual/BarChart';
-import { fetchData } from "../store/data";
+import { fetchData } from '../store/data';
 
-
-class HeadingsResult extends Component{
-  // console.log("props", props.data)
+class HeadingsResult extends Component {
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
   }
-  render(){
-    const { status, url, data, error } = this.props;
-    console.log(data)
-  return (
-    <div>
-    {status === "loading" && <h1>Loading Results</h1>}
-        {status === "success" && url && data && (
-          <div><p>This is HeadingsResult Component:</p>
-            <BarChart data={data.headingsResult} /></div>
+  render() {
+    const { status, url, data } = this.props;
+
+    return (
+      <div>
+        {status === 'loading' && <h1>Loading Results</h1>}
+        {status === 'success' && url && data && (
+          <div>
+            <p>This is HeadingsResult Component:</p>
+            <BarChart data={data.headingsResult} />
+          </div>
         )}
-    </div>
-  )
+      </div>
+    );
   }
 }
 
@@ -33,7 +33,6 @@ const mapState = (state) => {
     error: state.error,
   };
 };
-
 
 const mapDispatch = (dispatch) => {
   return {
