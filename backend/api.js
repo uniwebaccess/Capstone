@@ -56,48 +56,26 @@ router.post("/scan", async (req, res, next) => {
       .ref("/scans/" + req.body.urlKey)
       .set({ url: req.body.url, data: result });
 
-    let avgResultsObj = {};
-    await database.ref("/average-results/").once("value", (snapshot) => {
-      if (snapshot.exists()) {
-        avgResultsObj = snapshot.val();
-      }
-    });
-
-    //Only changes total-scans if url hasn't been scanned before
+    //for every percentage i the o
+    // (1/totalscans) * newscanscore  + ((totalscans-1) / totalscans ) *  current average
+    //Only changes average-results if url hasn't been scanned before
     if (!urlExists) {
+      let avgResultsObj = {};
+      await database.ref("/average-results/").once("value", (snapshot) => {
+        if (snapshot.exists()) {
+          avgResultsObj = snapshot.val();
+        }
+      });
+
       if (!avgResultsObj["total-scans"]) avgResultsObj["total-scans"] = 0;
 
       const newTotal = avgResultsObj["total-scans"] + 1;
       avgResultsObj = { ...avgResultsObj, "total-scans": newTotal };
+
+      await database.ref("/average-results/").set(avgResultsObj);
+
+      console.log("average results object in api is", avgResultsObj);
     }
-
-    // for every testfield percentage in the object
-    // for percentage average (1/totalscans) * newscanscore  + ((totalscans-1) / totalscans ) *  current average
-    // for passing average -> total number of passing scans
-    //Object.keys
-
-    Object.keys(result).forEach((key) => {
-      let newScan = result[key];
-
-      if (!Object.keys(newScan).length) newScan = {};
-      if (!newScan["percent"]) newScan["percent"] = 100;
-
-      let avgResult = {};
-      avgResultsObj[key]
-        ? (avgResult = avgResultsObj[key])
-        : (avgResult = { percent: 100, passed: 0 });
-      avgResultsObj[key] = { percent: 100, passed: 0 };
-      const totalScans = avgResultsObj["total-scans"];
-
-      const newPercent =
-        (1 / totalScans) * newScan["percent"] +
-        ((totalScans - 1) / totalScans) * avgResult["percent"];
-
-      avgResultsObj[key]["percent"] = newPercent;
-    });
-
-    await database.ref("/average-results/").set(avgResultsObj);
-
     res.json(result);
   } catch (err) {
     next(err);
