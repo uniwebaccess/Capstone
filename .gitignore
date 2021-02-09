@@ -2,14 +2,15 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+client/.pnp
+client/.pnp.js
 
 # testing
 /coverage
 
 # production
-/build
+client/build
+client/node_modules
 
 # misc
 .DS_Store
@@ -26,3 +27,5 @@ yarn-error.log*
 #add bundle.js if using webpack
 .eslintcache
 
+client/build
+client/node_modules
