@@ -1,21 +1,21 @@
-import React from "react";
-import history from "../history";
-import { connect } from "react-redux";
-import { runData } from "../store/data";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import SearchIcon from "@material-ui/icons/Search";
-import clsx from "clsx";
+import React from 'react';
+import history from '../history';
+import { connect } from 'react-redux';
+import { runData } from '../store/data';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
+import clsx from 'clsx';
 import {
   Icon,
   LinearProgress,
   Box,
   TextField,
   InputAdornment,
-} from "@material-ui/core";
-import { clearStatus } from "../store/status";
-import Alert from "@material-ui/lab/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
+} from '@material-ui/core';
+import { clearStatus } from '../store/status';
+import Alert from '@material-ui/lab/Alert';
+//import Snackbar from "@material-ui/core/Snackbar";
 
 const navStyles = (theme) => ({
   root: {
@@ -25,23 +25,23 @@ const navStyles = (theme) => ({
     flexGrow: 1,
   },
   inputRoot: {
-    color: "inherit",
+    color: 'inherit',
   },
 
   margin: {
-    width: "60%",
-    height: "15%",
+    width: '60%',
+    height: '15%',
   },
   textField: {
-    widthItem: "25ch",
+    widthItem: '25ch',
   },
 
   searchIcon: {
-    color: "#bdbdbd",
+    color: '#bdbdbd',
   },
 
   paragraph: {
-    color: "#bdbdbd",
+    color: '#bdbdbd',
   },
 });
 
@@ -49,7 +49,7 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputUrl: "https://en.wikipedia.org/wiki/Penguin",
+      inputUrl: 'https://en.wikipedia.org/wiki/Penguin',
     };
     this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -71,7 +71,7 @@ class SearchBar extends React.Component {
     //Changes input url to firebase key
     const urlKey = this.keyifyUrl(this.state.inputUrl);
     await this.props.runData(urlKey, this.state.inputUrl);
-    if (this.props.status === "success") {
+    if (this.props.status === 'success') {
       history.push(`/testresults/${urlKey}`);
     }
   }
@@ -80,7 +80,7 @@ class SearchBar extends React.Component {
   keyifyUrl(inputUrl) {
     //replace . with ,
     //replace / with =
-    let urlKey = inputUrl.replace(/\./g, ",").replace(/\//g, "=");
+    let urlKey = inputUrl.replace(/\./g, ',').replace(/\//g, '=');
     return urlKey;
   }
 
@@ -124,15 +124,15 @@ class SearchBar extends React.Component {
             </Box>
           </form>
         )}
-        {status === "loading" && (
+        {status === 'loading' && (
           <div className={classes.paragraph}>
             Scanning... <LinearProgress />
           </div>
         )}
-        {status === "error" && (
+        {status === 'error' && (
           <div>
             <Alert severity="error">This web address is not valid!</Alert>
-            <br/>
+            <br />
             <Button
               color="secondary"
               variant="contained"
