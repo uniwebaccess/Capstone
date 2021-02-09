@@ -12,17 +12,23 @@ async function controlsCheck(page) {
       if (link.getAttribute('target') === '_blank') {
         opensNewTabCount++;
       }
+      //this doesn't work - need to update
       if (link.getAttribute('focus')) {
         withFocus++;
       }
     }
 
     //could also add a check for <a> elements with no href that use onClick instead (and inform user why that is not a good solution)
-    let percent = Math.floor((withHref * 100) / count);
+    let hrefPercent = Math.floor((withHref / count) * 100);
+    let newTabPercent = Math.floor(((count - opensNewTabCount) / count) * 100);
+    let linksPercent = Math.floor((hrefPercent + newTabPercent) / 2);
+
     return {
       count,
       withHref,
-      percent,
+      hrefPercent,
+      newTabPercent,
+      linksPercent,
       opensNewTabCount,
       withFocus,
     };
@@ -36,24 +42,29 @@ async function controlsCheck(page) {
         withButtonType++;
       }
     }
-    let percent = Math.floor((withButtonType * 100) / count);
+    let buttonsPercent = Math.floor((withButtonType * 100) / count);
     return {
       count,
       withButtonType,
-      percent,
+      buttonsPercent,
     };
   });
+
+  let ControlsCategoryPercent =
+    (links.linksPercent + buttons.buttonsPercent) / 2;
 
   return {
     allLinks: links.count,
     linksWithHref: links.withHref,
-    hrefPercent: links.percent,
-    hrefPassed: links.percent > 10,
+    hrefPercent: links.hrefPercent,
+    hrefPassed: links.hrefPercent > 75,
     linksToNewTab: links.opensNewTabCount,
     allButtons: buttons.count,
     buttonsWithType: buttons.withButtonType,
-    buttonsPercent: buttons.percent,
-    buttonsPassed: buttons.percent > 50,
+    buttonsPercent: buttons.buttonsPercent,
+    buttonsPassed: buttons.buttonsPercent > 75,
+    passed: ControlsCategoryPercent > 75,
+    percent: ControlsCategoryPercent,
   };
 }
 
