@@ -8,8 +8,6 @@ Our aim is to provide a tool for web developers to assess the inclusivity and ac
 
 ## Table of Contents
 
-- [Uniweb Access](#Uniweb-Access)
-- [Table of Contents](#Table-of-Contents)
 - [Where to Find Us](#Where-to-Find-Us)
 - [Team](#Team)
   - [Elijah Meshnick](#Elijah-Meshnick)
@@ -26,25 +24,25 @@ Our aim is to provide a tool for web developers to assess the inclusivity and ac
 
 ## Team
 
-### `Elijah Meshnick`
+#### `Elijah Meshnick`
 
 LinkedIn: https://www.linkedin.com/in/elijah-meshnick/
 
 Github: https://github.com/emeshnick
 
-### `Elizabeth Howell`
+#### `Elizabeth Howell`
 
 LinkedIn: https://www.linkedin.com/in/e-m-howell/
 
 Github: https://github.com/bethhowell123
 
-### `Khrystyna Tsiupa`
+#### `Khrystyna Tsiupa`
 
 LinkedIn: https://www.linkedin.com/in/christidev/
 
 Github: https://github.com/vanderwooodsen
 
-### `Ksenia Rozhdestvenskaya`
+#### `Ksenia Rozhdestvenskaya`
 
 LinkedIn: https://www.linkedin.com/in/ksenia-ro/
 
@@ -53,13 +51,9 @@ Github: https://github.com/KseniaRo
 ## Tech Stack
 
 - Javascript
-
 - React
-
 - Puppeteer
-
 - Chart.js
-
 - Redux
 
 Our backend was created with Node.js, Firebase, Express, and deployed on Heroku.
