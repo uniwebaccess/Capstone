@@ -61,7 +61,15 @@ export default function MainResultsChart(props) {
           tooltips: {
             callbacks: {
               label: function (tooltipItem) {
-                if (tooltipItem.datasetIndex === 0) {
+                props.selectField(
+                  tooltipItem.label[0].toLowerCase() +
+                    tooltipItem.label.replace(/\s/g, "").substring(1)
+                );
+                // props.selectField(
+                //   console.log(
+                //   tooltipItem.label.replace(/\s/g, "")[0].toLowercase()
+                // ))
+                if (tooltipItem.dataset === 0) {
                   return `Your score is ${tooltipItem.yLabel}%`;
                 } else {
                   return `The average score is ${tooltipItem.yLabel}%`;

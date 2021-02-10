@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchData, selectField } from '../store/data';
-import { checkerDescriptions } from '../constants';
-import TestFieldDescription from './single-tests/TestFieldDescription';
-import MainResultsChart from '../visual/MainResultsChart';
-import Divider from '@material-ui/core/Divider';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchData, selectField } from "../store/data";
+import { checkerDescriptions } from "../constants";
+import TestFieldDescription from "./single-tests/TestFieldDescription";
+import MainResultsChart from "../visual/MainResultsChart";
+import Divider from "@material-ui/core/Divider";
 import {
   Grid,
   List,
@@ -13,35 +13,35 @@ import {
   Typography,
   Container,
   Box,
-} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import { Link as RouterLink } from 'react-router-dom';
+} from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import { Link as RouterLink } from "react-router-dom";
 
 const navStyles = (theme) => ({
   root: {
-    marginTop: '20px',
-    alignItems: 'center',
+    marginTop: "20px",
+    alignItems: "center",
   },
 
   header: {
-    text: 'bold',
-    variant: 'outlined',
-    color: '#1D3557',
-    marginTop: '20px',
+    text: "bold",
+    variant: "outlined",
+    color: "#1D3557",
+    marginTop: "20px",
   },
 
   paragraph: {
-    fontSize: '5px',
+    fontSize: "5px",
   },
 
   list: {
-    color: '#3a7ca5',
-    fontWeight: 'bold',
-    fontSize: '20px',
+    color: "#3a7ca5",
+    fontWeight: "bold",
+    fontSize: "20px",
   },
   link: {
-    color: '#d90429',
-    fontSize: '16px',
+    color: "#d90429",
+    fontSize: "16px",
   },
 });
 /*
@@ -51,9 +51,6 @@ const navStyles = (theme) => ({
 class TestResult extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: 'images',
-    };
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
@@ -72,8 +69,8 @@ class TestResult extends Component {
     const urlKey = this.props.match.params.urlKey;
     return (
       <div>
-        {status === 'loading' && <h1>Loading Results</h1>}
-        {status === 'success' && url && data && avgData && (
+        {status === "loading" && <h1>Loading Results</h1>}
+        {status === "success" && url && data && avgData && (
           <Container fixed>
             <Typography
               variant="h4"
@@ -87,7 +84,13 @@ class TestResult extends Component {
                 <span className={classes.link}>{url}</span>
               </Typography>
             </Typography>
-            <MainResultsChart newScan={data} averages={avgData} />
+
+            <MainResultsChart
+              newScan={data}
+              averages={avgData}
+              selectField={this.props.selectField}
+            />
+            <TestFieldDescription descriptions={checkerDescriptions} />
             <Grid
               container
               direction="row"
@@ -105,7 +108,7 @@ class TestResult extends Component {
                     <ListItem
                       button
                       component={RouterLink}
-                      to={'/imagesresult/' + urlKey}
+                      to={"/imagesresult/" + urlKey}
                     >
                       <ListItemText
                         disableTypography
@@ -117,7 +120,7 @@ class TestResult extends Component {
                     <ListItem
                       button
                       component={RouterLink}
-                      to={'/headingresult/' + urlKey}
+                      to={"/headingresult/" + urlKey}
                     >
                       <ListItemText
                         disableTypography
@@ -169,26 +172,9 @@ class TestResult extends Component {
                 </Box>
               </Grid>
             </Grid>
-            {/* <p id="test-results-description">
-              This site was measured by a variety of fields. Select a test to
-              learn more
-            </p>
-            <form>
-              <select
-                name="testField"
-                id="field-select"
-                value={this.state.selected}
-                onChange={this.handleChange}
-              >
-                <option value="images">Images</option>
-                <option value="globalCode">Global Code</option>
-                <option value="headings">Headings</option>
-              </select>
-            </form> */}
-            <TestFieldDescription descriptions={checkerDescriptions} />
           </Container>
         )}
-        {status === 'error' && (
+        {status === "error" && (
           <div>
             <h1>There was an error</h1>
             <p>{error}</p>
