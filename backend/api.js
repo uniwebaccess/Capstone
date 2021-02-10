@@ -84,9 +84,11 @@ router.post("/scan", async (req, res, next) => {
         const totalScans = avgResultsObj["total-scans"];
 
         //Recalculates average percent on average-results
-        const newPercent =
+        let newPercent =
           (1 / totalScans) * newScan["percent"] +
           ((totalScans - 1) / totalScans) * avgResult["percent"];
+
+        newPercent = Math.round(newPercent * 100) / 100;
 
         avgResultsObj[key]["percent"] = newPercent;
 

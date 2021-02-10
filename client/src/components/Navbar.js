@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {AppBar, Toolbar, IconButton, Typography} from '@material-ui/core';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import { withStyles} from '@material-ui/core/styles';
 import MailIcon from '@material-ui/icons/Mail';
-import SvgIcon from '@material-ui/core/SvgIcon';
 import Button from '@material-ui/core/Button';
 import { Link as RouterLink } from 'react-router-dom';
 
