@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import {AppBar, Toolbar, IconButton, Typography} from '@material-ui/core';
-import MailIcon from '@material-ui/icons/Mail';import Button from '@material-ui/core/Button';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import MailIcon from '@material-ui/icons/Mail';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import Button from '@material-ui/core/Button';
+import { Link as RouterLink } from 'react-router-dom';
+
+
 
 const navStyles = (theme) => ({
   root: {
@@ -19,6 +22,9 @@ const navStyles = (theme) => ({
   toolbarButtons: {
     float: 'right',
   },
+  email: {
+    fontSize:'14px'
+  }
 });
 
 class NavBar extends Component {
@@ -37,24 +43,38 @@ class NavBar extends Component {
               edge="start"
               className={classes.homeButton}
               color="inherit"
-              aria-label="home"
-            >
-              <SvgIcon>
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-              </SvgIcon>
+              aria-label="home">
+
+            <img alt="uniweb-logo" src="/logo-uniweb-navbar.png"/>
             </IconButton>
+
             <Typography variant="h6" className={classes.title}></Typography>
 
             <div className={classes.toolbarButtons}>
+            <Button
+              component={RouterLink}
+              to={'/about'}
+              color="inherit">
+             About
+             </Button>
+
+             <Button
+              component={RouterLink}
+              to={'/contactus'}
+              color="inherit">
+             Contact Us
+             </Button>
+
               <IconButton
-                aria-label="account of current user"
-                aria-controls={menuId}
+                aria-label="send data to email"
+                aria-controls="email"
                 aria-haspopup="true"
                 //onClick={handleProfileMenuOpen}
                 color="inherit"
-              >
-                <AccountCircle />
+              ><Typography className={classes.email}></Typography>
+                <MailIcon />
               </IconButton>
+
             </div>
           </Toolbar>
         </AppBar>

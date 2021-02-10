@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import TestResults from "./components/TestResults";
 import ImagesResult from './components/single-tests/ImagesResult';
 import HeadingsResult from './components/single-tests/HeadingsResult';
+import AboutUs from './components/AbouUs';
+import ContactUs from './components/ContactUs';
 class Routes extends Component {
   // componentDidMount() {
   //   this.props.loadInitialData()
@@ -16,6 +18,9 @@ class Routes extends Component {
         <Route path="/testresults/:urlKey" component={TestResults}/>
         <Route path="/imagesresult/:urlKey" component={ImagesResult}/>
         <Route path="/headingresult/:urlKey" component={HeadingsResult}/>
+        <Route path="/about" component={AboutUs}/>
+        <Route path="/contactus" component={ContactUs}/>
+
       </div>
     );
   }
