@@ -12,8 +12,6 @@ const reducer = combineReducers({
   error,
 });
 
-console.log("production env", process.env.NODE_ENV);
-
 const middleware = composeWithDevTools(
   applyMiddleware(
     thunkMiddleware,
