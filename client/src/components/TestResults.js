@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { fetchData, selectField } from "../store/data";
 import { checkerDescriptions } from "../constants";
 import TestFieldDescription from "./single-tests/TestFieldDescription";
-import HeadingsResult from "../components/HeadingsResult";
-import ImagesResult from "../components/ImagesResult";
+import HeadingsResult from "./single-tests/HeadingsResult";
+import ImagesResult from "./single-tests/ImagesResult";
 import Divider from "@material-ui/core/Divider";
 import {
   Grid,

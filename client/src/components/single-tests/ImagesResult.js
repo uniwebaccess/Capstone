@@ -1,8 +1,8 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import PieChart from "../visual/PieChart";
-import { fetchData } from "../store/data";
+import PieChart from "../../visual/PieChart";
+import { fetchData } from "../../store/data";
 
 class ImagesResult extends Component {
   componentDidMount() {

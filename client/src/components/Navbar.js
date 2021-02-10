@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {AppBar, Toolbar, IconButton, Typography} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import Button from '@material-ui/core/Button';
+import MailIcon from '@material-ui/icons/Mail';import Button from '@material-ui/core/Button';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -32,7 +31,7 @@ class NavBar extends Component {
     //   setAnchorEl(event.currentTarget);
     // };
     const classes = this.props.classes;
-    const menuId = 'primary-search-account-menu';
+    const menuId = 'primary-mail';
     return (
       <div className={classes.root}>
         <AppBar color='primary' position="static">

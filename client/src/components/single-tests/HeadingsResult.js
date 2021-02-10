@@ -1,8 +1,8 @@
 import React from 'react'
 import { Component } from 'react';
 import { connect } from "react-redux";
-import BarChart from '../visual/BarChart';
-import { fetchData } from "../store/data";
+import BarChart from '../../visual/BarChart';
+import { fetchData } from "../../store/data";
 
 
 class HeadingsResult extends Component{
