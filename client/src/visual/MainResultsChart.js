@@ -60,13 +60,11 @@ export default function MainResultsChart(props) {
         options={{
           tooltips: {
             callbacks: {
-              label: function (tooltipItem, data) {
-                console.log(this);
-                console.log(data);
+              label: function (tooltipItem) {
                 if (tooltipItem.datasetIndex === 0) {
-                  return `Your ${tooltipItem.label} score is ${tooltipItem.yLabel}%`;
+                  return `Your score is ${tooltipItem.yLabel}%`;
                 } else {
-                  return `The average ${tooltipItem.label} score is ${tooltipItem.yLabel}%`;
+                  return `The average score is ${tooltipItem.yLabel}%`;
                 }
               },
             },
