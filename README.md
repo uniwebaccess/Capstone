@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Uniweb Access
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**A web application that, given a URL, scans the webpage and returns feedback about its accessibility.**
 
-## Available Scripts
+Uniweb Access is developed by Ksenia Rozhdestvenskaya, Khrystyna Tsiupa, Elizabeth Howell, and Elijah Meshnick.
 
-In the project directory, you can run:
+Our aim is to provide a tool for web developers to assess the inclusivity and accessibility of their sites to a wide variety of users, including those with disabilities. We base our assessments on the [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/) and the checklist created by the [A11y Project](https://www.a11yproject.com/).
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Uniweb Access](#Uniweb-Access)
+- [Table of Contents](#Table-of-Contents)
+- [Where to Find Us](#Where-to-Find-Us)
+- [Team](#Team)
+  - [Elijah Meshnick](#Elijah-Meshnick)
+  - [Elizabeth Howell](#Elizabeth-Howell)
+  - [Khrystyna Tsiupa](#Khrystyna-Tsiupa)
+  - [Ksenia Rozhdestvenskaya](#Ksenia-Rozhdestvenskaya)
+- [Tech Stack](#Tech-Stack)
+- [Current Features](#Current-Features)
+- [Additional Ideas](#Additional-Ideas)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Where to Find Us
 
-### `npm test`
+### Visit our deployed application at http://uniweb-access.herokuapp.com
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Team
 
-### `npm run build`
+### `Elijah Meshnick`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+LinkedIn: https://www.linkedin.com/in/elijah-meshnick/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Github: https://github.com/emeshnick
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `Elizabeth Howell`
 
-### `npm run eject`
+LinkedIn: https://www.linkedin.com/in/e-m-howell/
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Github: https://github.com/bethhowell123
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `Khrystyna Tsiupa`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+LinkedIn: https://www.linkedin.com/in/christidev/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Github: https://github.com/vanderwooodsen
 
-## Learn More
+### `Ksenia Rozhdestvenskaya`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+LinkedIn: https://www.linkedin.com/in/ksenia-ro/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Github: https://github.com/KseniaRo
 
-### Code Splitting
+## Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Javascript
 
-### Analyzing the Bundle Size
+- React
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Puppeteer
 
-### Making a Progressive Web App
+- Chart.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Redux
 
-### Advanced Configuration
+Our backend was created with Node.js, Firebase, Express, and deployed on Heroku.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Current Features
 
-### Deployment
+- Users can input a URL for our application to test
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Uniweb Access will run a series of tests on the requested site and calculate scores based on the site's accessibility
 
-### `npm run build` fails to minify
+- In addition to individual test scores, we offer visual representations of your result data and a comparison to the average score of all sites we have previously tested
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Additional Ideas
+
+- Allow users to create an account and save their scan results to reference later
+
+- Integrate Google Lighthouse for more comprehensive results
