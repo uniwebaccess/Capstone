@@ -5,7 +5,7 @@ const globalCodeCheck = require("./globalCode");
 const controlsCheck = require("./controls");
 
 async function checkPage(url) {
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] } );
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
   await page.goto(url);
   //add different tasks
@@ -16,8 +16,17 @@ async function checkPage(url) {
 
   await browser.close();
 
+  const percent =
+    (imagesResult.percent +
+      headingsResult.percent +
+      globalCodeResult.percent +
+      controlsResult.percent) /
+    4;
+
+  const passed = percent > 70;
+
   return {
-    score: { percent: 100, passed: 0 },
+    score: { percent: percent, passed: passed },
     imagesResult,
     headingsResult,
     globalCodeResult,

@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchData, selectField } from "../store/data";
-import { checkerDescriptions } from "../constants";
-import TestFieldDescription from "./single-tests/TestFieldDescription";
-import HeadingsResult from "./single-tests/HeadingsResult";
-import ImagesResult from "./single-tests/ImagesResult";
-import Divider from "@material-ui/core/Divider";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchData, selectField } from '../store/data';
+import { checkerDescriptions } from '../constants';
+import TestFieldDescription from './single-tests/TestFieldDescription';
+import MainResultsChart from '../visual/MainResultsChart';
+import Divider from '@material-ui/core/Divider';
 import {
   Grid,
   List,
@@ -14,35 +13,35 @@ import {
   Typography,
   Container,
   Box,
-} from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import { Link as RouterLink } from "react-router-dom";
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 const navStyles = (theme) => ({
   root: {
-    marginTop: "20px",
-    alignItems: "center",
+    marginTop: '20px',
+    alignItems: 'center',
   },
 
   header: {
-    text: "bold",
-    variant: "outlined",
-    color: "#1D3557",
-    marginTop: "20px",
+    text: 'bold',
+    variant: 'outlined',
+    color: '#1D3557',
+    marginTop: '20px',
   },
 
   paragraph: {
-    fontSize: "5px",
+    fontSize: '5px',
   },
 
   list: {
-    color: "#3a7ca5",
-    fontWeight: "bold",
-    fontSize: "20px",
+    color: '#3a7ca5',
+    fontWeight: 'bold',
+    fontSize: '20px',
   },
   link: {
-    color: "#d90429",
-    fontSize: "16px",
+    color: '#d90429',
+    fontSize: '16px',
   },
 });
 /*
@@ -53,7 +52,7 @@ class TestResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "images",
+      selected: 'images',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -69,13 +68,12 @@ class TestResult extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { status, url, data, error } = this.props;
+    const { status, url, data, error, avgData } = this.props;
     const urlKey = this.props.match.params.urlKey;
-
     return (
       <div>
-        {status === "loading" && <h1>Loading Results</h1>}
-        {status === "success" && url && data && (
+        {status === 'loading' && <h1>Loading Results</h1>}
+        {status === 'success' && url && data && avgData && (
           <Container fixed>
             <Typography
               variant="h4"
@@ -89,7 +87,7 @@ class TestResult extends Component {
                 <span className={classes.link}>{url}</span>
               </Typography>
             </Typography>
-
+            <MainResultsChart newScan={data} averages={avgData} />
             <Grid
               container
               direction="row"
@@ -103,14 +101,11 @@ class TestResult extends Component {
                   bgcolor="background.paper"
                   border={1}
                 >
-                  <List
-                    component="nav"
-                    aria-label="list of checking"
-                  >
+                  <List component="nav" aria-label="list of checking">
                     <ListItem
                       button
                       component={RouterLink}
-                      to={"/imagesresult/" + urlKey}
+                      to={'/imagesresult/' + urlKey}
                     >
                       <ListItemText
                         disableTypography
@@ -122,7 +117,7 @@ class TestResult extends Component {
                     <ListItem
                       button
                       component={RouterLink}
-                      to={"/headingresult/" + urlKey}
+                      to={'/headingresult/' + urlKey}
                     >
                       <ListItemText
                         disableTypography
@@ -154,7 +149,7 @@ class TestResult extends Component {
                         primary="Checking tables. Tables are a structured set of data that help people understand the relationships between different types of information."
                       />
                     </ListItem>
-                    <Divider />
+                    {/* <Divider />
                     <ListItem button>
                       <ListItemText
                         disableTypography
@@ -169,12 +164,12 @@ class TestResult extends Component {
                         className={classes.list}
                         primary="Some other test..."
                       />
-                    </ListItem>
+                    </ListItem> */}
                   </List>
                 </Box>
               </Grid>
             </Grid>
-             {/* <p id="test-results-description">
+            {/* <p id="test-results-description">
               This site was measured by a variety of fields. Select a test to
               learn more
             </p>
@@ -193,7 +188,7 @@ class TestResult extends Component {
             <TestFieldDescription descriptions={checkerDescriptions} />
           </Container>
         )}
-        {status === "error" && (
+        {status === 'error' && (
           <div>
             <h1>There was an error</h1>
             <p>{error}</p>
@@ -206,7 +201,9 @@ class TestResult extends Component {
 
 const mapState = (state) => {
   return {
+    //data = results from most recent scan
     data: state.data.data,
+    //avgData = average results object (all previous scans)
     avgData: state.data.avgData,
     url: state.data.url,
     status: state.status,

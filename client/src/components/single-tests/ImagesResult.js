@@ -9,11 +9,11 @@ class ImagesResult extends Component {
     this.props.fetchData(this.props.match.params.urlKey);
   }
   render() {
-    const { status, url, data, error } = this.props;
+    const { status, url, data } = this.props;
     return (
       <div>
-        {status === "loading" && <h1>Loading Results</h1>}
-        {status === "success" && url && data && (
+        {status === 'loading' && <h1>Loading Results</h1>}
+        {status === 'success' && url && data && (
           <div>
             <p>This is ImagesResult Component:</p>
             <PieChart data={data.imagesResult} />
@@ -22,10 +22,10 @@ class ImagesResult extends Component {
             <ul>
               <li>Total images: {data.imagesResult.allImages}</li>
               <li>
-                Images with valid atribute alt:{" "}
+                Images with valid atribute alt:{' '}
                 {data.imagesResult.imagesWithAlt}
               </li>
-              <li>Test: {data.imagesResult.passed ? " passed" : " failed"}</li>
+              <li>Test: {data.imagesResult.passed ? ' passed' : ' failed'}</li>
               <li>Percent passed images: {data.imagesResult.percent}</li>
               <li>Total Score: {data.score.percent}</li>
             </ul>

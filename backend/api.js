@@ -26,7 +26,7 @@ router.get("/scan/:urlKey", async (req, res, next) => {
       }
     });
 
-    //Sends retrieved data if
+    //Sends retrieved data if it exists
     if (retrievedData["data"]) {
       res.json(retrievedData);
     } else {
@@ -63,40 +63,40 @@ router.post("/scan", async (req, res, next) => {
       }
     });
 
-    //Only changes total-scans if url hasn't been scanned before
+    //Only changes average-results if url hasn't been scanned before
     if (!urlExists) {
       if (!avgResultsObj["total-scans"]) avgResultsObj["total-scans"] = 0;
 
       const newTotal = avgResultsObj["total-scans"] + 1;
       avgResultsObj = { ...avgResultsObj, "total-scans": newTotal };
+
+      Object.keys(result).forEach((key) => {
+        let newScan = result[key];
+
+        if (!Object.keys(newScan).length) newScan = {};
+        if (!newScan["percent"]) newScan["percent"] = 100;
+
+        let avgResult = {};
+        avgResultsObj[key]
+          ? (avgResult = avgResultsObj[key])
+          : (avgResult = { percent: 100, passed: 0 });
+        avgResultsObj[key] = { percent: 100, passed: 0 };
+        const totalScans = avgResultsObj["total-scans"];
+
+        //Recalculates average percent on average-results
+        const newPercent =
+          (1 / totalScans) * newScan["percent"] +
+          ((totalScans - 1) / totalScans) * avgResult["percent"];
+
+        avgResultsObj[key]["percent"] = newPercent;
+
+        //Adds to number of passing scans on average-results if new scan passed field
+        if (newScan["passed"])
+          avgResultsObj[key]["passed"] = avgResultsObj[key]["passed"] + 1;
+      });
+
+      await database.ref("/average-results/").set(avgResultsObj);
     }
-
-    // for every testfield percentage in the object
-    // for percentage average (1/totalscans) * newscanscore  + ((totalscans-1) / totalscans ) *  current average
-    // for passing average -> total number of passing scans
-    //Object.keys
-
-    Object.keys(result).forEach((key) => {
-      let newScan = result[key];
-
-      if (!Object.keys(newScan).length) newScan = {};
-      if (!newScan["percent"]) newScan["percent"] = 100;
-
-      let avgResult = {};
-      avgResultsObj[key]
-        ? (avgResult = avgResultsObj[key])
-        : (avgResult = { percent: 100, passed: 0 });
-      avgResultsObj[key] = { percent: 100, passed: 0 };
-      const totalScans = avgResultsObj["total-scans"];
-
-      const newPercent =
-        (1 / totalScans) * newScan["percent"] +
-        ((totalScans - 1) / totalScans) * avgResult["percent"];
-
-      avgResultsObj[key]["percent"] = newPercent;
-    });
-
-    await database.ref("/average-results/").set(avgResultsObj);
 
     res.json(result);
   } catch (err) {
