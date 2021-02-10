@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Container, Typography, Box, Grid } from '@material-ui/core';
+import { Container, Typography, Box} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const navStyles = (theme) => ({
