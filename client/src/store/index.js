@@ -12,8 +12,16 @@ const reducer = combineReducers({
   error,
 });
 
+console.log("production env", process.env.NODE_ENV);
+
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(
+    thunkMiddleware,
+    createLogger({
+      collapsed: true,
+      predicate: (getState, action) => process.env.NODE_ENV === "development",
+    })
+  )
 );
 const store = createStore(reducer, middleware);
 export default store;
