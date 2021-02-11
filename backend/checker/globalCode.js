@@ -7,7 +7,7 @@ async function globalCodeCheck(page) {
     return html.getAttribute('lang');
   });
   const langAttr = !!lang
-  console.log("langAttr", langAttr)
+  // console.log("langAttr", langAttr)
 
   //check <main> tag:
   let main = async () => {
@@ -20,7 +20,7 @@ async function globalCodeCheck(page) {
     }
   }
   const isMainTag = await main()
-  console.log(isMainTag)
+  // console.log(isMainTag)
 
 
   //check for autofocus sttribute====pass when return 0
@@ -32,7 +32,7 @@ async function globalCodeCheck(page) {
       }
     }
   })
-  console.log("autofocus:", autofocus)
+  // console.log("autofocus:", autofocus)
 
 
   //Use <li> Element for list content
@@ -91,7 +91,7 @@ async function globalCodeCheck(page) {
   }
   const total = percent()
 
-  console.log("this is total score:", total)
+  // console.log("this is total score:", total)
   //SCORE passed in each indivisual test is % -how much this test contributed to a total% for entire subTest group. for example( total=80%, and 30% from it comes from langAttr if it passes the test)
   //======IT'S VERY GOOD FOR GRAPHS!!!=====
   return {
