@@ -1,6 +1,5 @@
 
 //npm install --save renature
-
 import React from 'react';
 import { useFrictionGroup } from 'renature';
 function FrictionGroup() {
@@ -41,5 +40,4 @@ function FrictionGroup() {
 }
 
 export default FrictionGroup
-
 

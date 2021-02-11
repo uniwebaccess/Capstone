@@ -20,8 +20,8 @@ const accessCheck = async (page) => {
   const headerTag = headerTagFunc()
   const sectionTag = sectionTagFunc()
 
-  console.log(sections)
-  console.log(headers)
+  // console.log(sections)
+  // console.log(headers)
 
   let sectionTagScore = 0
   let headerTagScore = 0
