@@ -17,6 +17,8 @@ import { clearStatus } from '../store/status';
 import Alert from '@material-ui/lab/Alert';
 //import Snackbar from "@material-ui/core/Snackbar";
 
+import FrictionGroup from '../visual/animation/Arrow'
+
 const navStyles = (theme) => ({
   root: {
     flexGrow: 1,
@@ -124,7 +126,10 @@ class SearchBar extends React.Component {
         )}
         {status === 'loading' && (
           <div className={classes.paragraph}>
-            Scanning... <LinearProgress />
+            <span>Scanning...</span>
+            <br />
+            <FrictionGroup />
+            {/* <LinearProgress /> */}
           </div>
         )}
         {status === 'error' && (
