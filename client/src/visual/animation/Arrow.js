@@ -7,11 +7,11 @@ function FrictionGroup() {
   const [nodes] = useFrictionGroup(4, i => ({
     from: {
       transform: 'translateX(0px)',
-      fill: '#219ebc',
+      fill: '#f1faee',
     },
     to: {
       transform: 'translateX(20px)',
-      fill: '#ffb703',
+      fill: '#457b9d',
     },
     config: {
       mu: 0.5,
@@ -33,7 +33,7 @@ function FrictionGroup() {
           xOffset.toString() +
           ",80";
         return (
-          <polygon points={points} fill="#ffb703" key={i} {...props} />
+          <polygon points={points} fill="#a8dadc" key={i} {...props} />
         );
       })}
     </svg>

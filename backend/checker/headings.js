@@ -63,8 +63,8 @@ async function headingsCheck(page) {
   };
   const totalPercent = totalScore();
 
-  console.log(totalPercent)
-  console.log(numbers)
+  // console.log(totalPercent)
+  // console.log(numbers)
 
   return {
     onlyOneH1: { h1OnlyOne: h1OnlyOne, score: h1TagScore },
