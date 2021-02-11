@@ -71,7 +71,7 @@ async function headingsCheck(page) {
     logicSequence: { logicSequence: logicSequence, score: logicSequenceScore },
     hTagSkip: { hTagSkip: hTagSkip, score: hTagSkipScore },
     percent: totalPercent,
-    passed: totalPercent > 70,
+    passed: totalPercent >= 70,
     testNames: ['H1 Tag', 'Logic Sequence', 'Skip H Tag', 'Your Score', 'Average Score'],
 
   };
