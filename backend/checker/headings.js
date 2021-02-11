@@ -63,15 +63,15 @@ async function headingsCheck(page) {
   };
   const totalPercent = totalScore();
 
-  console.log(totalPercent)
-  console.log(numbers)
+  // console.log(totalPercent)
+  // console.log(numbers)
 
   return {
     onlyOneH1: { h1OnlyOne: h1OnlyOne, score: h1TagScore },
     logicSequence: { logicSequence: logicSequence, score: logicSequenceScore },
     hTagSkip: { hTagSkip: hTagSkip, score: hTagSkipScore },
     percent: totalPercent,
-    passed: totalPercent > 70,
+    passed: totalPercent >= 70,
     testNames: ['H1 Tag', 'Logic Sequence', 'Skip H Tag', 'Your Score', 'Average Score'],
 
   };

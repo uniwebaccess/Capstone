@@ -17,6 +17,7 @@ async function checkPage(url) {
 
   await browser.close();
 
+  // calculating algorithm :
   const percent =
     imagesResult.percent * 0.25 +
     headingsResult.percent * 0.15 +
