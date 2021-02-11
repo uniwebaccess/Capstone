@@ -1,74 +1,149 @@
-import React, { Component } from "react";
+import React from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
-import { Box, Typography, Container } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import PieChart from "../../visual/PieChart";
+import { fetchData } from "../../store/data";
+import {
+  Button,
+  Icon,
+  TableRow, TableContainer, TableCell, TableBody, Table} from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { withStyles } from '@material-ui/core/styles';
+import history from '../../history';
+import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
 
 const navStyles = (theme) => ({
-  box: {
-    marginTop: "3%",
-    marginBottom: "3%",
+
+  backButton: {
+    marginTop: '5%',
+    color:'#0097a7'
   },
-  label: {
-    color: "#616161",
-    fontSize: "20px",
-    marginTop: "20px",
-    fontWeight: "bold",
+  header: {
+    marginTop: '4%',
+    marginBottom: '3%',
+    color: '#1D3557',
+    fontWeight: 'bold',
+    fontSize: '28px',
   },
-  description: {
-    color: "#616161",
-    fontSize: "15px",
-    margin: "40px",
-    marginTop: "10px",
-    marginBottom: "10px",
+  graphContainer1: {
+
   },
-  passing: {
-    fontSize: "8px",
-    fontWeight: "bold",
-    marginBottom: "20px",
+
+  tableheader:{
+    fontSize: '26px',
+    color: '#1D3557',
+    fontWeight: 'bold',
   },
-});
+
+  tableBody:{
+    fontSize: '17px',
+    //color: '#ffffff',
+    //color: '#1D3557',
+    //color:'#0097a7',
+    color: '#2c6283',
+    fontWeight: 'bold',
+  },
+  card: {
+    marginTop:'10%',
+    //background: '#fefae0',
+    //background: '#0097a7'
+
+  }
+})
+
 class TestFieldDescription extends Component {
+  componentDidMount() {
+    this.props.fetchData(this.props.match.params.urlKey);
+  }
+
   render() {
-    const { selectedField, avgData, descriptions, classes } = this.props;
+    const { status, url, data } = this.props;
+    const classes = this.props.classes;
     return (
-      <Container className={classes.root} align="center">
-        <Box
-          className={classes.box}
-          borderRadius="borderRadius"
-          borderColor="#e0e0e0"
-          bgcolor="background.paper"
-          border={1}
-          align="left"
-          width="50%"
-          height={200}
-        >
-          <Typography className={classes.label} align="center">
-            This is the label
-          </Typography>
-          <Typography className={classes.description}>
-            {descriptions[selectedField]}
-          </Typography>
-          {selectedField === "images" && avgData["images"] && (
-            <Typography className={classes.passing} align="center">
-              Out of {avgData["total-scans"]} scans,{" "}
-              {avgData[selectedField]["passed"]} have passed this test.
-            </Typography>
-          )}
-        </Box>
-      </Container>
+      <div>
+        {status === 'loading' && <h1>Loading Results</h1>}
+        {status === 'success' && url && data && (
+          <Container >
+            <Box  position="absolute"  left="1%" zIndex="tooltip">
+              <Button
+                type="moveback"
+                startIcon={<Icon><ArrowBackIosIcon/></Icon>}
+                className={classes.backButton}
+                onClick={history.goBack}></Button>
+            </Box>
+
+            <Typography
+               className={classes.header}>Results for test field description </Typography>
+
+            <Grid container spacing={3} className={classes.graphContainer1}>
+
+            <Grid item xs={12}  md={7}>
+              <Box> <PieChart data={data.imagesResult}/></Box>
+            </Grid>
+
+            <Grid item xs={12}  md={5}>
+            <Card className={classes.card}>
+            <CardContent>
+              <TableContainer  className={classes.tableContainer} >
+                <Table  aria-label="simple table">
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className={classes.tableBody}>Total images: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
+                    </TableRow>
+
+                    <TableRow>
+                      <TableCell className={classes.tableBody}> Images with valid atribute alt:{' '}</TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}</TableCell>
+                    </TableRow>
+
+                    <TableRow>
+                      <TableCell className={classes.tableBody}>Test: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
+                    </TableRow>
+
+                    <TableRow>
+                      <TableCell className={classes.tableBody}>Percent passed images: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}</TableCell>
+                    </TableRow>
+
+                    <TableRow>
+                      <TableCell className={classes.tableBody}>Total Score: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.score.percent}</TableCell>
+                    </TableRow>
+
+
+
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              </CardContent>
+              </Card>
+            </Grid>
+            </Grid>
+          </Container>
+        )}
+      </div>
     );
   }
 }
 
 const mapState = (state) => {
   return {
-    selectedField: state.data.selectedField,
-    avgData: state.data.avgData,
+    data: state.data.data,
+    url: state.data.url,
+    status: state.status,
+    error: state.error,
   };
 };
 
-const WithStylesComponent = withStyles(navStyles, { withTheme: true })(
-  TestFieldDescription
-);
+const mapDispatch = (dispatch) => {
+  return {
+    fetchData: (urlKey) => dispatch(fetchData(urlKey)),
+  };
+};
 
-export default connect(mapState)(WithStylesComponent);
+
+const styledComponent = withStyles(navStyles, { withTheme: true })(TestFieldDescription);
+
+export default connect(mapState, mapDispatch)(styledComponent);
