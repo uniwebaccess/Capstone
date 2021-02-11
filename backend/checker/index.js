@@ -1,11 +1,11 @@
-const puppeteer = require("puppeteer");
-const imagesCheck = require("./images");
-const headingsCheck = require("./headings");
-const globalCodeCheck = require("./globalCode");
-const controlsCheck = require("./controls");
-const accessCheck = require('./access')
+const puppeteer = require('puppeteer');
+const imagesCheck = require('./images');
+const headingsCheck = require('./headings');
+const globalCodeCheck = require('./globalCode');
+const controlsCheck = require('./controls');
+const accessCheck = require('./access');
 async function checkPage(url) {
-  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   const page = await browser.newPage();
   await page.goto(url);
   //add different tasks
@@ -18,12 +18,21 @@ async function checkPage(url) {
   await browser.close();
 
   const percent =
-    (imagesResult.percent +
-      headingsResult.percent +
-      globalCodeResult.percent +
-      accessResult.percent +
-      controlsResult.percent) /
-    5;
+    imagesResult.percent * 0.25 +
+    headingsResult.percent * 0.15 +
+    globalCodeResult.percent * 0.2 +
+    accessResult.percent * 0.25 +
+    controlsResult.percent * 0.15;
+
+  /*
+    Weights:
+      images: 25%
+      headings: 15%
+      globalcode: 20%
+      access: 25%
+      controls: 15%
+
+    */
 
   const passed = percent > 70;
 
