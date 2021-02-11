@@ -155,7 +155,7 @@ class TestResult extends Component {
                     aria-controls="panel2a-content">
                     <Typography className={classes.list}
                       component={RouterLink}
-                      to={"/imagesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking controls</Typography>
+                      to={"/testfielddescription/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking controls</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
@@ -171,7 +171,39 @@ class TestResult extends Component {
                     aria-controls="panel2a-content">
                     <Typography className={classes.list}
                       component={RouterLink}
-                      to={"/imagesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
+                      to={"/globalcode/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                      sit amet blandit leo lobortis eget.
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel4'} onChange={() => this.openAccordeon('panel4')}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content">
+                    <Typography className={classes.list}
+                      component={RouterLink}
+                      to={"/controlresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                      sit amet blandit leo lobortis eget.
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel4'} onChange={() => this.openAccordeon('panel4')}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content">
+                    <Typography className={classes.list}
+                      component={RouterLink}
+                      to={"/accesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>

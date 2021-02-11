@@ -6,6 +6,10 @@ import ImagesResult from './components/single-tests/ImagesResult';
 import HeadingsResult from './components/single-tests/HeadingsResult';
 import AboutUs from './components/AbouUs';
 import ContactUs from './components/ContactUs';
+import TestFieldDescription from './components/single-tests/TestFieldDescription';
+import GlobalCodeResult from './components/single-tests/GlobalCodeResult';
+import ControlsResult from './components/single-tests/GlobalCodeResult.js';
+import AccessResult from './components/single-tests/AccessibilityResult.js';
 class Routes extends Component {
   // componentDidMount() {
   //   this.props.loadInitialData()
@@ -20,6 +24,11 @@ class Routes extends Component {
         <Route path="/headingresult/:urlKey" component={HeadingsResult}/>
         <Route path="/about" component={AboutUs}/>
         <Route path="/contactus" component={ContactUs}/>
+        <Route path="/testfielddescription/:urlKey" component={TestFieldDescription}/>
+        <Route path="/globalcode/:urlKey" component={GlobalCodeResult}/>
+        <Route path="/controlresult/:urlKey" component={ControlsResult}/>
+        <Route path="/accesresult/:urlKey" component={AccessResult}/>
+
 
       </div>
     );
