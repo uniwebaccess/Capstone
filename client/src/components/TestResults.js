@@ -155,7 +155,7 @@ class TestResult extends Component {
                     aria-controls="panel2a-content">
                     <Typography className={classes.list}
                       component={RouterLink}
-                      to={"/testfielddescription/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking controls</Typography>
+                      to={"/testfielddescription/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking field description</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
@@ -171,7 +171,7 @@ class TestResult extends Component {
                     aria-controls="panel2a-content">
                     <Typography className={classes.list}
                       component={RouterLink}
-                      to={"/globalcode/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
+                      to={"/globalcode/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking global code</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
@@ -187,7 +187,7 @@ class TestResult extends Component {
                     aria-controls="panel2a-content">
                     <Typography className={classes.list}
                       component={RouterLink}
-                      to={"/controlresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
+                      to={"/controlresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking controls</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
@@ -203,7 +203,7 @@ class TestResult extends Component {
                     aria-controls="panel2a-content">
                     <Typography className={classes.list}
                       component={RouterLink}
-                      to={"/accesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking tables</Typography>
+                      to={"/accesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon/></Icon> Checking accesresult</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
