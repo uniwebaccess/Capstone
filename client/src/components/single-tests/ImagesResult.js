@@ -6,17 +6,14 @@ import { fetchData } from "../../store/data";
 import {
   Button,
   Icon,
-  TableRow,Paper, TableHead, TableContainer, TableCell, TableBody, Table} from '@material-ui/core';
+  TableRow, TableContainer, TableCell, TableBody, Table} from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { withStyles } from '@material-ui/core/styles';
 import history from '../../history';
-import {Grid, Typography, Container, Box} from '@material-ui/core';
+import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
 
 const navStyles = (theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 500,
-  },
+
   backButton: {
     marginTop: '5%',
     color:'#0097a7'
@@ -31,20 +28,27 @@ const navStyles = (theme) => ({
   graphContainer1: {
 
   },
-  result: {
-    fontWeight: 'bold',
+
+  tableheader:{
     fontSize: '26px',
-    color: '#3a7ca5',
-    marginBottom: '3%',
-  },
-  resultList: {
-    color: '#757575',
+    color: '#1D3557',
     fontWeight: 'bold',
-    fontSize: '16px'
   },
-  table: {
-    minWidth: 100,
+
+  tableBody:{
+    fontSize: '17px',
+    //color: '#ffffff',
+    //color: '#1D3557',
+    //color:'#0097a7',
+    color: '#2c6283',
+    fontWeight: 'bold',
   },
+  card: {
+    marginTop:'10%',
+    //background: '#fefae0',
+    //background: '#0097a7'
+
+  }
 })
 
 class ImagesResult extends Component {
@@ -59,10 +63,9 @@ class ImagesResult extends Component {
       <div>
         {status === 'loading' && <h1>Loading Results</h1>}
         {status === 'success' && url && data && (
-          <Container fixed>
+          <Container >
             <Box  position="absolute"  left="1%" zIndex="tooltip">
               <Button
-                id="addBtn"
                 type="moveback"
                 startIcon={<Icon><ArrowBackIosIcon/></Icon>}
                 className={classes.backButton}
@@ -72,51 +75,48 @@ class ImagesResult extends Component {
             <Typography
                className={classes.header}>Results for images and 'alt' tags</Typography>
 
-            <Grid container alignItems='flex-start' className={classes.graphContainer1}>
+            <Grid container spacing={3} className={classes.graphContainer1}>
 
-            <Grid item xs={6}>
-              <PieChart data={data.imagesResult}/>
+            <Grid item xs={12}  md={7}>
+              <Box> <PieChart data={data.imagesResult}/></Box>
             </Grid>
 
-            <Grid item xs={6}>
-              <Typography className={classes.result}>The results of statistic:</Typography>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
-
-                  <TableHead>
+            <Grid item xs={12}  md={5}>
+            <Card className={classes.card}>
+            <CardContent>
+              <TableContainer  className={classes.tableContainer} >
+                <Table  aria-label="simple table">
+                  <TableBody>
                     <TableRow>
-                    </TableRow>
-                  </TableHead>
-
-                  <TableBody className={classes.tableBody}>
-                    <TableRow>
-                      <TableCell>Total images: </TableCell>
-                      <TableCell align="right">{data.imagesResult.allImages}</TableCell>
+                      <TableCell className={classes.tableBody}>Total images: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell> Images with valid atribute alt:{' '}</TableCell>
-                      <TableCell align="right">{data.imagesResult.imagesWithAlt}</TableCell>
+                      <TableCell className={classes.tableBody}> Images with valid atribute alt:{' '}</TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}</TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell>Test: </TableCell>
-                      <TableCell align="right">{data.imagesResult.passed ? ' passed' : ' failed'}</TableCell>
+                      <TableCell className={classes.tableBody}>Test: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell>Percent passed images: </TableCell>
-                      <TableCell align="right">{data.imagesResult.percent}</TableCell>
+                      <TableCell className={classes.tableBody}>Percent passed images: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}</TableCell>
                     </TableRow>
 
                     <TableRow>
-                      <TableCell>Total Score: </TableCell>
-                      <TableCell align="right">{data.score.percent}</TableCell>
+                      <TableCell className={classes.tableBody}>Total Score: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.score.percent}</TableCell>
                     </TableRow>
 
                   </TableBody>
                 </Table>
               </TableContainer>
+              </CardContent>
+              </Card>
             </Grid>
             </Grid>
           </Container>
@@ -145,21 +145,3 @@ const mapDispatch = (dispatch) => {
 const styledComponent = withStyles(navStyles, { withTheme: true })(ImagesResult);
 
 export default connect(mapState, mapDispatch)(styledComponent);
-
-
-/*
-<Typography variant='overline' className={classes.resultList}>
-                <ul>
-                  <li>Total images: {data.imagesResult.allImages}</li>
-                  <li>
-                    Images with valid atribute alt:{' '}
-                    {data.imagesResult.imagesWithAlt}
-                  </li>
-                  <li>Test: {data.imagesResult.passed ? ' passed' : ' failed'}</li>
-                  <li>Percent passed images: {data.imagesResult.percent}</li>
-                  <li>Total Score: {data.score.percent}</li>
-                </ul>
-              </Typography>
-
-
-            */

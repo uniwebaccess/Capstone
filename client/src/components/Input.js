@@ -98,7 +98,6 @@ class SearchBar extends React.Component {
             <TextField
               name="inputUrl"
               placeholder="Search by URL "
-              id="standard-start-adornment"
               className={clsx(classes.margin, classes.textField)}
               InputProps={{
                 startAdornment: (
@@ -115,7 +114,6 @@ class SearchBar extends React.Component {
               <Button
                 color="secondary"
                 variant="contained"
-                id="addBtn"
                 type="submit"
                 endIcon={<Icon>send</Icon>}
               >
