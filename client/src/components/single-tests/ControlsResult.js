@@ -93,7 +93,7 @@ class ControlsResult extends Component {
     const { status, url, data } = this.props;
     const classes = this.props.classes;
     const expanded = this.state.expanded;
-    console.log(classes);
+    console.log(data.controlsResult);
     return (
       <div>
         {status === 'loading' && <h1>Loading Results</h1>}
@@ -171,6 +171,11 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksWithHref}
                               </TableCell>
                             </TableRow>
+                            {data.controlsResult.hrefPassed ? (
+                              ''
+                            ) : (
+                              <TableRow>{checkerSuggestions.hrefAttr}</TableRow>
+                            )}
                             {/* <Accordion
                               xs={6}
                               expanded={expanded === 'panel1'}
@@ -201,6 +206,17 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksToNewTab}
                               </TableCell>
                             </TableRow>
+                            {Math.floor(
+                              (data.controlsResult.linksToNewTab /
+                                data.controlsResult.allLinks) *
+                                100
+                            ) < 30 ? (
+                              ''
+                            ) : (
+                              <TableRow>
+                                {checkerSuggestions.targetAttr}
+                              </TableRow>
+                            )}
                             {/* <Accordion
                               expanded={expanded === 'panel2'}
                               onChange={() => this.openAccordion('panel2')}
@@ -242,6 +258,11 @@ class ControlsResult extends Component {
                                 {data.controlsResult.buttonsWithType}
                               </TableCell>
                             </TableRow>
+                            {data.controlsResult.buttonsPassed ? (
+                              ''
+                            ) : (
+                              <TableRow>button feedback</TableRow>
+                            )}
                             {/* <Accordion
                               expanded={expanded === 'panel3'}
                               onChange={() => this.openAccordion('panel3')}
