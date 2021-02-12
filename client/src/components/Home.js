@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import Button from '@material-ui/core/Button';
 import { Container, Typography, Box, Grid } from '@material-ui/core';
 import SearchBar from './Input';
 import { withStyles } from '@material-ui/core/styles';
@@ -36,8 +35,7 @@ class Home extends Component {
         <Typography
           fontWeight="fontWeightBold"
           m={1}
-          className={classes.header}
-        >
+          className={classes.header}>
           Add your URL Link for scanning web page
         </Typography>
         <Box justifyContent="center">

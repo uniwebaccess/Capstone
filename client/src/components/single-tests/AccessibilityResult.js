@@ -51,7 +51,7 @@ const navStyles = (theme) => ({
   }
 })
 
-class TestFieldDescription extends Component {
+class AccessResult extends Component {
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
   }
@@ -73,7 +73,7 @@ class TestFieldDescription extends Component {
             </Box>
 
             <Typography
-               className={classes.header}>Results for test field description </Typography>
+               className={classes.header}>Results for accessibility</Typography>
 
             <Grid container spacing={3} className={classes.graphContainer1}>
 
@@ -112,8 +112,6 @@ class TestFieldDescription extends Component {
                       <TableCell align="right" className={classes.tableBody}>{data.score.percent}</TableCell>
                     </TableRow>
 
-
-
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -144,6 +142,6 @@ const mapDispatch = (dispatch) => {
 };
 
 
-const styledComponent = withStyles(navStyles, { withTheme: true })(TestFieldDescription);
+const styledComponent = withStyles(navStyles, { withTheme: true })(AccessResult);
 
 export default connect(mapState, mapDispatch)(styledComponent);

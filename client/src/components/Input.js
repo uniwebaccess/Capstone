@@ -17,6 +17,8 @@ import { clearStatus } from '../store/status';
 import Alert from '@material-ui/lab/Alert';
 //import Snackbar from "@material-ui/core/Snackbar";
 
+import FrictionGroup from '../visual/animation/Arrow'
+
 const navStyles = (theme) => ({
   root: {
     flexGrow: 1,
@@ -98,7 +100,6 @@ class SearchBar extends React.Component {
             <TextField
               name="inputUrl"
               placeholder="Search by URL "
-              id="standard-start-adornment"
               className={clsx(classes.margin, classes.textField)}
               InputProps={{
                 startAdornment: (
@@ -115,7 +116,6 @@ class SearchBar extends React.Component {
               <Button
                 color="secondary"
                 variant="contained"
-                id="addBtn"
                 type="submit"
                 endIcon={<Icon>send</Icon>}
               >
@@ -126,7 +126,10 @@ class SearchBar extends React.Component {
         )}
         {status === 'loading' && (
           <div className={classes.paragraph}>
-            Scanning... <LinearProgress />
+            <span>Scanning...</span>
+            <br />
+            <FrictionGroup />
+            {/* <LinearProgress /> */}
           </div>
         )}
         {status === 'error' && (

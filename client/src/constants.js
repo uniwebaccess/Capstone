@@ -7,6 +7,8 @@ export const checkerDescriptions = {
     "Images are a common way to convey a variety of information on websites.  Having accessible code that uses 'alt' attributes ensures that screen readers are able to describe your images to visitors who may have visual impairments.",
   controls:
     'Controls are interactive elements such as links and buttons that let a person navigate to a destination or perform an action on your website or app.',
+  structuralHTML:
+    'Introductory content on your site should be wrapped in a <header> element.  The <section> element designates a standalone portion of your site. Forms allow people to enter information into a site for processing and manipulation.',
 };
 
 export const checkerSuggestions = {
