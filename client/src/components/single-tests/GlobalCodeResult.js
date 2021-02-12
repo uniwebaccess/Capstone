@@ -105,34 +105,48 @@ class GlobalCodeResult extends Component {
                   flexDirection="row"
                 >
                   <div>
-                    {data.globalCodeResult.autofocusAttr.autofocus > 0 ? (
+                    {data.globalCodeResult.autofocusAttr ? (
                       <CheckboxCheck delay="one" />
                     ) : (
                       <CheckboxX delay="one" />
                     )}
-                    <Typography className="checkbox-label">Autofocus</Typography>
+                    <Typography className="checkbox-label">
+                      Autofocus
+                    </Typography>
                   </div>
                   <div>
-                    {data.globalCodeResult.langAttr.langAttr ? (
+                    {data.globalCodeResult.useListElement ? (
                       <CheckboxCheck delay="two" />
                     ) : (
                       <CheckboxX delay="two" />
                     )}
-                    <Typography className="checkbox-label">Language Attribute</Typography>
+                    <Typography className="checkbox-label">
+                      List Element
+                    </Typography>
                   </div>
                   <div>
-                    {data.globalCodeResult.isMainTag.isMainTag.mainTag ? (
+                    {data.globalCodeResult.langAttr ? (
                       <CheckboxCheck delay="three" />
                     ) : (
                       <CheckboxX delay="three" />
+                    )}
+                    <Typography className="checkbox-label">
+                      Language Attribute
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.globalCodeResult.isMainTag.mainTag ? (
+                      <CheckboxCheck delay="four" />
+                    ) : (
+                      <CheckboxX delay="four" />
                     )}
                     <Typography className="checkbox-label">Main Tag</Typography>
                   </div>
                   <div>
                     {data.globalCodeResult.passed ? (
-                      <CheckboxCheck delay="four" />
+                      <CheckboxCheck delay="five" />
                     ) : (
-                      <CheckboxX delay="four" />
+                      <CheckboxX delay="five" />
                     )}
                     <Typography className="checkbox-label">Overall</Typography>
                   </div>
@@ -153,10 +167,24 @@ class GlobalCodeResult extends Component {
                               align="right"
                               className={classes.tableBody}
                             >
-                              {data.globalCodeResult.autofocusAttr.autofocus}
+                              {data.globalCodeResult.autofocusAttr
+                                ? "Passed"
+                                : "Failed"}
                             </TableCell>
                           </TableRow>
-
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>
+                              List Elements:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.globalCodeResult.useListElement
+                                ? "Passed"
+                                : "Failed"}
+                            </TableCell>
+                          </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
@@ -166,21 +194,7 @@ class GlobalCodeResult extends Component {
                               align="right"
                               className={classes.tableBody}
                             >
-                              {data.globalCodeResult.langAttr.langAttr
-                                ? "Passed"
-                                : "Failed"}
-                            </TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>
-                              Test:{" "}
-                            </TableCell>
-                            <TableCell
-                              align="right"
-                              className={classes.tableBody}
-                            >
-                              {data.globalCodeResult.passed
+                              {data.globalCodeResult.langAttr
                                 ? "Passed"
                                 : "Failed"}
                             </TableCell>
@@ -194,7 +208,7 @@ class GlobalCodeResult extends Component {
                               align="right"
                               className={classes.tableBody}
                             >
-                              {data.globalCodeResult.isMainTag.isMainTag.mainTag
+                              {data.globalCodeResult.isMainTag.mainTag
                                 ? "Passed"
                                 : "Failed"}
                             </TableCell>
@@ -202,7 +216,21 @@ class GlobalCodeResult extends Component {
 
                           <TableRow>
                             <TableCell className={classes.tableBody}>
-                              Total Score:{" "}
+                              Overall:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.globalCodeResult.passed
+                                ? "Passed"
+                                : "Failed"}
+                            </TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>
+                              Overall Score:{" "}
                             </TableCell>
                             <TableCell
                               align="right"

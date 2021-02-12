@@ -74,14 +74,18 @@
 }
 
 .two path {
-  animation-delay: 2s;
+  animation-delay: 1.75s;
 }
 
 .three path {
-  animation-delay: 2.75s;
+  animation-delay: 2.5s;
 }
 
 .four path {
+  animation-delay: 3s;
+}
+
+.five path {
   animation-delay: 3.25s;
 }
 
