@@ -76,5 +76,5 @@ async function headingsCheck(page) {
 
   };
 }
-
+//comment
 module.exports = headingsCheck;
