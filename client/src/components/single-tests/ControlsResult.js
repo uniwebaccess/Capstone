@@ -3,7 +3,12 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../../store/data';
 
-import PieChart from '../../visual/PieChart';
+import {
+  HrefChart,
+  TargetChart,
+  ButtonsChart,
+  ControlsScoreChart,
+} from '../../visual/ControlsChart';
 import {
   Button,
   Icon,
@@ -87,11 +92,20 @@ class ControlsResult extends Component {
               </Typography>
 
               <Grid container spacing={3} className={classes.graphContainer1}>
-                {/* <Grid item xs={12} md={7}>
+                <Grid item xs={12} md={7}>
                   <Box>
-                    <PieChart data={this.props.data.controlsResult} />
+                    <HrefChart data={data} />
                   </Box>
-                </Grid> */}
+                  <Box>
+                    <TargetChart data={data} />
+                  </Box>
+                  <Box>
+                    <ButtonsChart data={data} />
+                  </Box>
+                  <Box>
+                    <ControlsScoreChart data={data} />
+                  </Box>
+                </Grid>
 
                 <Grid item xs={12} md={5}>
                   <Card className={classes.card}>
