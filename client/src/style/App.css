@@ -39,3 +39,58 @@
     transform: rotate(360deg);
   }
 }
+
+.single-page-loading {
+  position: relative;
+  top: 200px;
+}
+
+.checkbox-label {
+  opacity: 0;
+  animation: fadein 1s linear forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadein {
+  to {
+    opacity: 1;
+  }
+}
+
+.checkbox path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 10s linear forwards;
+}
+
+.checkbox-x path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 25s linear forwards;
+}
+
+.one path {
+  animation-delay: 1s;
+}
+
+.two path {
+  animation-delay: 1.75s;
+}
+
+.three path {
+  animation-delay: 2.5s;
+}
+
+.four path {
+  animation-delay: 3s;
+}
+
+.five path {
+  animation-delay: 3.25s;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
