@@ -4,6 +4,7 @@ import { Bar } from "react-chartjs-2";
 export default function MainResultsChart(props) {
   const {
     controlsResult,
+    structuralResult,
     globalCodeResult,
     headingsResult,
     imagesResult,
@@ -14,11 +15,19 @@ export default function MainResultsChart(props) {
     <div>
       <Bar
         data={{
-          labels: ["Images", "Headings", "Controls", "Global Code", "Overall"],
+          labels: [
+            "Structural HTML",
+            "Images",
+            "Headings",
+            "Controls",
+            "Global Code",
+            "Overall Score",
+          ],
           datasets: [
             {
               label: "Your Score",
               data: [
+                structuralResult.percent,
                 imagesResult.percent,
                 headingsResult.percent,
                 controlsResult.percent,
@@ -26,26 +35,19 @@ export default function MainResultsChart(props) {
                 score.percent,
               ],
               backgroundColor: [
+                "rgba(194, 75, 39, 1)",
                 "rgba(33, 158, 188, 1)",
                 "rgba(255, 183, 3, 1)",
                 "rgba(2, 48, 71, 1)",
-                "rgba(142, 202, 230, 1",
+                "rgba(54, 65, 163, 1)",
                 "rgba(251, 133, 0, 1)",
                 "rgba(166, 255, 245, 1)",
               ],
-              borderColor: [
-                "rgba(33, 158, 188, 1)",
-                "rgba(255, 183, 3, 1)",
-                "rgba(2, 48, 71, 1)",
-                "rgba(142, 202, 230, 1",
-                "rgba(251, 133, 0, 1)",
-                "rgba(166, 255, 245, 1)",
-              ],
-              borderWidth: 1,
             },
             {
               label: "Average Score",
               data: [
+                averages.structuralResult.percent,
                 averages.imagesResult.percent,
                 averages.headingsResult.percent,
                 averages.controlsResult.percent,
@@ -61,15 +63,10 @@ export default function MainResultsChart(props) {
           tooltips: {
             callbacks: {
               label: function (tooltipItem) {
-                props.selectField(
+                const fieldName =
                   tooltipItem.label[0].toLowerCase() +
-                  tooltipItem.label.replace(/\s/g, "").substring(1)
-                );
-                // props.selectField(
-                //   console.log(
-                //   tooltipItem.label.replace(/\s/g, "")[0].toLowercase()
-                // ))
-                if (tooltipItem.dataset === 0) {
+                  tooltipItem.label.replace(/\s/g, "").substring(1);
+                if (tooltipItem.datasetIndex === 0) {
                   return `Your score is ${tooltipItem.yLabel}%`;
                 } else {
                   return `The average score is ${tooltipItem.yLabel}%`;
@@ -90,11 +87,10 @@ export default function MainResultsChart(props) {
           },
           legend: {
             labels: {
-              fontColor: '#023047',
-              fontFamily: 'arial',
+              fontColor: "#023047",
+              fontFamily: "arial",
               fontSize: 15,
-              fontStyle: 'bold',
-
+              fontStyle: "bold",
             },
           },
         }}
