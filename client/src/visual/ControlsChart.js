@@ -82,7 +82,7 @@ export function TargetChart(props) {
       <div>
         <Doughnut
           data={{
-            labels: ['Links that Open in a New Tab or Window'],
+            labels: ['Links Opening in a New Tab or Window'],
             datasets: [
               {
                 data: [100 - newTabPercent, newTabPercent],

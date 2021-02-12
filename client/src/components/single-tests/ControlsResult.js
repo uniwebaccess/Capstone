@@ -1,8 +1,7 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../../store/data';
-
+import { checkerSuggestions } from '../../constants';
 import {
   HrefChart,
   TargetChart,
@@ -17,17 +16,21 @@ import {
   TableCell,
   TableBody,
   Table,
-} from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import history from '../../history';
-import {
   Grid,
+  FormRow,
   Typography,
   Container,
   Box,
   Card,
   CardContent,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
 } from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import history from '../../history';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import { withStyles } from '@material-ui/core/styles';
 
 const navStyles = (theme) => ({
@@ -56,18 +59,41 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop: '10%',
+    marginTop: '',
   },
 });
 
 class ControlsResult extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.openAccordion = this.openAccordion.bind(this);
+  }
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
   }
+
+  handleChange(evt) {
+    evt.preventDefault();
+    this.setState({ selected: evt.target.value });
+    this.props.selectField(evt.target.value);
+  }
+
+  openAccordion = (panel) => {
+    this.setState((oldState) => {
+      return {
+        ...oldState,
+        expanded: panel !== oldState.expanded ? panel : null,
+      };
+    });
+  };
+
   render() {
     const { status, url, data } = this.props;
     const classes = this.props.classes;
-
+    const expanded = this.state.expanded;
+    console.log(classes);
     return (
       <div>
         {status === 'loading' && <h1>Loading Results</h1>}
@@ -91,23 +117,31 @@ class ControlsResult extends Component {
                 Results for Controls (Links & Buttons)
               </Typography>
 
-              <Grid container spacing={3} className={classes.graphContainer1}>
-                <Grid item xs={12} md={7}>
-                  <Box>
+              <Grid
+                container
+                spacing={3}
+                xs={12}
+                className={classes.graphContainer1}
+              >
+                <Grid container position="static" xs={6}>
+                  <Grid item>
                     <HrefChart data={data} />
-                  </Box>
-                  <Box>
+                  </Grid>
+                  <Grid item>
                     <TargetChart data={data} />
-                  </Box>
-                  <Box>
-                    <ButtonsChart data={data} />
-                  </Box>
-                  <Box>
-                    <ControlsScoreChart data={data} />
-                  </Box>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item>
+                      <ButtonsChart data={data} />
+                    </Grid>
+                    <Grid item>
+                      <ControlsScoreChart data={data} />
+                    </Grid>
+                  </Grid>
                 </Grid>
 
-                <Grid item xs={12} md={5}>
+                <Grid item xs={6}>
                   <Card className={classes.card}>
                     <CardContent>
                       <TableContainer className={classes.tableContainer}>
@@ -137,7 +171,25 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksWithHref}
                               </TableCell>
                             </TableRow>
-
+                            {/* <Accordion
+                              xs={6}
+                              expanded={expanded === 'panel1'}
+                              onChange={() => this.openAccordion('panel1')}
+                            >
+                              <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                              >
+                                <Typography className={classes.list}>
+                                  Learn More{' '}
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails className={classes.paragraph}>
+                                <Typography>
+                                  {checkerSuggestions.hrefAttr}
+                                </Typography>
+                              </AccordionDetails>
+                            </Accordion> */}
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Links that open in a new tab or window:{' '}
@@ -149,7 +201,24 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksToNewTab}
                               </TableCell>
                             </TableRow>
-
+                            {/* <Accordion
+                              expanded={expanded === 'panel2'}
+                              onChange={() => this.openAccordion('panel2')}
+                            >
+                              <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2a-content"
+                              >
+                                <Typography className={classes.list}>
+                                  Learn More
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails className={classes.paragraph}>
+                                <Typography>
+                                  {checkerSuggestions.targetAttr}
+                                </Typography>
+                              </AccordionDetails>
+                            </Accordion> */}
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Total buttons:{' '}
@@ -173,7 +242,22 @@ class ControlsResult extends Component {
                                 {data.controlsResult.buttonsWithType}
                               </TableCell>
                             </TableRow>
-
+                            {/* <Accordion
+                              expanded={expanded === 'panel3'}
+                              onChange={() => this.openAccordion('panel3')}
+                            >
+                              <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2a-content"
+                              >
+                                <Typography className={classes.list}>
+                                  Learn More
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Typography>Text</Typography>
+                              </AccordionDetails>
+                            </Accordion> */}
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Score for this Category:{' '}
@@ -182,7 +266,7 @@ class ControlsResult extends Component {
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.controlsResult.percent}
+                                {data.controlsResult.percent}%
                               </TableCell>
                             </TableRow>
 
@@ -194,7 +278,7 @@ class ControlsResult extends Component {
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.score.percent}
+                                {data.score.percent}%
                               </TableCell>
                             </TableRow>
                           </TableBody>
