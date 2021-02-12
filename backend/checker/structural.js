@@ -47,7 +47,7 @@ const structuralCheck = async (page) => {
   const sectionTag = sectionTagFunc()
   const inputAndLabel = formsWithInputsAndLabelsFunc()
 
-  // console.log(inputAndLabel)
+  // console.log(inputAndLabel) === failed
 
   let sectionTagScore = 0
   let headerTagScore = 0
