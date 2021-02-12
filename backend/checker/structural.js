@@ -1,4 +1,4 @@
-const accessCheck = async (page) => {
+const structuralCheck = async (page) => {
 
   //checking if forms with inputs have labels:
   let formsWithLabels = []
@@ -84,4 +84,4 @@ const accessCheck = async (page) => {
   }
 }
 
-module.exports = accessCheck;
+module.exports = structuralCheck;
