@@ -110,7 +110,7 @@ class GlobalCodeResult extends Component {
                     ) : (
                       <CheckboxX delay="one" />
                     )}
-                    <Typography>Autofocus</Typography>
+                    <Typography className="checkbox-label">Autofocus</Typography>
                   </div>
                   <div>
                     {data.globalCodeResult.langAttr.langAttr ? (
@@ -118,7 +118,7 @@ class GlobalCodeResult extends Component {
                     ) : (
                       <CheckboxX delay="two" />
                     )}
-                    <Typography>Language Attribute</Typography>
+                    <Typography className="checkbox-label">Language Attribute</Typography>
                   </div>
                   <div>
                     {data.globalCodeResult.isMainTag.isMainTag.mainTag ? (
@@ -126,7 +126,7 @@ class GlobalCodeResult extends Component {
                     ) : (
                       <CheckboxX delay="three" />
                     )}
-                    <Typography>Main Tag</Typography>
+                    <Typography className="checkbox-label">Main Tag</Typography>
                   </div>
                   <div>
                     {data.globalCodeResult.passed ? (
@@ -134,7 +134,7 @@ class GlobalCodeResult extends Component {
                     ) : (
                       <CheckboxX delay="four" />
                     )}
-                    <Typography>Overall</Typography>
+                    <Typography className="checkbox-label">Overall</Typography>
                   </div>
                 </Box>
               </Grid>
