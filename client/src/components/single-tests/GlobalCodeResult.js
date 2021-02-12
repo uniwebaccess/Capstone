@@ -108,8 +108,8 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.autofocusAttr ? (
                       <CheckboxCheck delay="one" />
                     ) : (
-                      <CheckboxX delay="one" />
-                    )}
+                        <CheckboxX delay="one" />
+                      )}
                     <Typography className="checkbox-label">
                       Autofocus
                     </Typography>
@@ -118,8 +118,8 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.useListElement ? (
                       <CheckboxCheck delay="two" />
                     ) : (
-                      <CheckboxX delay="two" />
-                    )}
+                        <CheckboxX delay="two" />
+                      )}
                     <Typography className="checkbox-label">
                       List Element
                     </Typography>
@@ -128,8 +128,8 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.langAttr ? (
                       <CheckboxCheck delay="three" />
                     ) : (
-                      <CheckboxX delay="three" />
-                    )}
+                        <CheckboxX delay="three" />
+                      )}
                     <Typography className="checkbox-label">
                       Language Attribute
                     </Typography>
@@ -138,16 +138,16 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.isMainTag.mainTag ? (
                       <CheckboxCheck delay="four" />
                     ) : (
-                      <CheckboxX delay="four" />
-                    )}
+                        <CheckboxX delay="four" />
+                      )}
                     <Typography className="checkbox-label">Main Tag</Typography>
                   </div>
                   <div>
                     {data.globalCodeResult.passed ? (
                       <CheckboxCheck delay="five" />
                     ) : (
-                      <CheckboxX delay="five" />
-                    )}
+                        <CheckboxX delay="five" />
+                      )}
                     <Typography className="checkbox-label">Overall</Typography>
                   </div>
                 </Box>
