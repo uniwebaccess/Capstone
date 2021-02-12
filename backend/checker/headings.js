@@ -20,19 +20,19 @@ async function headingsCheck(page) {
     currentLevel = level;
   }
   const logicSequenceFunc = () => {
-    if (wrongHeaders !== 0) return false;
-    return true;
+    if (wrongHeaders !== 0) return "no pass";
+    return "pass";
   };
   const skipHeadersFunc = () => {
-    if (skipHeaders !== 0) return false;
-    return true;
+    if (skipHeaders !== 0) return "no pass";
+    return "pass";
   };
 
   //====Checking h1 tag:
   const checkH1 = await page.$$('h1');
   const h1 = () => {
-    if (checkH1.length === 1) return true;
-    return false;
+    if (checkH1.length === 1) return "pass";
+    return "no pass";
   };
 
 
@@ -40,22 +40,22 @@ async function headingsCheck(page) {
   const h1OnlyOne = h1();
   const logicSequence = logicSequenceFunc();
   const hTagSkip = skipHeadersFunc()
-  let h1TagScore = 0
-  let logicSequenceScore = 0
-  let hTagSkipScore = 0
+  let h1TagScore = 1
+  let logicSequenceScore = 1
+  let hTagSkipScore = 1
 
 
   const totalScore = () => {
     let total = 0;
-    if (h1OnlyOne === true) {
+    if (h1OnlyOne === "pass") {
       total += 40;
       h1TagScore = 40
     }
-    if (logicSequence === true) {
+    if (logicSequence === "pass") {
       total += 30;
       logicSequenceScore = 30
     }
-    if (hTagSkip === true) {
+    if (hTagSkip === "pass") {
       total += 30;
       hTagSkipScore = 30
     }
@@ -67,12 +67,12 @@ async function headingsCheck(page) {
   // console.log(numbers)
 
   return {
-    onlyOneH1: { h1OnlyOne: h1OnlyOne, score: h1TagScore },
+    h1OnlyOne: { h1OnlyOne: h1OnlyOne, score: h1TagScore },
     logicSequence: { logicSequence: logicSequence, score: logicSequenceScore },
     hTagSkip: { hTagSkip: hTagSkip, score: hTagSkipScore },
     percent: totalPercent,
     passed: totalPercent >= 70,
-    testNames: ['H1 Tag', 'Logic Sequence', 'Skip H Tag', 'Your Score', 'Average Score'],
+    testNames: ['H1 Tag', 'Logic Sequence', 'Skip H Tag'],
 
   };
 }
