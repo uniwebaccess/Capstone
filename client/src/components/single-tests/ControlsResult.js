@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../../store/data';
-import { checkerSuggestions } from '../../constants';
+import { failingSuggestions, passingFeedback } from '../../constants';
 import {
   HrefChart,
   TargetChart,
@@ -61,6 +61,9 @@ const navStyles = (theme) => ({
   card: {
     marginTop: '',
   },
+  messageCell: {
+    align: 'left',
+  },
 });
 
 class ControlsResult extends Component {
@@ -93,7 +96,7 @@ class ControlsResult extends Component {
     const { status, url, data } = this.props;
     const classes = this.props.classes;
     const expanded = this.state.expanded;
-    console.log(data.controlsResult);
+
     return (
       <div>
         {status === 'loading' && <h1>Loading Results</h1>}
@@ -171,11 +174,16 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksWithHref}
                               </TableCell>
                             </TableRow>
-                            {data.controlsResult.hrefPassed ? (
-                              ''
-                            ) : (
-                              <TableRow>{checkerSuggestions.hrefAttr}</TableRow>
-                            )}
+                            <TableCell className={classes.messageCell}>
+                              {data.controlsResult.hrefPassed ? (
+                                <TableRow>{passingFeedback.hrefAttr}</TableRow>
+                              ) : (
+                                <TableRow>
+                                  {failingSuggestions.hrefAttr}
+                                </TableRow>
+                              )}
+                            </TableCell>
+
                             {/* <Accordion
                               xs={6}
                               expanded={expanded === 'panel1'}
@@ -191,7 +199,7 @@ class ControlsResult extends Component {
                               </AccordionSummary>
                               <AccordionDetails className={classes.paragraph}>
                                 <Typography>
-                                  {checkerSuggestions.hrefAttr}
+                                  {failingSuggestions.hrefAttr}
                                 </Typography>
                               </AccordionDetails>
                             </Accordion> */}
@@ -206,17 +214,22 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksToNewTab}
                               </TableCell>
                             </TableRow>
-                            {Math.floor(
-                              (data.controlsResult.linksToNewTab /
-                                data.controlsResult.allLinks) *
-                                100
-                            ) < 30 ? (
-                              ''
-                            ) : (
-                              <TableRow>
-                                {checkerSuggestions.targetAttr}
-                              </TableRow>
-                            )}
+                            <TableCell className={classes.messageCell}>
+                              {Math.floor(
+                                (data.controlsResult.linksToNewTab /
+                                  data.controlsResult.allLinks) *
+                                  100
+                              ) < 30 ? (
+                                <TableRow>
+                                  {passingFeedback.targetAttr}
+                                </TableRow>
+                              ) : (
+                                <TableRow>
+                                  {failingSuggestions.targetAttr}
+                                </TableRow>
+                              )}
+                            </TableCell>
+
                             {/* <Accordion
                               expanded={expanded === 'panel2'}
                               onChange={() => this.openAccordion('panel2')}
@@ -231,7 +244,7 @@ class ControlsResult extends Component {
                               </AccordionSummary>
                               <AccordionDetails className={classes.paragraph}>
                                 <Typography>
-                                  {checkerSuggestions.targetAttr}
+                                  {failingSuggestions.targetAttr}
                                 </Typography>
                               </AccordionDetails>
                             </Accordion> */}
@@ -258,11 +271,16 @@ class ControlsResult extends Component {
                                 {data.controlsResult.buttonsWithType}
                               </TableCell>
                             </TableRow>
-                            {data.controlsResult.buttonsPassed ? (
-                              ''
-                            ) : (
-                              <TableRow>button feedback</TableRow>
-                            )}
+                            <TableCell className={classes.messageCell}>
+                              {data.controlsResult.buttonsPassed ? (
+                                <TableRow>{passingFeedback.buttons}</TableRow>
+                              ) : (
+                                <TableRow>
+                                  {failingSuggestions.buttons}
+                                </TableRow>
+                              )}
+                            </TableCell>
+
                             {/* <Accordion
                               expanded={expanded === 'panel3'}
                               onChange={() => this.openAccordion('panel3')}
