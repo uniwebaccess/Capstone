@@ -5,7 +5,7 @@ export function HrefChart(props) {
   const { hrefPercent } = props.data.controlsResult;
 
   const chartOptions = {
-    cutoutPercentage: 75,
+    cutoutPercentage: 65,
     maintainAspectRatio: false,
     legend: {
       labels: {
@@ -19,13 +19,13 @@ export function HrefChart(props) {
   let bgColor;
 
   if (hrefPercent >= 80) {
-    bgColor = 'rgba(76, 148, 92, 1)';
+    bgColor = '#5fad56';
   }
   if (hrefPercent < 80 && hrefPercent >= 40) {
-    bgColor = 'rgba(236, 205, 111, 1)';
+    bgColor = '#ffd500';
   }
   if (hrefPercent < 40) {
-    bgColor = 'rgba(187, 68, 48, 1)';
+    bgColor = '#ff2400';
   }
   return (
     <>
@@ -55,7 +55,7 @@ export function TargetChart(props) {
   const newTabPercent = Math.floor((linksToNewTab / allLinks) * 100);
 
   const chartOptions = {
-    cutoutPercentage: 75,
+    cutoutPercentage: 65,
     maintainAspectRatio: false,
     legend: {
       labels: {
@@ -69,20 +69,20 @@ export function TargetChart(props) {
   let bgColor;
 
   if (newTabPercent <= 80) {
-    bgColor = 'rgba(76, 148, 92, 1)';
+    bgColor = '#5fad56';
   }
   if (newTabPercent > 80 && newTabPercent <= 40) {
-    bgColor = 'rgba(236, 205, 111, 1)';
+    bgColor = '#ffd500';
   }
   if (newTabPercent > 40) {
-    bgColor = 'rgba(187, 68, 48, 1)';
+    bgColor = '#ff2400';
   }
   return (
     <>
       <div>
         <Doughnut
           data={{
-            labels: ['Links that Open in a New Tab or Window'],
+            labels: ['Links Opening in a New Tab or Window'],
             datasets: [
               {
                 data: [100 - newTabPercent, newTabPercent],
@@ -104,7 +104,7 @@ export function ButtonsChart(props) {
   const { buttonsPercent } = props.data.controlsResult;
 
   const chartOptions = {
-    cutoutPercentage: 75,
+    cutoutPercentage: 65,
     elements: {
       center: {
         text: 'inner text',
@@ -128,13 +128,13 @@ export function ButtonsChart(props) {
   let bgColor;
 
   if (buttonsPercent >= 80) {
-    bgColor = 'rgba(76, 148, 92, 1)';
+    bgColor = '#5fad56';
   }
   if (buttonsPercent < 80 && buttonsPercent >= 40) {
-    bgColor = 'rgba(236, 205, 111, 1)';
+    bgColor = '#ffd500';
   }
   if (buttonsPercent < 40) {
-    bgColor = 'rgba(187, 68, 48, 1)';
+    bgColor = '#ff2400';
   }
   return (
     <>
@@ -163,7 +163,7 @@ export function ControlsScoreChart(props) {
   const { percent } = props.data.controlsResult;
 
   const chartOptions = {
-    cutoutPercentage: 75,
+    cutoutPercentage: 65,
     maintainAspectRatio: false,
     legend: {
       labels: {
@@ -177,13 +177,13 @@ export function ControlsScoreChart(props) {
   let bgColor;
 
   if (percent >= 80) {
-    bgColor = 'rgba(76, 148, 92, 1)';
+    bgColor = '#5fad56';
   }
   if (percent < 80 && percent >= 40) {
-    bgColor = 'rgba(236, 205, 111, 1)';
+    bgColor = '#ffd500';
   }
   if (percent < 40) {
-    bgColor = 'rgba(187, 68, 48, 1)';
+    bgColor = '#ff2400';
   }
   return (
     <>
