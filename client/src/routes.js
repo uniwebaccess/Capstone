@@ -9,7 +9,7 @@ import ContactUs from './components/ContactUs';
 import TestFieldDescription from './components/single-tests/TestFieldDescription';
 import GlobalCodeResult from './components/single-tests/GlobalCodeResult';
 import ControlsResult from './components/single-tests/ControlsResult.js';
-import AccessResult from './components/single-tests/AccessibilityResult.js';
+import StructuralResult from './components/single-tests/StructuralResult.js';
 class Routes extends Component {
   // componentDidMount() {
   //   this.props.loadInitialData()
@@ -30,7 +30,7 @@ class Routes extends Component {
         />
         <Route path="/globalcode/:urlKey" component={GlobalCodeResult} />
         <Route path="/controlresult/:urlKey" component={ControlsResult} />
-        <Route path="/accesresult/:urlKey" component={AccessResult} />
+        <Route path="/structuralresult/:urlKey" component={StructuralResult} />
       </div>
     );
   }

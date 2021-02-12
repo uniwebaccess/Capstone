@@ -1,11 +1,8 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import BarChartTotal from '../../visual/HeadingsBarChartTotal'
-import HeadingsBarChart from '../../visual/HeadingsBarChart'
+import PieChart from "../../visual/PieChart";
 import { fetchData } from "../../store/data";
-
-
 import {
   Button,
   Icon,
@@ -55,16 +52,13 @@ const navStyles = (theme) => ({
   }
 })
 
-class HeadingsResult extends Component {
-
+class StructuralResult extends Component {
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
-
   }
 
   render() {
-
-    const { status, url, data, average } = this.props;
+    const { status, url, data } = this.props;
     const classes = this.props.classes;
     return (
       <div>
@@ -80,58 +74,44 @@ class HeadingsResult extends Component {
             </Box>
 
             <Typography
-              className={classes.header}>Results for Headings Test</Typography>
+              className={classes.header}>Results for accessibility</Typography>
 
-            <Grid container spacing={4} className={classes.graphContainer1}>
+            <Grid container spacing={3} className={classes.graphContainer1}>
 
-              <Grid item xs={12} md={6}>
-                <Box>
-                  <HeadingsBarChart data={data.headingsResult} average={average} />
-
-                </Box>
-
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box>
-
-                  <BarChartTotal data={data.headingsResult} average={average} />
-                </Box>
+              <Grid item xs={12} md={7}>
+                <Box> <PieChart data={data.imagesResult} /></Box>
               </Grid>
 
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={5}>
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer} >
                       <Table aria-label="simple table">
                         <TableBody>
                           <TableRow>
-                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
+                            <TableCell className={classes.tableBody}>Total images: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.logicSequence.logicSequence}</TableCell>
+                            <TableCell className={classes.tableBody}> Images with valid atribute alt:{' '}</TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}</TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.h1OnlyOne.h1OnlyOne}</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}> Don't skip order of H Tags : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip}</TableCell>
+                            <TableCell className={classes.tableBody}>Test: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.passed ? 'pass' : 'no pass'}</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.percent}</TableCell>
+                            <TableCell className={classes.tableBody}>Percent passed images: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}</TableCell>
                           </TableRow>
 
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>Total Score: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.score.percent}</TableCell>
+                          </TableRow>
 
                         </TableBody>
                       </Table>
@@ -141,8 +121,7 @@ class HeadingsResult extends Component {
               </Grid>
             </Grid>
           </Container>
-        )
-        }
+        )}
       </div>
     );
   }
@@ -151,7 +130,6 @@ class HeadingsResult extends Component {
 const mapState = (state) => {
   return {
     data: state.data.data,
-    average: state.data.avgData,
     url: state.data.url,
     status: state.status,
     error: state.error,
@@ -165,9 +143,6 @@ const mapDispatch = (dispatch) => {
 };
 
 
-const styledComponent = withStyles(navStyles, { withTheme: true })(HeadingsResult);
+const styledComponent = withStyles(navStyles, { withTheme: true })(StructuralResult);
 
 export default connect(mapState, mapDispatch)(styledComponent);
-
-
-

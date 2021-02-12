@@ -246,13 +246,7 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/accesresult/' + urlKey}
-                      >
-                        <Icon className={classes.checkIcon}>
-                          <CheckIcon />
-                        </Icon>{' '}
-                        Accessibility
-                      </Typography>
+                        to={"/structuralesult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography>
