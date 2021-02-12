@@ -17,7 +17,7 @@ export default function MainResultsChart(props) {
           labels: ["Images", "Headings", "Controls", "Global Code", "Overall"],
           datasets: [
             {
-              label: "Your Score",
+              label: `Your Overall Score: ${score.percent}`,
               data: [
                 imagesResult.percent,
                 headingsResult.percent,
@@ -44,7 +44,7 @@ export default function MainResultsChart(props) {
               borderWidth: 1,
             },
             {
-              label: "Average Score",
+              label: `Average Overall Score: ${averages.score.percent}`,
               data: [
                 averages.imagesResult.percent,
                 averages.headingsResult.percent,

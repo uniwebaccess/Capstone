@@ -15,9 +15,9 @@ const structuralCheck = async (page) => {
       return "no valid forms for the test"
     } else {
       if (!formsWithLabels.length) {
-        return false
+        return "Failed"
       } else {
-        return true
+        return "Passed"
       }
     }
   }
@@ -28,8 +28,8 @@ const structuralCheck = async (page) => {
     return sections.map((section) => 1);
   });
   const headerTagFunc = () => {
-    if (headers.length) return false;
-    return true;
+    if (headers.length) return "Failed";
+    return "Passed";
   };
 
   //checking section tag:
@@ -37,8 +37,8 @@ const structuralCheck = async (page) => {
     return sections.map((section) => 1);
   });
   const sectionTagFunc = () => {
-    if (sections.length) return false;
-    return true;
+    if (sections.length) return "Failed";
+    return "Passed";
   };
 
 
@@ -47,7 +47,7 @@ const structuralCheck = async (page) => {
   const sectionTag = sectionTagFunc()
   const inputAndLabel = formsWithInputsAndLabelsFunc()
 
-
+  // console.log(inputAndLabel)
 
   let sectionTagScore = 0
   let headerTagScore = 0
@@ -56,15 +56,15 @@ const structuralCheck = async (page) => {
 
   const totalScore = () => {
     let total = 0;
-    if (headerTag === true) {
+    if (headerTag === "Passed") {
       total += 30;
       headerTagScore = 30
     }
-    if (sectionTag === true) {
+    if (sectionTag === "Passed") {
       total += 40;
       sectionTagScore = 40
     }
-    if (inputAndLabel === true || "no valid forms for the test") {
+    if (inputAndLabel === "Passed" || "no valid forms for the test") {
       total += 30;
       inputAndLabelScore = 30
     }
@@ -79,8 +79,9 @@ const structuralCheck = async (page) => {
     sectionTag: { sectionTag: sectionTag, score: sectionTagScore },
     headerTag: { headerTag: headerTag, score: headerTagScore },
     inputAndLabel: { inputAndLabel: inputAndLabel, score: inputAndLabelScore },
+    testNames: ["Section Tag", "Header Tag", "Input and Label"],
     percent: totalPercent,
-    passed: totalPercent > 70,
+    passed: totalPercent >= 70,
   }
 }
 

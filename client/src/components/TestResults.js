@@ -4,6 +4,7 @@ import { fetchData, selectField } from "../store/data";
 import { checkerDescriptions } from "../constants";
 import TestFieldDescription from "./single-tests/TestFieldDescription";
 import MainResultsChart from "../visual/MainResultsChart";
+import FrictionGroup from '../visual/animation/Arrow'
 import {
   Grid,
   Typography,
@@ -96,7 +97,11 @@ class TestResult extends Component {
 
     return (
       <div>
-        {status === "loading" && <h1>Loading Results</h1>
+        {status === "loading" && (
+          <div className="single-page-loading">
+            <FrictionGroup />
+          </div>
+        )
           //  <LinearProgress />
         }
         {status === "success" && url && data && avgData && (
@@ -120,15 +125,32 @@ class TestResult extends Component {
 
               <Grid item xs={12} className={classes.boxList} >
                 <Box className={classes.boxList} boxShadow={2}>
-                  <Accordion expanded={expanded === 'panel1'} onChange={() => this.openAccordeon('panel1')}>
+
+                  <Accordion expanded={expanded === 'panel4'} onChange={() => this.openAccordeon('panel4')}>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content">
+                      aria-controls="panel2a-content">
                       <Typography className={classes.list}
                         component={RouterLink}
-                        to={"/imagesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Images </Typography>
+                        to={"/controlresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Controls</Typography>
                     </AccordionSummary>
-                    <AccordionDetails className={classes.paragraph}>
+                    <AccordionDetails>
+                      <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                        sit amet blandit leo lobortis eget.
+                    </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+
+                  <Accordion expanded={expanded === 'panel3'} onChange={() => this.openAccordeon('panel3')}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel2a-content">
+                      <Typography className={classes.list}
+                        component={RouterLink}
+                        to={"/globalcode/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Global Code</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
                       <Typography>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
                         sit amet blandit leo lobortis eget.
@@ -152,6 +174,39 @@ class TestResult extends Component {
                     </AccordionDetails>
                   </Accordion>
 
+                  <Accordion expanded={expanded === 'panel1'} onChange={() => this.openAccordeon('panel1')}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content">
+                      <Typography className={classes.list}
+                        component={RouterLink}
+                        to={"/imagesresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Images </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.paragraph}>
+                      <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                        sit amet blandit leo lobortis eget.
+                    </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+
+                  <Accordion expanded={expanded === 'panel5'} onChange={() => this.openAccordeon('panel5')}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel2a-content">
+                      <Typography className={classes.list}
+                        component={RouterLink}
+                        to={"/structuralresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                        sit amet blandit leo lobortis eget.
+                    </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+
+
                   {/* <Accordion expanded={expanded === 'panel3'} onChange={() => this.openAccordeon('panel3')}>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -167,54 +222,6 @@ class TestResult extends Component {
                     </Typography>
                     </AccordionDetails>
                   </Accordion> */}
-
-                  <Accordion expanded={expanded === 'panel3'} onChange={() => this.openAccordeon('panel3')}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content">
-                      <Typography className={classes.list}
-                        component={RouterLink}
-                        to={"/globalcode/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Global Code</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-
-                  <Accordion expanded={expanded === 'panel4'} onChange={() => this.openAccordeon('panel4')}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content">
-                      <Typography className={classes.list}
-                        component={RouterLink}
-                        to={"/controlresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Controls</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-
-                  <Accordion expanded={expanded === 'panel5'} onChange={() => this.openAccordeon('panel5')}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content">
-                      <Typography className={classes.list}
-                        component={RouterLink}
-                        to={"/structuralesult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                    </AccordionDetails>
-                  </Accordion>
                 </Box>
               </Grid>
             </Grid>
