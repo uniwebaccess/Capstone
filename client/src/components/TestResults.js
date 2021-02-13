@@ -123,33 +123,10 @@ class TestResult extends Component {
 
               <Grid item xs={12} className={classes.boxList}>
                 <Box className={classes.boxList} boxShadow={2}>
+
                   <Accordion
                     expanded={expanded === 'panel1'}
                     onChange={() => this.openAccordeon('panel1')}
-                  >
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                    >
-                      <Typography
-                        className={classes.list}
-                        component={RouterLink}
-                        to={'/imagesresult/' + urlKey}
-                      >
-                        <Icon className={classes.checkIcon}>
-                          <CheckIcon />
-                        </Icon>{' '}
-                       Images{' '}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.paragraph}>
-                      <Typography>{checkerDescriptions.images}</Typography>
-                    </AccordionDetails>
-                  </Accordion>
-
-                  <Accordion
-                    expanded={expanded === 'panel2'}
-                    onChange={() => this.openAccordeon('panel2')}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -158,22 +135,22 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/headingresult/' + urlKey}
+                        to={'/controlresult/' + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                       Headings
+                       Controls
                      </Typography>
                     </AccordionSummary>
-                    <AccordionDetails className={classes.paragraph}>
-                      <Typography>{checkerDescriptions.headings}</Typography>
+                    <AccordionDetails>
+                      <Typography>{checkerDescriptions.controls}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
                   <Accordion
-                    expanded={expanded === 'panel3'}
-                    onChange={() => this.openAccordeon('panel3')}
+                    expanded={expanded === 'panel2'}
+                    onChange={() => this.openAccordeon('panel2')}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -195,9 +172,10 @@ class TestResult extends Component {
                     </AccordionDetails>
                   </Accordion>
 
+
                   <Accordion
-                    expanded={expanded === 'panel4'}
-                    onChange={() => this.openAccordeon('panel4')}
+                    expanded={expanded === 'panel3'}
+                    onChange={() => this.openAccordeon('panel3')}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -206,16 +184,42 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/controlresult/' + urlKey}
+                        to={'/headingresult/' + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                       Controls
+                       Headings
                      </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>{checkerDescriptions.controls}</Typography>
+                    <AccordionDetails className={classes.paragraph}>
+                      <Typography>{checkerDescriptions.headings}</Typography>
+                    </AccordionDetails>
+                  </Accordion>
+
+
+
+                  <Accordion
+                    expanded={expanded === 'panel4'}
+                    onChange={() => this.openAccordeon('panel4')}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                    >
+                      <Typography
+                        className={classes.list}
+                        component={RouterLink}
+                        to={'/imagesresult/' + urlKey}
+                      >
+                        <Icon className={classes.checkIcon}>
+                          <CheckIcon />
+                        </Icon>{' '}
+                       Images{' '}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.paragraph}>
+                      <Typography>{checkerDescriptions.images}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
