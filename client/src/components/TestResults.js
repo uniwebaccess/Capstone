@@ -58,8 +58,8 @@ const navStyles = (theme) => ({
   },
 });
 /*
- * Page to render results of tests
- */
+* Page to render results of tests
+*/
 //Through the route /testresults/:urlKey
 class TestResult extends Component {
   constructor(props) {
@@ -139,7 +139,7 @@ class TestResult extends Component {
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Images{' '}
+                       Images{' '}
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
@@ -163,27 +163,11 @@ class TestResult extends Component {
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Headings
-                      </Typography>
+                       Headings
+                     </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.headings}</Typography>
-                    </AccordionDetails>
-                  </Accordion>
-
-                  <Accordion expanded={expanded === 'panel2'} onChange={() => this.openAccordeon('panel2')}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content">
-                      <Typography className={classes.list}
-                        component={RouterLink}
-                        to={"/headingresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Headings</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.paragraph}>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
                     </AccordionDetails>
                   </Accordion>
 
@@ -203,8 +187,8 @@ class TestResult extends Component {
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Global Code
-                      </Typography>
+                       Global Code
+                     </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography>{checkerDescriptions.globalCode}</Typography>
@@ -227,8 +211,8 @@ class TestResult extends Component {
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Controls
-                      </Typography>
+                       Controls
+                     </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography>{checkerDescriptions.controls}</Typography>
@@ -246,14 +230,14 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={"/testfielddescription/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Checking field description</Typography>
+                        to={"/structuralresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography>
                         {checkerDescriptions.structuralHTML}
                       </Typography>
                     </AccordionDetails>
-                  </Accordion> */
+                  </Accordion>
                 </Box>
               </Grid>
             </Grid>
@@ -294,3 +278,4 @@ const styledComponent = withStyles(navStyles, { withTheme: true })(TestResult);
 export default connect(mapState, mapDispatch)(styledComponent);
 
 //<TestFieldDescription descriptions={checkerDescriptions} />
+

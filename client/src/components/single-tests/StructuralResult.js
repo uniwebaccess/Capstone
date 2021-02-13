@@ -114,7 +114,7 @@ class StructuralResult extends Component {
                   flexDirection="row"
                 >
                   <div>
-                    {(data.structuralResult.sectionTag.sectionTag === "Passed") ? (
+                    {data.structuralResult.sectionTag.sectionTag ? (
                       <CheckboxCheck delay="one" />
                     ) : (
                         <CheckboxX delay="one" />
@@ -124,7 +124,7 @@ class StructuralResult extends Component {
                     </Typography>
                   </div>
                   <div>
-                    {(data.structuralResult.headerTag.headerTag === "Passed") ? (
+                    {data.structuralResult.headerTag.headerTag ? (
                       <CheckboxCheck delay="two" />
                     ) : (
                         <CheckboxX delay="two" />
@@ -134,7 +134,7 @@ class StructuralResult extends Component {
                     </Typography>
                   </div>
                   <div>
-                    {(data.structuralResult.inputAndLabel.inputAndLabel === "Passed") ? (
+                    {data.structuralResult.inputAndLabel.inputAndLabel ? (
                       <CheckboxCheck delay="three" />
                     ) : (
                         <CheckboxX delay="three" />
@@ -168,16 +168,16 @@ class StructuralResult extends Component {
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> HTML includes Section Tag: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag}</TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> HTML includes Header Tag: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag}</TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel}</TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
 
                           <TableRow>

@@ -12,12 +12,12 @@ const structuralCheck = async (page) => {
   }
   const formsWithInputsAndLabelsFunc = () => {
     if (!formsWithInput.length) {
-      return "no valid forms for the test"
+      return true
     } else {
       if (!formsWithLabels.length) {
-        return "Failed"
+        return false
       } else {
-        return "Passed"
+        return true
       }
     }
   }
@@ -28,8 +28,8 @@ const structuralCheck = async (page) => {
     return sections.map((section) => 1);
   });
   const headerTagFunc = () => {
-    if (headers.length) return "Failed";
-    return "Passed";
+    if (headers.length) return false;
+    return true;
   };
 
   //checking section tag:
@@ -37,8 +37,8 @@ const structuralCheck = async (page) => {
     return sections.map((section) => 1);
   });
   const sectionTagFunc = () => {
-    if (sections.length) return "Failed";
-    return "Passed";
+    if (sections.length) return false;
+    return true;
   };
 
 
@@ -56,15 +56,15 @@ const structuralCheck = async (page) => {
 
   const totalScore = () => {
     let total = 0;
-    if (headerTag === "Passed") {
+    if (headerTag === true) {
       total += 30;
       headerTagScore = 30
     }
-    if (sectionTag === "Passed") {
+    if (sectionTag === true) {
       total += 40;
       sectionTagScore = 40
     }
-    if (inputAndLabel === "Passed" || "no valid forms for the test") {
+    if (inputAndLabel === true) {
       total += 30;
       inputAndLabelScore = 30
     }
