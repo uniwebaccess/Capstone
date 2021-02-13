@@ -25,7 +25,7 @@ export default function MainResultsChart(props) {
           ],
           datasets: [
             {
-              label: "Your Score",
+              label: `Your Overall Score: ${score.percent}`,
               data: [
                 structuralResult.percent,
                 imagesResult.percent,
@@ -45,7 +45,7 @@ export default function MainResultsChart(props) {
               ],
             },
             {
-              label: "Average Score",
+              label: `Average Overall Score: ${averages.score.percent}`,
               data: [
                 averages.structuralResult.percent,
                 averages.imagesResult.percent,

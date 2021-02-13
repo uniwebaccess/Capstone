@@ -5,6 +5,10 @@ import BarChartTotal from '../../visual/HeadingsBarChartTotal'
 import HeadingsBarChart from '../../visual/HeadingsBarChart'
 import { fetchData } from "../../store/data";
 
+import CheckboxCheck from '../../visual/animation/CheckboxCheck'
+import CheckboxX from '../../visual/animation/CheckboxX'
+import FrictionGroup from '../../visual/animation/Arrow'
+
 
 import {
   Button,
@@ -69,7 +73,11 @@ class HeadingsResult extends Component {
     const classes = this.props.classes;
     return (
       <div>
-        {status === 'loading' && <h1>Loading Results</h1>}
+        {status === 'loading' && (
+          <div className="single-page-loading">
+            <FrictionGroup />
+          </div>
+        )}
         {status === 'success' && url && data && (
           <Container >
             <Box position="absolute" left="1%" zIndex="tooltip">
@@ -81,7 +89,7 @@ class HeadingsResult extends Component {
             </Box>
 
             <Typography
-              className={classes.header}>Results for Headings Test</Typography>
+              className={classes.header}>Headings Test</Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
 
@@ -91,10 +99,58 @@ class HeadingsResult extends Component {
                 </Box>
 
               </Grid>
+
               <Grid item xs={12} md={6}>
 
                 <Box>
                   <BarChartTotal data={data.headingsResult} average={average} />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={7}>
+                <Box
+                  className={classes.checkboxes}
+                  display="flex"
+                  flexDirection="row"
+                >
+                  <div>
+                    {(data.headingsResult.h1OnlyOne.h1OnlyOne === "Passed") ? (
+                      <CheckboxCheck delay="one" />
+                    ) : (
+                        <CheckboxX delay="one" />
+                      )}
+                    <Typography className="checkbox-label">
+                      H1 Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {(data.headingsResult.logicSequence.logicSequence === "Passed") ? (
+                      <CheckboxCheck delay="two" />
+                    ) : (
+                        <CheckboxX delay="two" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Logic Sequence
+                    </Typography>
+                  </div>
+                  <div>
+                    {(data.headingsResult.hTagSkip.hTagSkip === "Passed") ? (
+                      <CheckboxCheck delay="three" />
+                    ) : (
+                        <CheckboxX delay="three" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Skip H Tag
+                    </Typography>
+                  </div>
+
+                  <div>
+                    {data.headingsResult.passed ? (
+                      <CheckboxCheck delay="four" />
+                    ) : (
+                        <CheckboxX delay="four" />
+                      )}
+                    <Typography className="checkbox-label">Overall</Typography>
+                  </div>
                 </Box>
               </Grid>
 
@@ -110,7 +166,7 @@ class HeadingsResult extends Component {
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
+                            <TableCell className={classes.tableBody}> App follows Logic Sequence for H tags : </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.logicSequence.logicSequence}</TableCell>
                           </TableRow>
 
@@ -126,11 +182,11 @@ class HeadingsResult extends Component {
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.passed ? 'pass' : 'no pass'}</TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.passed ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.percent}</TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.percent}%</TableCell>
                           </TableRow>
                         </TableBody>
                       </Table>

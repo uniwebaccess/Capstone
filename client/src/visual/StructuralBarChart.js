@@ -1,8 +1,7 @@
 import React from 'react';
 import { HorizontalBar } from 'react-chartjs-2';
 
-export default function HeadingsBarChart(props) {
-
+export default function StructuralBarChart(props) {
   return (
     <div>
       <HorizontalBar
@@ -11,9 +10,9 @@ export default function HeadingsBarChart(props) {
           datasets: [
             {
               label: ' YOUR APP SCORE',
-              data: [props.data.h1OnlyOne.score,
-              props.data.logicSequence.score,
-              props.data.hTagSkip.score
+              data: [props.data.sectionTag.score,
+              props.data.headerTag.score,
+              props.data.inputAndLabel.score
               ],
               backgroundColor: [
                 'rgba(33, 158,188, 1)',
@@ -34,7 +33,7 @@ export default function HeadingsBarChart(props) {
             },
             {
               label: 'AVERAGE SCORE',
-              data: [35, 27, 30],
+              data: [35, 26, 22],
             },
           ],
         }}

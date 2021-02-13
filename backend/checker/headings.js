@@ -20,19 +20,19 @@ async function headingsCheck(page) {
     currentLevel = level;
   }
   const logicSequenceFunc = () => {
-    if (wrongHeaders !== 0) return "no pass";
-    return "pass";
+    if (wrongHeaders !== 0) return "Failed";
+    return "Passed";
   };
   const skipHeadersFunc = () => {
-    if (skipHeaders !== 0) return "no pass";
-    return "pass";
+    if (skipHeaders !== 0) return "Failed";
+    return "Passed";
   };
 
   //====Checking h1 tag:
   const checkH1 = await page.$$('h1');
   const h1 = () => {
-    if (checkH1.length === 1) return "pass";
-    return "no pass";
+    if (checkH1.length === 1) return "Passed";
+    return "Failed";
   };
 
 
@@ -47,15 +47,15 @@ async function headingsCheck(page) {
 
   const totalScore = () => {
     let total = 0;
-    if (h1OnlyOne === "pass") {
+    if (h1OnlyOne === "Passed") {
       total += 40;
       h1TagScore = 40
     }
-    if (logicSequence === "pass") {
+    if (logicSequence === "Passed") {
       total += 30;
       logicSequenceScore = 30
     }
-    if (hTagSkip === "pass") {
+    if (hTagSkip === "Passed") {
       total += 30;
       hTagSkipScore = 30
     }

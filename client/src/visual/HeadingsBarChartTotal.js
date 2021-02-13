@@ -65,7 +65,7 @@ export default function BarChartTotal(props) {
           },
           title: {
             display: true,
-            text: 'Score in % by SubTest:',
+            text: 'Overall in % :',
             color: "#fb8500",
             fontSize: 20,
           },

@@ -1,8 +1,15 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import PieChart from "../../visual/PieChart";
+import StructuralPieChart from '../../visual/StructuralPieChart'
+import StructuralBarChart from '../../visual/StructuralBarChart'
 import { fetchData } from "../../store/data";
+
+import CheckboxCheck from '../../visual/animation/CheckboxCheck'
+import CheckboxX from '../../visual/animation/CheckboxX'
+import FrictionGroup from '../../visual/animation/Arrow'
+
+
 import {
   Button,
   Icon,
@@ -53,16 +60,23 @@ const navStyles = (theme) => ({
 })
 
 class StructuralResult extends Component {
+
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
+
   }
 
   render() {
-    const { status, url, data } = this.props;
+
+    const { status, url, data, average } = this.props;
     const classes = this.props.classes;
     return (
       <div>
-        {status === 'loading' && <h1>Loading Results</h1>}
+        {status === 'loading' && (
+          <div className="single-page-loading">
+            <FrictionGroup />
+          </div>
+        )}
         {status === 'success' && url && data && (
           <Container >
             <Box position="absolute" left="1%" zIndex="tooltip">
@@ -74,44 +88,107 @@ class StructuralResult extends Component {
             </Box>
 
             <Typography
-              className={classes.header}>Results for accessibility</Typography>
+              className={classes.header}>Structural HTML Test</Typography>
 
-            <Grid container spacing={3} className={classes.graphContainer1}>
+            <Grid container spacing={4} className={classes.graphContainer1}>
 
-              <Grid item xs={12} md={7}>
-                <Box> <PieChart data={data.imagesResult} /></Box>
+              <Grid item xs={12} md={6}>
+                <Box>
+                  <StructuralBarChart data={data.structuralResult} average={average} />
+
+                </Box>
+
               </Grid>
 
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={6}>
+                <Box>
+
+                  <StructuralPieChart data={data.structuralResult} average={average} />
+                </Box>
+              </Grid>
+
+              <Grid item xs={12} md={7}>
+                <Box
+                  className={classes.checkboxes}
+                  display="flex"
+                  flexDirection="row"
+                >
+                  <div>
+                    {data.structuralResult.sectionTag.sectionTag ? (
+                      <CheckboxCheck delay="one" />
+                    ) : (
+                        <CheckboxX delay="one" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Section Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.structuralResult.headerTag.headerTag ? (
+                      <CheckboxCheck delay="two" />
+                    ) : (
+                        <CheckboxX delay="two" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Header Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.structuralResult.inputAndLabel.inputAndLabel ? (
+                      <CheckboxCheck delay="three" />
+                    ) : (
+                        <CheckboxX delay="three" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Input and Label Tags
+                    </Typography>
+                  </div>
+
+                  <div>
+                    {data.structuralResult.passed ? (
+                      <CheckboxCheck delay="four" />
+                    ) : (
+                        <CheckboxX delay="four" />
+                      )}
+                    <Typography className="checkbox-label">Overall</Typography>
+                  </div>
+                </Box>
+              </Grid>
+
+              <Grid item xs={12} md={12}>
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer} >
                       <Table aria-label="simple table">
                         <TableBody>
                           <TableRow>
-                            <TableCell className={classes.tableBody}>Total images: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
+                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Images with valid atribute alt:{' '}</TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}</TableCell>
+                            <TableCell className={classes.tableBody}> HTML includes Section Tag: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}>Test: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
+                            <TableCell className={classes.tableBody}> HTML includes Header Tag: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag ? 'Passed' : 'Failed'}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}>Percent passed images: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}</TableCell>
+                            <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.passed ? 'Passed' : 'Failed'}</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.percent}%</TableCell>
                           </TableRow>
 
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>Total Score: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.score.percent}</TableCell>
-                          </TableRow>
 
                         </TableBody>
                       </Table>
@@ -121,7 +198,8 @@ class StructuralResult extends Component {
               </Grid>
             </Grid>
           </Container>
-        )}
+        )
+        }
       </div>
     );
   }
@@ -130,6 +208,7 @@ class StructuralResult extends Component {
 const mapState = (state) => {
   return {
     data: state.data.data,
+    average: state.data.avgData,
     url: state.data.url,
     status: state.status,
     error: state.error,

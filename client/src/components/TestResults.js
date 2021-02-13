@@ -58,8 +58,8 @@ const navStyles = (theme) => ({
   },
 });
 /*
- * Page to render results of tests
- */
+* Page to render results of tests
+*/
 //Through the route /testresults/:urlKey
 class TestResult extends Component {
   constructor(props) {
@@ -123,27 +123,28 @@ class TestResult extends Component {
 
               <Grid item xs={12} className={classes.boxList}>
                 <Box className={classes.boxList} boxShadow={2}>
+
                   <Accordion
                     expanded={expanded === 'panel1'}
                     onChange={() => this.openAccordeon('panel1')}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
+                      aria-controls="panel2a-content"
                     >
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/imagesresult/' + urlKey}
+                        to={'/controlresult/' + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Images{' '}
-                      </Typography>
+                       Controls
+                     </Typography>
                     </AccordionSummary>
-                    <AccordionDetails className={classes.paragraph}>
-                      <Typography>{checkerDescriptions.images}</Typography>
+                    <AccordionDetails>
+                      <Typography>{checkerDescriptions.controls}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
@@ -158,34 +159,19 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/headingresult/' + urlKey}
+                        to={'/globalcode/' + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Headings
-                      </Typography>
+                       Global Code
+                     </Typography>
                     </AccordionSummary>
-                    <AccordionDetails className={classes.paragraph}>
-                      <Typography>{checkerDescriptions.headings}</Typography>
+                    <AccordionDetails>
+                      <Typography>{checkerDescriptions.globalCode}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
-                  {/* <Accordion expanded={expanded === 'panel3'} onChange={() => this.openAccordeon('panel3')}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content">
-                      <Typography className={classes.list}
-                        component={RouterLink}
-                        to={"/testfielddescription/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Checking field description</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                    </AccordionDetails>
-                  </Accordion> */}
 
                   <Accordion
                     expanded={expanded === 'panel3'}
@@ -198,18 +184,20 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/globalcode/' + urlKey}
+                        to={'/headingresult/' + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Global Code
-                      </Typography>
+                       Headings
+                     </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>{checkerDescriptions.globalCode}</Typography>
+                    <AccordionDetails className={classes.paragraph}>
+                      <Typography>{checkerDescriptions.headings}</Typography>
                     </AccordionDetails>
                   </Accordion>
+
+
 
                   <Accordion
                     expanded={expanded === 'panel4'}
@@ -217,21 +205,21 @@ class TestResult extends Component {
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
+                      aria-controls="panel1a-content"
                     >
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/controlresult/' + urlKey}
+                        to={'/imagesresult/' + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
                         </Icon>{' '}
-                        Controls
+                       Images{' '}
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>{checkerDescriptions.controls}</Typography>
+                    <AccordionDetails className={classes.paragraph}>
+                      <Typography>{checkerDescriptions.images}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
@@ -246,7 +234,7 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={"/structuralesult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
+                        to={"/structuralresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography>
@@ -294,3 +282,4 @@ const styledComponent = withStyles(navStyles, { withTheme: true })(TestResult);
 export default connect(mapState, mapDispatch)(styledComponent);
 
 //<TestFieldDescription descriptions={checkerDescriptions} />
+
