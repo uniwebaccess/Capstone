@@ -11,6 +11,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { withStyles } from '@material-ui/core/styles';
 import history from '../../history';
 import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
+import ImgPieChart from "../../visual/ImgPieChart";
 
 const navStyles = (theme) => ({
 
@@ -56,6 +57,16 @@ class ImagesResult extends Component {
     this.props.fetchData(this.props.match.params.urlKey);
   }
 
+  pieData() {
+    let data = this.props.data;
+
+    return [
+      { title: 'One', value: 10, color: '#E38627' },
+      { title: 'Two', value: 15, color: '#C13C37' },
+      { title: 'Three', value: 20, color: '#6A2135' },
+    ]
+  }
+
   render() {
     const { status, url, data } = this.props;
     const classes = this.props.classes;
@@ -87,6 +98,7 @@ class ImagesResult extends Component {
               <TableContainer  className={classes.tableContainer} >
                 <Table  aria-label="simple table">
                   <TableBody>
+
                     <TableRow>
                       <TableCell className={classes.tableBody}>Total images: </TableCell>
                       <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
@@ -117,6 +129,9 @@ class ImagesResult extends Component {
               </TableContainer>
               </CardContent>
               </Card>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <ImgPieChart data={this.pieData()}/>
             </Grid>
             </Grid>
           </Container>

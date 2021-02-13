@@ -49,6 +49,7 @@ const navStyles = (theme) => ({
   },
   card: {
     marginTop: '10%',
+    marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
 
@@ -87,13 +88,12 @@ class HeadingsResult extends Component {
               <Grid item xs={12} md={6}>
                 <Box>
                   <HeadingsBarChart data={data.headingsResult} average={average} />
-
                 </Box>
 
               </Grid>
               <Grid item xs={12} md={6}>
-                <Box>
 
+                <Box>
                   <BarChartTotal data={data.headingsResult} average={average} />
                 </Box>
               </Grid>
@@ -118,6 +118,7 @@ class HeadingsResult extends Component {
                             <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.h1OnlyOne.h1OnlyOne}</TableCell>
                           </TableRow>
+
                           <TableRow>
                             <TableCell className={classes.tableBody}> Don't skip order of H Tags : </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip}</TableCell>
@@ -131,8 +132,6 @@ class HeadingsResult extends Component {
                             <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.percent}</TableCell>
                           </TableRow>
-
-
                         </TableBody>
                       </Table>
                     </TableContainer>
