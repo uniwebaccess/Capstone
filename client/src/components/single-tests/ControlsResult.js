@@ -123,10 +123,10 @@ class ControlsResult extends Component {
               <Grid
                 container
                 spacing={3}
-                xs={12}
+
                 className={classes.graphContainer1}
               >
-                <Grid container position="static" xs={6}>
+                <Grid container position="static" >
                   <Grid item>
                     <HrefChart data={data} />
                   </Grid>
@@ -174,35 +174,17 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksWithHref}
                               </TableCell>
                             </TableRow>
-                            <TableCell className={classes.messageCell}>
+                            <TableRow className={classes.messageCell}>
                               {data.controlsResult.hrefPassed ? (
-                                <TableRow>{passingFeedback.hrefAttr}</TableRow>
+                                <TableCell>{passingFeedback.hrefAttr}</TableCell>
                               ) : (
-                                <TableRow>
-                                  {failingSuggestions.hrefAttr}
-                                </TableRow>
-                              )}
-                            </TableCell>
+                                  <TableCell>
+                                    {failingSuggestions.hrefAttr}
+                                  </TableCell>
+                                )}
+                            </TableRow>
 
-                            {/* <Accordion
-                              xs={6}
-                              expanded={expanded === 'panel1'}
-                              onChange={() => this.openAccordion('panel1')}
-                            >
-                              <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                              >
-                                <Typography className={classes.list}>
-                                  Learn More{' '}
-                                </Typography>
-                              </AccordionSummary>
-                              <AccordionDetails className={classes.paragraph}>
-                                <Typography>
-                                  {failingSuggestions.hrefAttr}
-                                </Typography>
-                              </AccordionDetails>
-                            </Accordion> */}
+
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Links that open in a new tab or window:{' '}
@@ -214,40 +196,23 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksToNewTab}
                               </TableCell>
                             </TableRow>
-                            <TableCell className={classes.messageCell}>
+                            <TableRow className={classes.messageCell}>
                               {Math.floor(
                                 (data.controlsResult.linksToNewTab /
                                   data.controlsResult.allLinks) *
-                                  100
+                                100
                               ) < 30 ? (
-                                <TableRow>
-                                  {passingFeedback.targetAttr}
-                                </TableRow>
-                              ) : (
-                                <TableRow>
-                                  {failingSuggestions.targetAttr}
-                                </TableRow>
-                              )}
-                            </TableCell>
+                                  <TableCell>
+                                    {passingFeedback.targetAttr}
+                                  </TableCell>
+                                ) : (
+                                  <TableCell>
+                                    {failingSuggestions.targetAttr}
+                                  </TableCell>
+                                )}
+                            </TableRow>
 
-                            {/* <Accordion
-                              expanded={expanded === 'panel2'}
-                              onChange={() => this.openAccordion('panel2')}
-                            >
-                              <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel2a-content"
-                              >
-                                <Typography className={classes.list}>
-                                  Learn More
-                                </Typography>
-                              </AccordionSummary>
-                              <AccordionDetails className={classes.paragraph}>
-                                <Typography>
-                                  {failingSuggestions.targetAttr}
-                                </Typography>
-                              </AccordionDetails>
-                            </Accordion> */}
+
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Total buttons:{' '}
@@ -271,32 +236,16 @@ class ControlsResult extends Component {
                                 {data.controlsResult.buttonsWithType}
                               </TableCell>
                             </TableRow>
-                            <TableCell className={classes.messageCell}>
+                            <TableRow className={classes.messageCell}>
                               {data.controlsResult.buttonsPassed ? (
-                                <TableRow>{passingFeedback.buttons}</TableRow>
+                                <TableCell>{passingFeedback.buttons}</TableCell>
                               ) : (
-                                <TableRow>
-                                  {failingSuggestions.buttons}
-                                </TableRow>
-                              )}
-                            </TableCell>
+                                  <TableCell>
+                                    {failingSuggestions.buttons}
+                                  </TableCell>
+                                )}
+                            </TableRow>
 
-                            {/* <Accordion
-                              expanded={expanded === 'panel3'}
-                              onChange={() => this.openAccordion('panel3')}
-                            >
-                              <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel2a-content"
-                              >
-                                <Typography className={classes.list}>
-                                  Learn More
-                                </Typography>
-                              </AccordionSummary>
-                              <AccordionDetails>
-                                <Typography>Text</Typography>
-                              </AccordionDetails>
-                            </Accordion> */}
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Score for this Category:{' '}
