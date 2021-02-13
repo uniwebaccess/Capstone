@@ -12,7 +12,7 @@ const structuralCheck = async (page) => {
   }
   const formsWithInputsAndLabelsFunc = () => {
     if (!formsWithInput.length) {
-      return "no valid forms for the test"
+      return true
     } else {
       if (!formsWithLabels.length) {
         return false
@@ -47,7 +47,7 @@ const structuralCheck = async (page) => {
   const sectionTag = sectionTagFunc()
   const inputAndLabel = formsWithInputsAndLabelsFunc()
 
-
+  // console.log(inputAndLabel) === failed
 
   let sectionTagScore = 0
   let headerTagScore = 0
@@ -64,7 +64,7 @@ const structuralCheck = async (page) => {
       total += 40;
       sectionTagScore = 40
     }
-    if (inputAndLabel === true || "no valid forms for the test") {
+    if (inputAndLabel === true) {
       total += 30;
       inputAndLabelScore = 30
     }
@@ -79,8 +79,9 @@ const structuralCheck = async (page) => {
     sectionTag: { sectionTag: sectionTag, score: sectionTagScore },
     headerTag: { headerTag: headerTag, score: headerTagScore },
     inputAndLabel: { inputAndLabel: inputAndLabel, score: inputAndLabelScore },
+    testNames: ["Section Tag", "Header Tag", "Input and Label"],
     percent: totalPercent,
-    passed: totalPercent > 70,
+    passed: totalPercent >= 70,
   }
 }
 
