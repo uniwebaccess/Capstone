@@ -45,6 +45,7 @@ const navStyles = (theme) => ({
   },
   card: {
     marginTop:'10%',
+    marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
   }

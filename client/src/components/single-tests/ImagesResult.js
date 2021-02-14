@@ -13,8 +13,10 @@ import history from '../../history';
 import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
 import ImgPieChart from '../../visual/ImgPieChart';
 import ImgBarChart from '../../visual/ImgBarChart';
-import CheckboxX from '../../visual/animation/CheckboxX'
+import CheckboxX from '../../visual/animation/CheckboxX';
 import CheckboxCheck from '../../visual/animation/CheckboxCheck';
+import FrictionGroup from '../../visual/animation/Arrow';
+import { failingSuggestions, passingFeedback } from '../../constants';
 
 const navStyles = (theme) => ({
 
@@ -47,12 +49,19 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-
+    marginBottom: '5%',
     marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
   },
 
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
+  }
 
 })
 
@@ -87,7 +96,11 @@ class ImagesResult extends Component {
             </Box>
 
             <Typography
-               className={classes.header}>Results for images and 'alt' tags</Typography>
+              className={classes.header}> <br />
+              {data.imagesResult.passed ? <b>Images Category <span className={classes.green}>Passed</span></b> : <b>Images Category <span className={classes.red}>Failed</span></b>} <br />
+            </Typography>
+
+
 
             <Grid container spacing={3} className={classes.graphContainer1}>
 

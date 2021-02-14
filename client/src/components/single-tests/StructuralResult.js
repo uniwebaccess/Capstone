@@ -115,7 +115,8 @@ class StructuralResult extends Component {
 
             <Typography
               className={classes.header}> <br />
-              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br /></Typography>
+              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br />
+            </Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
 
