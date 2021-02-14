@@ -46,8 +46,10 @@ const navStyles = (theme) => ({
     fontSize: '28px',
   },
   graphContainer1: {
-    marginTop: '3%',
-    marginBottom: '5%'
+    alignItems: 'center',
+    align: 'center',
+    justifyContent: 'center',
+    marginTop: '5%',
   },
 
   tableheader: {
@@ -62,7 +64,7 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop: '',
+    marginTop: '5%',
   },
   messageCell: {
     align: 'left',
@@ -127,26 +129,28 @@ class ControlsResult extends Component {
 
               <Grid
                 container
-                spacing={3}
+                item={true}
                 className={classes.graphContainer1}
+                xs={12}
               >
-
+                <Grid container item={true} xs={12}>
                   <Grid item xs={3}>
-                      <HrefChart data={data} />
-                      <br/>
-                      <TargetChart data={data} />
+                    <HrefChart data={data} />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TargetChart delay="one" data={data} />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <ButtonsChart delay="two" data={data} />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <ControlsScoreChart delay="three" data={data} />
                   </Grid>
 
-                  <Grid item xs={3}>
-                      <ButtonsChart data={data} />
-                      <br/>
-                      <ControlsScoreChart data={data} />
-                  </Grid>
 
-
-                <Grid item xs={6}>
-                  <Card className={classes.card}>
-                    <CardContent>
+                <Grid item xs={8} align="center">
+                  <Card className={classes.card} align="center">
+                    <CardContent align="center">
                       <TableContainer className={classes.tableContainer}>
                         <Table aria-label="simple table">
                           <TableBody>
@@ -176,14 +180,15 @@ class ControlsResult extends Component {
                             </TableRow>
                             <TableRow className={classes.messageCell}>
                               {data.controlsResult.hrefPassed ? (
-                                <TableCell>{passingFeedback.hrefAttr}</TableCell>
+                                <TableCell>
+                                  {passingFeedback.hrefAttr}
+                                </TableCell>
                               ) : (
-                                  <TableCell>
-                                    {failingSuggestions.hrefAttr}
-                                  </TableCell>
-                                )}
+                                <TableCell>
+                                  {failingSuggestions.hrefAttr}
+                                </TableCell>
+                              )}
                             </TableRow>
-
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
@@ -200,18 +205,17 @@ class ControlsResult extends Component {
                               {Math.floor(
                                 (data.controlsResult.linksToNewTab /
                                   data.controlsResult.allLinks) *
-                                100
+                                  100
                               ) < 30 ? (
-                                  <TableCell>
-                                    {passingFeedback.targetAttr}
-                                  </TableCell>
-                                ) : (
-                                  <TableCell>
-                                    {failingSuggestions.targetAttr}
-                                  </TableCell>
-                                )}
+                                <TableCell>
+                                  {passingFeedback.targetAttr}
+                                </TableCell>
+                              ) : (
+                                <TableCell>
+                                  {failingSuggestions.targetAttr}
+                                </TableCell>
+                              )}
                             </TableRow>
-
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
@@ -240,10 +244,10 @@ class ControlsResult extends Component {
                               {data.controlsResult.buttonsPassed ? (
                                 <TableCell>{passingFeedback.buttons}</TableCell>
                               ) : (
-                                  <TableCell>
-                                    {failingSuggestions.buttons}
-                                  </TableCell>
-                                )}
+                                <TableCell>
+                                  {failingSuggestions.buttons}
+                                </TableCell>
+                              )}
                             </TableRow>
 
                             <TableRow>
