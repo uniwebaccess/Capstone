@@ -78,7 +78,13 @@ const navStyles = (theme) => ({
     marginTop: '10%',
     //background: '#fefae0',
     //background: '#0097a7'
-
+  },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
   }
 })
 
@@ -93,6 +99,7 @@ class StructuralResult extends Component {
 
     const { status, url, data, average } = this.props;
     const classes = this.props.classes;
+    console.log()
     return (
       <div>
         {status === 'loading' && (
@@ -111,7 +118,8 @@ class StructuralResult extends Component {
             </Box>
 
             <Typography
-              className={classes.header}>Structural HTML Test</Typography>
+              className={classes.header}> <br />
+              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br /></Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
 
@@ -187,48 +195,51 @@ class StructuralResult extends Component {
 
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> HTML includes Section Tag: </TableCell>
+                            <TableCell className={classes.tableBody}> HTML includes Section Tag:
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.structuralResult.sectionTag.sectionTag ? (passingFeedback.sectionTag) :
+                                  (failingSuggestions.sectionTag
+                                  )}
+                              </Typography>
+                            </TableCell>
 
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag ? 'Passed' : 'Failed'}</TableCell>
 
                           </TableRow>
 
-                          {data.structuralResult.sectionTag.sectionTag ? (
-                            <TableRow>{passingFeedback.sectionTag}</TableRow>
-                          ) : (
-                              <TableRow>
-                                {failingSuggestions.sectionTag}
-                              </TableRow>
-                            )}
+
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> HTML includes Header Tag: </TableCell>
+                            <TableCell className={classes.tableBody}> HTML includes Header Tag:
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.structuralResult.headerTag.headerTag ? (passingFeedback.headerTag) :
+                                  (failingSuggestions.headerTag
+                                  )}
+                              </Typography>
+                            </TableCell>
 
 
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag ? 'Passed' : 'Failed'}</TableCell>
 
                           </TableRow>
-                          {data.structuralResult.headerTag.headerTag ? (
-                            <TableRow>{passingFeedback.headerTag}</TableRow>
-                          ) : (
-                              <TableRow>
-                                {failingSuggestions.headerTag}
-                              </TableRow>
-                            )}
+
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags </TableCell>
+                            <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.structuralResult.inputAndLabel.inputAndLabel ? (passingFeedback.formLabels) :
+                                  (failingSuggestions.formLabels
+                                  )}
+                              </Typography>
+                            </TableCell>
 
 
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel ? 'Passed' : 'Failed'}</TableCell>
 
                           </TableRow>
-                          {data.structuralResult.inputAndLabel.inputAndLabel ? (
-                            <TableRow>{passingFeedback.formLabels}</TableRow>
-                          ) : (
-                              <TableRow>
-                                {failingSuggestions.formLabels}
-                              </TableRow>
-                            )}
+
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>

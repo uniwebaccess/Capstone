@@ -47,7 +47,7 @@ export default function StructuralPieChart(props) {
           },
           title: {
             display: true,
-            text: 'Overall in % :',
+            text: 'How your total score calculated:',
             color: "#fb8500",
             fontSize: 20,
           },
