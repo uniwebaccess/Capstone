@@ -1,21 +1,9 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import Chart from 'chart.js';
 
 export function HrefChart(props) {
   const { hrefPercent } = props.data.controlsResult;
-
-  const chartOptions = {
-    cutoutPercentage: 65,
-    maintainAspectRatio: false,
-    legend: {
-      labels: {
-        fontColor: '#2E2E3A',
-        fontFamily: 'arial',
-        fontSize: 15,
-      },
-    },
-  };
-
   let bgColor;
 
   if (hrefPercent >= 80) {
@@ -27,6 +15,49 @@ export function HrefChart(props) {
   if (hrefPercent < 40) {
     bgColor = '#ff2400';
   }
+  const chartOptions = {
+    cutoutPercentage: 65,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+      labels: {
+        fontColor: '#2E2E3A',
+        fontFamily: 'arial',
+        fontSize: 15,
+      },
+    },
+    title: {
+      display: true,
+      text: ['Links with href Attribute'],
+      fontSize: 15,
+    },
+    elements: {
+      center: {
+        text: `${hrefPercent}%`,
+        color: bgColor,
+        fontStyle: 'Arial',
+        sidePadding: 20, // Default is 20 (as a percentage)
+        minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+        maxFontSize: 35,
+        lineHeight: 25, // Default is 25 (in px), used for when text wraps
+      },
+    },
+    animation: {
+      duration: 750,
+      easing: 'linear',
+      from: 1,
+      to: 0,
+      loop: false,
+      delay: 0,
+    },
+    // plugins: {
+    //   deferred: {
+    //     enabled: true,
+    //     delay: 0,
+    //   },
+    // },
+  };
+
   return (
     <>
       <div>
@@ -54,18 +85,6 @@ export function TargetChart(props) {
   const { allLinks, linksToNewTab } = props.data.controlsResult;
   const newTabPercent = Math.floor((linksToNewTab / allLinks) * 100);
 
-  const chartOptions = {
-    cutoutPercentage: 65,
-    maintainAspectRatio: false,
-    legend: {
-      labels: {
-        fontColor: '#2E2E3A',
-        fontFamily: 'arial',
-        fontSize: 15,
-      },
-    },
-  };
-
   let bgColor;
 
   if (newTabPercent <= 80) {
@@ -77,12 +96,54 @@ export function TargetChart(props) {
   if (newTabPercent > 40) {
     bgColor = '#ff2400';
   }
+
+  const chartOptions = {
+    cutoutPercentage: 65,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+      labels: {
+        fontColor: '#2E2E3A',
+        fontFamily: 'arial',
+        fontSize: 15,
+      },
+    },
+    title: {
+      display: true,
+      text: ['Links to New Tab or Window'],
+      fontSize: 15,
+    },
+    elements: {
+      center: {
+        text: `${100 - newTabPercent}%`,
+        color: bgColor,
+        fontStyle: 'Arial',
+        sidePadding: 20, // Default is 20 (as a percentage)
+        minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+        maxFontSize: 35,
+        lineHeight: 25, // Default is 25 (in px), used for when text wraps
+      },
+    },
+    animation: {
+      duration: 750,
+      easing: 'linear',
+      loop: false,
+      delay: 250,
+    },
+    // plugins: {
+    //   deferred: {
+    //     enabled: true,
+    //     delay: 250,
+    //   },
+    // },
+  };
+
   return (
     <>
       <div>
         <Doughnut
           data={{
-            labels: ['Links Opening in a New Tab or Window'],
+            labels: [['Links to New Tab or Window']],
             datasets: [
               {
                 data: [100 - newTabPercent, newTabPercent],
@@ -103,28 +164,6 @@ export function TargetChart(props) {
 export function ButtonsChart(props) {
   const { buttonsPercent } = props.data.controlsResult;
 
-  const chartOptions = {
-    cutoutPercentage: 65,
-    elements: {
-      center: {
-        text: 'inner text',
-        color: '#FF6384', // Default is #000000
-        fontStyle: 'Arial', // Default is Arial
-        sidePadding: 20, // Default is 20 (as a percentage)
-        minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-        lineHeight: 25, // Default is 25 (in px), used for when text wraps
-      },
-    },
-    maintainAspectRatio: false,
-    legend: {
-      labels: {
-        fontColor: '#2E2E3A',
-        fontFamily: 'arial',
-        fontSize: 15,
-      },
-    },
-  };
-
   let bgColor;
 
   if (buttonsPercent >= 80) {
@@ -136,6 +175,47 @@ export function ButtonsChart(props) {
   if (buttonsPercent < 40) {
     bgColor = '#ff2400';
   }
+  const chartOptions = {
+    cutoutPercentage: 65,
+    elements: {
+      center: {
+        text: `${buttonsPercent}%`,
+        color: bgColor,
+        fontStyle: 'Arial',
+        sidePadding: 20, // Default is 20 (as a percentage)
+        minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+        maxFontSize: 35,
+        lineHeight: 25, // Default is 25 (in px), used for when text wraps
+      },
+    },
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+      labels: {
+        fontColor: '#2E2E3A',
+        fontFamily: 'arial',
+        fontSize: 15,
+      },
+    },
+    title: {
+      display: true,
+      text: 'Buttons with Type Attribute',
+      fontSize: 15,
+    },
+    animation: {
+      duration: 750,
+      easing: 'linear',
+      loop: false,
+      delay: 500,
+    },
+    // plugins: {
+    //   deferred: {
+    //     enabled: true,
+    //     delay: 500,
+    //   },
+    // },
+  };
+
   return (
     <>
       <div>
@@ -162,18 +242,6 @@ export function ButtonsChart(props) {
 export function ControlsScoreChart(props) {
   const { percent } = props.data.controlsResult;
 
-  const chartOptions = {
-    cutoutPercentage: 65,
-    maintainAspectRatio: false,
-    legend: {
-      labels: {
-        fontColor: '#2E2E3A',
-        fontFamily: 'arial',
-        fontSize: 15,
-      },
-    },
-  };
-
   let bgColor;
 
   if (percent >= 80) {
@@ -185,6 +253,47 @@ export function ControlsScoreChart(props) {
   if (percent < 40) {
     bgColor = '#ff2400';
   }
+  const chartOptions = {
+    cutoutPercentage: 65,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+      labels: {
+        fontColor: '#2E2E3A',
+        fontFamily: 'arial',
+        fontSize: 15,
+      },
+    },
+    title: {
+      display: true,
+      text: 'Score for this Category',
+      fontSize: 15,
+    },
+    elements: {
+      center: {
+        text: `${percent}%`,
+        color: bgColor,
+        fontStyle: 'Arial',
+        sidePadding: 20, // Default is 20 (as a percentage)
+        minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
+        maxFontSize: 35,
+        lineHeight: 25, // Default is 25 (in px), used for when text wraps
+      },
+    },
+    animation: {
+      duration: 750,
+      easing: 'linear',
+      loop: false,
+      delay: 250,
+    },
+    // plugins: {
+    //   deferred: {
+    //     enabled: true,
+    //     delay: 750,
+    //   },
+    // },
+  };
+
   return (
     <>
       <div>
@@ -207,3 +316,87 @@ export function ControlsScoreChart(props) {
     </>
   );
 }
+
+Chart.pluginService.register({
+  beforeDraw: function (chart) {
+    if (chart.config.options.elements.center) {
+      // Get ctx from string
+      var ctx = chart.chart.ctx;
+
+      // Get options from the center object in options
+      var centerConfig = chart.config.options.elements.center;
+      var fontStyle = centerConfig.fontStyle || 'Arial';
+      var txt = centerConfig.text;
+      var color = centerConfig.color || '#000';
+      var maxFontSize = centerConfig.maxFontSize || 75;
+      var sidePadding = centerConfig.sidePadding || 20;
+      var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2);
+      // Start with a base font of 30px
+      ctx.font = '30px ' + fontStyle;
+
+      // Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+      var stringWidth = ctx.measureText(txt).width;
+      var elementWidth = chart.innerRadius * 2 - sidePaddingCalculated;
+
+      // Find out how much the font can grow in width.
+      var widthRatio = elementWidth / stringWidth;
+      var newFontSize = Math.floor(30 * widthRatio);
+      var elementHeight = chart.innerRadius * 2;
+
+      // Pick a new font size so it will not be larger than the height of label.
+      var fontSizeToUse = Math.min(newFontSize, elementHeight, maxFontSize);
+      var minFontSize = centerConfig.minFontSize;
+      var lineHeight = centerConfig.lineHeight || 25;
+      var wrapText = false;
+
+      if (minFontSize === undefined) {
+        minFontSize = 20;
+      }
+
+      if (minFontSize && fontSizeToUse < minFontSize) {
+        fontSizeToUse = minFontSize;
+        wrapText = true;
+      }
+
+      // Set font settings to draw it correctly.
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      var centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+      var centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+      ctx.font = fontSizeToUse + 'px ' + fontStyle;
+      ctx.fillStyle = color;
+
+      if (!wrapText) {
+        ctx.fillText(txt, centerX, centerY);
+        return;
+      }
+
+      var words = txt.split(' ');
+      var line = '';
+      var lines = [];
+
+      // Break words up into multiple lines if necessary
+      for (var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = ctx.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > elementWidth && n > 0) {
+          lines.push(line);
+          line = words[n] + ' ';
+        } else {
+          line = testLine;
+        }
+      }
+
+      // Move the center up depending on line height and number of lines
+      centerY -= (lines.length / 2) * lineHeight;
+
+      for (var n = 0; n < lines.length; n++) {
+        ctx.fillText(lines[n], centerX, centerY);
+        centerY += lineHeight;
+      }
+      //Draw text in center
+      ctx.fillText(line, centerX, centerY);
+    }
+  },
+});
