@@ -51,6 +51,14 @@ export default function StructuralPieChart(props) {
               },
             },
           },
+
+          title: {
+            display: true,
+            text: 'How your total score calculated:',
+            color: "#fb8500",
+            fontSize: 20,
+          },
+
           legend: {
             labels: {
               fontColor: '#1D3557',
@@ -58,7 +66,8 @@ export default function StructuralPieChart(props) {
               fontSize: 17,
               fontStyle: 'bold',
             },
-            position:'top'
+
+            position:'top',
           },
 
           plugins: {

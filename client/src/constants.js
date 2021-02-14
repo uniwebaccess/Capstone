@@ -37,6 +37,7 @@ export const failingSuggestions = {
     'Use <section> elements properly.  The section element is intended to be a container for content that has a related theme, not for use as a generic container element. When an element is needed only for styling purposes or as a convenience for scripting, we encourage you to use the div element instead.',
   autofocus:
     'Avoid using the autofocus attribute. People who are blind or who have low vision may be disoriented when page focus is moved without their permission. Additionally, autofocus can be problematic for people with motor control disabilities, as it may create extra work for them to navigate out from the autofocused area and to other locations on the page/view.',
+  skipHeadings: "Do not skip heading levels.  For example, don't jump from a h2 to a h4, skipping an h3 element. If a level is skipped, the user may be confused and think that they have missed a section of content. If your heading levels are being skipped for a specific visual treatment, use CSS classes or change the text size instead."
 };
 
 export const passingFeedback = {
@@ -64,4 +65,5 @@ export const passingFeedback = {
     'The section element is intended to be a container for content that has a related theme, not for use as a generic container element. When an element is needed only for styling purposes or as a convenience for scripting, we encourage you to use the div element instead.',
   autofocus:
     'People who are blind or who have low vision may be disoriented when page focus is moved without their permission. Additionally, autofocus can be problematic for people with motor control disabilities, as it may create extra work for them to navigate out from the autofocused area and to other locations on the page/view.',
+  skipHeadings: 'Heading elements help users understand what information is contained in webpages and how that information is organized. When headings are clear and descriptive, users can find the information they seek more easily, and they can understand the relationships between different parts of the content more easily.'
 };

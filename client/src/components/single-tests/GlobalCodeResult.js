@@ -26,6 +26,8 @@ import FrictionGroup from "../../visual/animation/Arrow";
 import CheckboxX from "../../visual/animation/CheckboxX";
 import CheckboxCheck from "../../visual/animation/CheckboxCheck";
 
+import { failingSuggestions, passingFeedback } from '../../constants';
+
 const navStyles = (theme) => ({
   backButton: {
     marginTop: "5%",
@@ -61,6 +63,13 @@ const navStyles = (theme) => ({
     //background: '#fefae0',
     //background: '#0097a7'
   },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
+  }
 });
 
 class GlobalCodeResult extends Component {
@@ -94,11 +103,12 @@ class GlobalCodeResult extends Component {
             </Box>
 
             <Typography className={classes.header}>
-              Results for global code{" "}
+              <br />
+              {data.globalCodeResult.passed ? <b>Global Code Category <span className={classes.green}>Passed</span></b> : <b>Global Code Category <span className={classes.red}>Failed</span></b>} <br />
             </Typography>
 
             <Grid container spacing={3} className={classes.graphContainer1}>
-              <Grid item xs={12} md={7}>
+              <Grid item xs={12} >
                 <Box
                   className={classes.checkboxes}
                   display="flex"
@@ -153,7 +163,7 @@ class GlobalCodeResult extends Component {
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={12}>
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer}>
@@ -162,6 +172,12 @@ class GlobalCodeResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               Auto Focus:{" "}
+                              <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.globalCodeResult.autofocusAttr ? (passingFeedback.sectionTag) :
+                                  (failingSuggestions.sectionTag
+                                  )}
+                              </Typography>
                             </TableCell>
                             <TableCell
                               align="right"

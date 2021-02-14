@@ -55,7 +55,9 @@ export default function HeadingsBarChart(props) {
                 offsetGridLines: true
               },
               ticks: {
-                callback: (v) => `${v}%`
+                callback: (v) => `${v}%`,
+                beginAtZero: true,
+                suggestedMax: 50,
               }
             }],
           },
@@ -67,6 +69,12 @@ export default function HeadingsBarChart(props) {
               fontStyle: 'bold',
 
             },
+          },
+          title: {
+            display: true,
+            text: 'Maximum score possible by Sub-Test:',
+            color: "#fb8500",
+            fontSize: 20,
           },
         }}
       />

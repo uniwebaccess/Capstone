@@ -56,6 +56,10 @@ const navStyles = (theme) => ({
   checkIcon: {
     color: '#388e3c',
   },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" }
 });
 /*
 * Page to render results of tests
@@ -109,7 +113,7 @@ class TestResult extends Component {
               className={classes.header}
             >
               <br />
-              <b>Analyzed page: </b>
+              {this.props.data.score.percent > 80 ? <b>Web-Accessibility Test <span className={classes.green}>Passed</span> for :</b> : <b>Web-Accessibility Test <span className={classes.red}>Failed</span> for :</b>} <br />
               <span className={classes.link}>{url}</span>
             </Typography>
             <Grid container spacing={3}>

@@ -12,9 +12,10 @@ export default function StructuralBarChart(props) {
           datasets: [
             {
               label: ' YOUR APP SCORE',
-              data: [props.data.sectionTag.score,
-              props.data.headerTag.score,
-              props.data.inputAndLabel.score
+              data: [
+                props.data.sectionTag.score,
+                props.data.headerTag.score,
+                props.data.inputAndLabel.score
               ],
               backgroundColor: [
                 'rgba(33, 158,188, 1)',
@@ -44,9 +45,22 @@ export default function StructuralBarChart(props) {
 
           maintainAspectRatio: false,
           scales: {
-            xAxes: [{
+            yAxes: [{
               ticks: {
-                callback: (v) => `${v}%`
+                beginAtZero: true,
+                suggestedMax: 50,
+                suggestedMin: 0,
+              },
+            },
+            ],
+            xAxes: [{
+              gridLines: {
+                offsetGridLines: true
+              },
+              ticks: {
+                callback: (v) => `${v}%`,
+                suggestedMax: 50,
+                suggestedMin: 0,
               }
             }],
           },
@@ -68,7 +82,13 @@ export default function StructuralBarChart(props) {
                   size: 10,
                 }
             }
-          }
+          },
+          title: {
+            display: true,
+            text: 'Maximum score possible by Sub-Test:',
+            color: "#fb8500",
+            fontSize: 20,
+          },
         }}
       />
     </div>
