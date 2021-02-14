@@ -11,7 +11,8 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { withStyles } from '@material-ui/core/styles';
 import history from '../../history';
 import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
-import ImgPieChart from "../../visual/ImgPieChart";
+import ImgPieChart from '../../visual/ImgPieChart';
+import ImgBarChart from '../../visual/ImgBarChart';
 
 const navStyles = (theme) => ({
 
@@ -21,7 +22,6 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: '4%',
-    marginBottom: '3%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
@@ -46,10 +46,12 @@ const navStyles = (theme) => ({
   },
   card: {
     marginTop:'10%',
+    marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
+  },
 
-  }
+
 })
 
 class ImagesResult extends Component {
@@ -61,9 +63,9 @@ class ImagesResult extends Component {
     let data = this.props.data;
 
     return [
-      { title: 'One', value: 10, color: '#E38627' },
+      { title: 'One', value: 10, color: '#2c6283'},
       { title: 'Two', value: 15, color: '#C13C37' },
-      { title: 'Three', value: 20, color: '#6A2135' },
+      { title: 'Three', value: 20, color: '#fdc500' },
     ]
   }
 
@@ -88,11 +90,18 @@ class ImagesResult extends Component {
 
             <Grid container spacing={3} className={classes.graphContainer1}>
 
-            <Grid item xs={12}  md={7}>
-              <Box> <PieChart data={data.imagesResult}/></Box>
+            <Grid item xs={6}  md={7}>
+              <Box className={classes.pie}>
+                <ImgPieChart data={this.pieData()}/>
+              </Box>
             </Grid>
 
-            <Grid item xs={12}  md={5}>
+            <Grid item xs={6}>
+              <ImgBarChart data={data.imagesResult}/>
+            </Grid>
+
+
+            <Grid item xs={12}  md={8}>
             <Card className={classes.card}>
             <CardContent>
               <TableContainer  className={classes.tableContainer} >
@@ -129,9 +138,6 @@ class ImagesResult extends Component {
               </TableContainer>
               </CardContent>
               </Card>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <ImgPieChart data={this.pieData()}/>
             </Grid>
             </Grid>
           </Container>

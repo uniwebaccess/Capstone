@@ -28,13 +28,10 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: '4%',
-    marginBottom: '3%',
+    marginBottom: '5%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
-  },
-  graphContainer1: {
-
   },
 
   tableheader: {
@@ -52,7 +49,7 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop: '10%',
+    marginTop: '5%',
     marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
@@ -106,11 +103,13 @@ class HeadingsResult extends Component {
                   <BarChartTotal data={data.headingsResult} average={average} />
                 </Box>
               </Grid>
-              <Grid item xs={12} md={7}>
+
+              <Grid item xs={12} >
                 <Box
                   className={classes.checkboxes}
                   display="flex"
                   flexDirection="row"
+                  mx={45}
                 >
                   <div>
                     {(data.headingsResult.h1OnlyOne.h1OnlyOne === "Passed") ? (

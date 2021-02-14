@@ -45,7 +45,10 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
     fontSize: '28px',
   },
-  graphContainer1: {},
+  graphContainer1: {
+    marginTop: '3%',
+    marginBottom: '5%'
+  },
 
   tableheader: {
     fontSize: '26px',
@@ -64,6 +67,8 @@ const navStyles = (theme) => ({
   messageCell: {
     align: 'left',
   },
+
+
 });
 
 class ControlsResult extends Component {
@@ -123,26 +128,21 @@ class ControlsResult extends Component {
               <Grid
                 container
                 spacing={3}
-
                 className={classes.graphContainer1}
               >
-                <Grid container position="static" >
-                  <Grid item>
-                    <HrefChart data={data} />
-                  </Grid>
-                  <Grid item>
-                    <TargetChart data={data} />
+
+                  <Grid item xs={3}>
+                      <HrefChart data={data} />
+                      <br/>
+                      <TargetChart data={data} />
                   </Grid>
 
-                  <Grid container>
-                    <Grid item>
+                  <Grid item xs={3}>
                       <ButtonsChart data={data} />
-                    </Grid>
-                    <Grid item>
+                      <br/>
                       <ControlsScoreChart data={data} />
-                    </Grid>
                   </Grid>
-                </Grid>
+
 
                 <Grid item xs={6}>
                   <Card className={classes.card}>
@@ -274,7 +274,8 @@ class ControlsResult extends Component {
                       </TableContainer>
                     </CardContent>
                   </Card>
-                </Grid>
+                  </Grid>
+
               </Grid>
             </Container>
           </div>
