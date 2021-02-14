@@ -5,9 +5,9 @@ import StructuralPieChart from '../../visual/StructuralPieChart'
 import StructuralBarChart from '../../visual/StructuralBarChart'
 import { fetchData } from "../../store/data";
 
-import CheckboxCheck from '../../visual/animation/CheckboxCheck'
-import CheckboxX from '../../visual/animation/CheckboxX'
-import FrictionGroup from '../../visual/animation/Arrow'
+import CheckboxCheck from '../../visual/animation/CheckboxCheck';
+import CheckboxX from '../../visual/animation/CheckboxX';
+import FrictionGroup from '../../visual/animation/Arrow';
 
 
 import {
@@ -58,9 +58,7 @@ const navStyles = (theme) => ({
     //background: '#0097a7'
 
   },
-  checkboxes: {
 
-  }
 })
 
 class StructuralResult extends Component {

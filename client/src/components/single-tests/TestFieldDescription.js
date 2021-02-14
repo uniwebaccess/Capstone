@@ -47,7 +47,6 @@ const navStyles = (theme) => ({
     marginTop:'10%',
     //background: '#fefae0',
     //background: '#0097a7'
-
   }
 })
 

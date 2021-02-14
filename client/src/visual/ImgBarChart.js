@@ -8,14 +8,11 @@ export default function ImgBarChart(props) {
       <HorizontalBar
       plugins={[ChartDataLabels]}
         data={{
-          labels: props.data.testNames,
+          labels: props.data.imagesName,
           datasets: [
             {
               label: ' YOUR APP SCORE',
-              data: [props.data.ImagesResult,
-              props.data.headerTag.score,
-              props.data.inputAndLabel.score
-              ],
+              data: props.data.imagesData,
               backgroundColor: [
                 'rgba(33, 158,188, 1)',
                 'rgba(255, 183, 3, 1)',

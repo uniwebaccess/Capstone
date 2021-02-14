@@ -34,14 +34,16 @@ async function imagesCheck(page) {
     );
   }
 
-  console.log('images w/ empty alt: ', result.withEmptyAlt);
+  //console.log('images w/ empty alt: ', result.withEmptyAlt);
+
 
   return {
     allImages: result.totalImages,
     imagesWithAlt: result.withAlt,
     withEmptyAlt: result.withEmptyAlt,
+    noAlt: result.noAlt,
     percent: percent,
-    passed: percent > 80,
+    passed: percent > 75,
     imagesData: [result.noAlt, result.withAlt, result.withEmptyAlt],
     imagesName: [
       'Images without alt attribute',

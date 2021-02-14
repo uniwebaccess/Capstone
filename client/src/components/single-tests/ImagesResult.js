@@ -13,6 +13,8 @@ import history from '../../history';
 import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
 import ImgPieChart from '../../visual/ImgPieChart';
 import ImgBarChart from '../../visual/ImgBarChart';
+import CheckboxX from '../../visual/animation/CheckboxX'
+import CheckboxCheck from '../../visual/animation/CheckboxCheck';
 
 const navStyles = (theme) => ({
 
@@ -27,7 +29,7 @@ const navStyles = (theme) => ({
     fontSize: '28px',
   },
   graphContainer1: {
-
+    marginTop: '4%',
   },
 
   tableheader:{
@@ -45,7 +47,7 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop:'10%',
+
     marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
@@ -60,12 +62,11 @@ class ImagesResult extends Component {
   }
 
   pieData() {
-    let data = this.props.data;
-
+    let data = this.props.data.imagesResult;
     return [
-      { title: 'One', value: 10, color: '#2c6283'},
-      { title: 'Two', value: 15, color: '#C13C37' },
-      { title: 'Three', value: 20, color: '#fdc500' },
+      { title: 'Images without `alt`', value: data.noAlt, color: '#2c6283'},
+      { title: 'Images with `alt`' , value: data.imagesWithAlt, color: '#C13C37' },
+      { title: 'Images wit empty `alt`', value: data.withEmptyAlt, color: '#fdc500' },
     ]
   }
 
@@ -90,18 +91,72 @@ class ImagesResult extends Component {
 
             <Grid container spacing={3} className={classes.graphContainer1}>
 
-            <Grid item xs={6}  md={7}>
+            <Grid item xs={12} md={6}>
+              <ImgBarChart data={data.imagesResult}/>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <PieChart data={data.imagesResult}/>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Box
+                  className={classes.checkboxes}
+                  display="flex"
+                  flexDirection="row"
+                  mx={45}>
+                  <div>
+                    {data.structuralResult.sectionTag.sectionTag ? (
+                      <CheckboxCheck delay="one" />
+                    ) : (
+                        <CheckboxX delay="one" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Section Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.structuralResult.headerTag.headerTag ? (
+                      <CheckboxCheck delay="two" />
+                    ) : (
+                        <CheckboxX delay="two" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Header Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.structuralResult.inputAndLabel.inputAndLabel ? (
+                      <CheckboxCheck delay="three" />
+                    ) : (
+                        <CheckboxX delay="three" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Input and Label Tags
+                    </Typography>
+                  </div>
+
+                  <div>
+                    {data.structuralResult.passed ? (
+                      <CheckboxCheck delay="four" />
+                    ) : (
+                        <CheckboxX delay="four" />
+                      )}
+                    <Typography className="checkbox-label">Overall</Typography>
+                  </div>
+                </Box>
+            </Grid>
+
+
+
+            <Grid item xs={6} md={4}>
               <Box className={classes.pie}>
                 <ImgPieChart data={this.pieData()}/>
               </Box>
             </Grid>
 
-            <Grid item xs={6}>
-              <ImgBarChart data={data.imagesResult}/>
-            </Grid>
 
-
-            <Grid item xs={12}  md={8}>
+            <Grid item xs={12}  md={12}>
             <Card className={classes.card}>
             <CardContent>
               <TableContainer  className={classes.tableContainer} >

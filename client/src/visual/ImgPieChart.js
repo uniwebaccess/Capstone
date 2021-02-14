@@ -31,14 +31,22 @@ function ImgPieChart(props) {
         fontSize: '6px',
       }}
       data={data}
-      radius={PieChart.defaultProps.radius - 24}
+      radius={PieChart.defaultProps.radius - 14}
       lineWidth={60}
       segmentsStyle={{ transition: 'stroke .3s', cursor: 'pointer' }}
       segmentsShift={(index) => (index === selected ? 6 : 1)}
       animate
-      label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
+      label={({ dataEntry }) => {
+        let percentage = Math.round(dataEntry.percentage);
+        if (percentage === 0) {
+          return '';
+        }
+
+        return percentage + '%';
+      }
+           }
       labelPosition={100 - lineWidth / 2}
-      center={[35, 35]}
+      center={[40, 50]}
       labelStyle={{
         fill: '#fff',
         opacity: 0.70,

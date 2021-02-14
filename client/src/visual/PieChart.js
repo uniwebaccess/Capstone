@@ -78,7 +78,7 @@ export default function PieChart(props) {
               fontSize: 17,
               fontStyle: 'bold',
             },
-            position:'bottom'
+            position:'top'
           },
 
           plugins: {
