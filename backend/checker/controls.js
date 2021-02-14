@@ -38,7 +38,7 @@ async function controlsCheck(page) {
     let count = buttons.length;
     let withButtonType = 0;
     for (let button of buttons) {
-      if (button.getAttribute('type') === 'button') {
+      if (button.getAttribute('role') === 'button') {
         withButtonType++;
       }
     }

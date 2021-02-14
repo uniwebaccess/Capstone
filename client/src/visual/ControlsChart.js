@@ -22,7 +22,7 @@ export function HrefChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
+        fontFamily: 'Roboto',
         fontSize: 15,
       },
     },
@@ -35,7 +35,7 @@ export function HrefChart(props) {
       center: {
         text: `${hrefPercent}%`,
         color: bgColor,
-        fontStyle: 'Arial',
+        fontStyle: 'Roboto',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -104,7 +104,7 @@ export function TargetChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
+        fontFamily: 'Roboto',
         fontSize: 15,
       },
     },
@@ -117,7 +117,7 @@ export function TargetChart(props) {
       center: {
         text: `${100 - newTabPercent}%`,
         color: bgColor,
-        fontStyle: 'Arial',
+        fontStyle: 'Roboto',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -129,6 +129,11 @@ export function TargetChart(props) {
       easing: 'linear',
       loop: false,
       delay: 250,
+    },
+    tooltips: {
+      callbacks: {
+        label: `Your score is ${newTabPercent}%`,
+      },
     },
     // plugins: {
     //   deferred: {
@@ -181,7 +186,7 @@ export function ButtonsChart(props) {
       center: {
         text: `${buttonsPercent}%`,
         color: bgColor,
-        fontStyle: 'Arial',
+        fontStyle: 'Roboto',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -193,7 +198,7 @@ export function ButtonsChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
+        fontFamily: 'Roboto',
         fontSize: 15,
       },
     },
@@ -260,7 +265,7 @@ export function ControlsScoreChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
+        fontFamily: 'Roboto',
         fontSize: 15,
       },
     },
@@ -273,7 +278,7 @@ export function ControlsScoreChart(props) {
       center: {
         text: `${percent}%`,
         color: bgColor,
-        fontStyle: 'Arial',
+        fontStyle: 'Roboto',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -325,7 +330,7 @@ Chart.pluginService.register({
 
       // Get options from the center object in options
       var centerConfig = chart.config.options.elements.center;
-      var fontStyle = centerConfig.fontStyle || 'Arial';
+      var fontStyle = centerConfig.fontStyle || 'Roboto';
       var txt = centerConfig.text;
       var color = centerConfig.color || '#000';
       var maxFontSize = centerConfig.maxFontSize || 75;

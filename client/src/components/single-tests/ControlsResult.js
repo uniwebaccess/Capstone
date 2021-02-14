@@ -186,6 +186,14 @@ class ControlsResult extends Component {
                                   {failingSuggestions.hrefAttr}
                                 </TableCell>
                               )}
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.controlsResult.hrefPassed
+                                  ? 'Passed'
+                                  : 'Failed'}
+                              </TableCell>
                             </TableRow>
 
                             <TableRow>
@@ -213,6 +221,18 @@ class ControlsResult extends Component {
                                   {failingSuggestions.targetAttr}
                                 </TableCell>
                               )}
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {Math.floor(
+                                  (data.controlsResult.linksToNewTab /
+                                    data.controlsResult.allLinks) *
+                                    100
+                                ) < 30
+                                  ? 'Passed'
+                                  : 'Failed'}
+                              </TableCell>
                             </TableRow>
 
                             <TableRow>
@@ -246,6 +266,14 @@ class ControlsResult extends Component {
                                   {failingSuggestions.buttons}
                                 </TableCell>
                               )}
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.controlsResult.buttonsPassed
+                                  ? 'Passed'
+                                  : 'Failed'}
+                              </TableCell>
                             </TableRow>
 
                             <TableRow>
