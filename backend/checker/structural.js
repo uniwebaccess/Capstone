@@ -89,15 +89,3 @@ module.exports = structuralCheck;
 
 
 
-{/* <TableRow className={classes.messageCell}>
-{data.controlsResult.hrefPassed ? (
-  <TableCell>{passingFeedback.hrefAttr}</TableCell>
-) : (
-    <TableCell>
-      {failingSuggestions.hrefAttr}
-    </TableCell>
-  )}
-</TableRow> */}
-
-
-// import { failingSuggestions, passingFeedback } from '../../constants';

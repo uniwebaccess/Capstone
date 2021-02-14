@@ -192,6 +192,7 @@ class StructuralResult extends Component {
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag ? 'Passed' : 'Failed'}</TableCell>
 
                           </TableRow>
+
                           {data.structuralResult.sectionTag.sectionTag ? (
                             <TableRow>{passingFeedback.sectionTag}</TableRow>
                           ) : (
@@ -284,4 +285,4 @@ const styledComponent = withStyles(navStyles, { withTheme: true })(StructuralRes
 export default connect(mapState, mapDispatch)(styledComponent);
 
 
-//"passed failed in result and description in structural and headings"
+
