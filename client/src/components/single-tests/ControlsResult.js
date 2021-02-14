@@ -45,7 +45,12 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
     fontSize: '28px',
   },
-  graphContainer1: {},
+  graphContainer1: {
+    alignItems: 'center',
+    align: 'center',
+    justifyContent: 'center',
+    marginTop: '5%',
+  },
 
   tableheader: {
     fontSize: '26px',
@@ -59,7 +64,7 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop: '',
+    marginTop: '5%',
   },
   messageCell: {
     align: 'left',
@@ -120,25 +125,30 @@ class ControlsResult extends Component {
                 Results for Controls (Links & Buttons)
               </Typography>
 
-              <Grid container className={classes.graphContainer1} xs={12}>
-                <Grid container xs={12}>
-                  <Grid item xs={2.5}>
+              <Grid
+                container
+                item={true}
+                className={classes.graphContainer1}
+                xs={12}
+              >
+                <Grid container item={true} xs={12}>
+                  <Grid item xs={3}>
                     <HrefChart data={data} />
                   </Grid>
-                  <Grid item xs={2.5}>
+                  <Grid item xs={3}>
                     <TargetChart delay="one" data={data} />
                   </Grid>
-                  <Grid item xs={2.5}>
+                  <Grid item xs={3}>
                     <ButtonsChart delay="two" data={data} />
                   </Grid>
-                  <Grid item xs={2.5}>
+                  <Grid item xs={3}>
                     <ControlsScoreChart delay="three" data={data} />
                   </Grid>
                 </Grid>
 
-                <Grid item xs={8}>
-                  <Card className={classes.card}>
-                    <CardContent>
+                <Grid item xs={8} align="center">
+                  <Card className={classes.card} align="center">
+                    <CardContent align="center">
                       <TableContainer className={classes.tableContainer}>
                         <Table aria-label="simple table">
                           <TableBody>
