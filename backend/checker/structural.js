@@ -86,3 +86,6 @@ const structuralCheck = async (page) => {
 }
 
 module.exports = structuralCheck;
+
+
+

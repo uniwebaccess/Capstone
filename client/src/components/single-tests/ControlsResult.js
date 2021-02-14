@@ -69,6 +69,13 @@ const navStyles = (theme) => ({
   messageCell: {
     align: 'left',
   },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
+  }
 });
 
 class ControlsResult extends Component {
@@ -122,7 +129,8 @@ class ControlsResult extends Component {
               </Box>
 
               <Typography className={classes.header}>
-                Results for Controls (Links & Buttons)
+                <br />
+                {data.controlsResult.passed ? <b>Controls (Links & Buttons) Category <span className={classes.green}>Passed</span></b> : <b>Controls (Links & Buttons) Category <span className={classes.red}>Failed</span></b>} <br />
               </Typography>
 
               <Grid
@@ -168,6 +176,12 @@ class ControlsResult extends Component {
                               <TableCell className={classes.tableBody}>
                                 {' '}
                                 Links with href attribute:{' '}
+                                <Typography variant="body1" className={classes.description}>
+                                  <br />
+                                  {data.controlsResult.hrefPassed ? (passingFeedback.hrefAttr) :
+                                    (failingSuggestions.hrefAttr
+                                    )}
+                                </Typography>
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -176,21 +190,23 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksWithHref}
                               </TableCell>
                             </TableRow>
-                            <TableRow className={classes.messageCell}>
-                              {data.controlsResult.hrefPassed ? (
-                                <TableCell>
-                                  {passingFeedback.hrefAttr}
-                                </TableCell>
-                              ) : (
-                                <TableCell>
-                                  {failingSuggestions.hrefAttr}
-                                </TableCell>
-                              )}
-                            </TableRow>
+
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Links that open in a new tab or window:{' '}
+                                <Typography variant="body1" className={classes.description}>
+                                  <br />
+                                  {Math.floor(
+                                    (data.controlsResult.linksToNewTab /
+                                      data.controlsResult.allLinks) *
+                                    100
+                                  ) < 30 ? (
+                                      passingFeedback.targetAttr
+                                    ) : (
+                                      failingSuggestions.targetAttr
+                                    )}
+                                </Typography>
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -198,21 +214,6 @@ class ControlsResult extends Component {
                               >
                                 {data.controlsResult.linksToNewTab}
                               </TableCell>
-                            </TableRow>
-                            <TableRow className={classes.messageCell}>
-                              {Math.floor(
-                                (data.controlsResult.linksToNewTab /
-                                  data.controlsResult.allLinks) *
-                                  100
-                              ) < 30 ? (
-                                <TableCell>
-                                  {passingFeedback.targetAttr}
-                                </TableCell>
-                              ) : (
-                                <TableCell>
-                                  {failingSuggestions.targetAttr}
-                                </TableCell>
-                              )}
                             </TableRow>
 
                             <TableRow>
@@ -230,6 +231,15 @@ class ControlsResult extends Component {
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Buttons that include a type attribute:{' '}
+
+                                <Typography variant="body1" className={classes.description}>
+                                  <br />
+                                  {data.controlsResult.buttonsPassed ? (
+                                    passingFeedback.buttons
+                                  ) : (
+                                      failingSuggestions.buttons
+                                    )}
+                                </Typography>
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -238,15 +248,7 @@ class ControlsResult extends Component {
                                 {data.controlsResult.buttonsWithType}
                               </TableCell>
                             </TableRow>
-                            <TableRow className={classes.messageCell}>
-                              {data.controlsResult.buttonsPassed ? (
-                                <TableCell>{passingFeedback.buttons}</TableCell>
-                              ) : (
-                                <TableCell>
-                                  {failingSuggestions.buttons}
-                                </TableCell>
-                              )}
-                            </TableRow>
+
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>

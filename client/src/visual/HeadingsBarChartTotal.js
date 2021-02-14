@@ -52,7 +52,8 @@ export default function BarChartTotal(props) {
               stacked: true,
               gridLines: {
                 offsetGridLines: true
-              }
+              },
+
             }],
           },
           legend: {
@@ -65,7 +66,7 @@ export default function BarChartTotal(props) {
           },
           title: {
             display: true,
-            text: 'Overall in % :',
+            text: 'Overall :',
             color: "#fb8500",
             fontSize: 20,
           },
