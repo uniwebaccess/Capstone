@@ -9,6 +9,7 @@ import CheckboxCheck from '../../visual/animation/CheckboxCheck'
 import CheckboxX from '../../visual/animation/CheckboxX'
 import FrictionGroup from '../../visual/animation/Arrow'
 
+import { failingSuggestions, passingFeedback } from '../../constants';
 
 import {
   Button,
@@ -161,25 +162,52 @@ class HeadingsResult extends Component {
                     <TableContainer className={classes.tableContainer} >
                       <Table aria-label="simple table">
                         <TableBody>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
-                          </TableRow>
+
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> App follows Logic Sequence for H tags : </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.logicSequence.logicSequence}</TableCell>
+
                           </TableRow>
+                          {data.headingsResult.logicSequence.logicSequence ? (
+                            <TableRow>{passingFeedback.logicSequence}</TableRow>
+                          ) : (
+                              <TableRow>
+                                {failingSuggestions.logicSequence}
+                              </TableRow>
+                            )}
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.h1OnlyOne.h1OnlyOne}</TableCell>
+
                           </TableRow>
+                          {data.headingsResult.h1OnlyOne.h1OnlyOne ? (
+                            <TableRow>{passingFeedback.h1Tag}</TableRow>
+                          ) : (
+                              <TableRow>
+                                {failingSuggestions.h1Tag}
+                              </TableRow>
+                            )}
                           <TableRow>
                             <TableCell className={classes.tableBody}> Don't skip order of H Tags : </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip}</TableCell>
-                          </TableRow>
 
+                          </TableRow>
+                          {data.headingsResult.hTagSkip.hTagSkip ? (
+                            <TableRow>{passingFeedback.skipHTag}</TableRow>
+                          ) : (
+                              <TableRow>
+                                {failingSuggestions.skipHTag}
+                              </TableRow>
+                            )}
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
+
+
+                          </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.passed ? 'Passed' : 'Failed'}</TableCell>

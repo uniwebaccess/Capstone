@@ -35,8 +35,10 @@ export const failingSuggestions = {
     'Add a <header> element to your site. The HTML header element helps programmatically define the essential semantic structure of a page.  It represents introductory content, typically a group of introductory or navigational aids. It may contain some heading elements but also a logo, a search form, an author name, and other elements.',
   sectionTag:
     'Use <section> elements properly.  The section element is intended to be a container for content that has a related theme, not for use as a generic container element. When an element is needed only for styling purposes or as a convenience for scripting, we encourage you to use the div element instead.',
+  inputAndLabel: "Use a for/id pairing to guarantee the highest level of browser/assistive technology support.",
   autofocus:
     'Avoid using the autofocus attribute. People who are blind or who have low vision may be disoriented when page focus is moved without their permission. Additionally, autofocus can be problematic for people with motor control disabilities, as it may create extra work for them to navigate out from the autofocused area and to other locations on the page/view.',
+  skipHTag: "description"
 };
 
 export const passingFeedback = {
@@ -64,4 +66,6 @@ export const passingFeedback = {
     'The section element is intended to be a container for content that has a related theme, not for use as a generic container element. When an element is needed only for styling purposes or as a convenience for scripting, we encourage you to use the div element instead.',
   autofocus:
     'People who are blind or who have low vision may be disoriented when page focus is moved without their permission. Additionally, autofocus can be problematic for people with motor control disabilities, as it may create extra work for them to navigate out from the autofocused area and to other locations on the page/view.',
+  inputAndLabel: "Use a for/id pairing to guarantee the highest level of browser/assistive technology support.",
+  skipHTag: "description"
 };
