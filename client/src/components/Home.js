@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { Container, Typography, Box, Grid } from '@material-ui/core';
-import SearchBar from './Input';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { Container, Typography, Box, Grid } from "@material-ui/core";
+import SearchBar from "./Input";
+import { withStyles } from "@material-ui/core/styles";
 
 const navStyles = (theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 500,
   },
   header: {
-    marginTop: '30px',
-    marginBottom: '10px',
-    color: '#bdbdbd',
-    fontFamily: 'Roboto Slab serif',
+    marginTop: "30px",
+    marginBottom: "10px",
+    color: "#bdbdbd",
+    fontFamily: "Roboto Slab serif",
     fontSize: 20,
   },
 
   paragraph: {
-    color: '#616161',
-    fontFamily: 'Heebo sans-serif',
+    color: "#616161",
+    fontFamily: "Heebo sans-serif",
     fontSize: 20,
-    marginTop: '40px',
-    marginBottom: '40px',
+    marginTop: "40px",
+    marginBottom: "40px",
   },
 });
 class Home extends Component {
@@ -35,7 +35,8 @@ class Home extends Component {
         <Typography
           fontWeight="fontWeightBold"
           m={1}
-          className={classes.header}>
+          className={classes.header}
+        >
           Add your URL Link for scanning web page
         </Typography>
         <Box justifyContent="center">
@@ -44,26 +45,24 @@ class Home extends Component {
         <Grid container direction="row" spacing={6}>
           <Grid item xs={6}>
             <Typography className={classes.paragraph} gutterBottom>
-              So you need to send those files to Heroku. For the purposes of
-              this workshop, and in the future with Boilermaker, you should use
-              npm run deploy. This script creates a deploy branch, runs webpack,
-              adds these files to the branch, commits these changes, deploys
-              them to Heroku by git push heroku deploy:master and finally
-              deletes the deploy branch. For a closer look at what this script
-              is doing and how it works, see the seventh Boilermaker review
-              video.
+              Welcome to Uniweb-Access! Our tool tests websites against
+              standards of web accessibility. Simply input a url above to get
+              started. You'll be taken to another page where you can explore
+              visualizations that demonstrates how your site measures up, and
+              you can learn more about some of the most important qualities of a
+              website that anyone and everyone can use. Let's work together to
+              create more inclusive world!
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography className={classes.paragraph} gutterBottom>
-              So you need to send those files to Heroku. For the purposes of
-              this workshop, and in the future with Boilermaker, you should use
-              npm run deploy. This script creates a deploy branch, runs webpack,
-              adds these files to the branch, commits these changes, deploys
-              them to Heroku by git push heroku deploy:master and finally
-              deletes the deploy branch. For a closer look at what this script
-              is doing and how it works, see the seventh Boilermaker review
-              video.
+              At Uniweb-Access, we believe that accommodating disabled users
+              should be a priority for every website. In the United States,
+              there are approximately 57 million people with disabilities.
+              That's nearly one in every five people. Web accessibility is
+              legally required under the protection of the Americans with
+              Disabilities act, and there were 11,053 federal lawsuits filed on
+              this basis in 2019 alone.
             </Typography>
           </Grid>
         </Grid>

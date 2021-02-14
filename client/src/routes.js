@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import Home from './components/Home';
-import TestResults from './components/TestResults';
-import ImagesResult from './components/single-tests/ImagesResult';
-import HeadingsResult from './components/single-tests/HeadingsResult';
-import AboutUs from './components/AbouUs';
-import ContactUs from './components/ContactUs';
-import TestFieldDescription from './components/single-tests/TestFieldDescription';
-import GlobalCodeResult from './components/single-tests/GlobalCodeResult';
-import ControlsResult from './components/single-tests/ControlsResult.js';
-import StructuralResult from './components/single-tests/StructuralResult.js';
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import Home from "./components/Home";
+import TestResults from "./components/TestResults";
+import ImagesResult from "./components/single-tests/ImagesResult";
+import HeadingsResult from "./components/single-tests/HeadingsResult";
+import About from "./components/About";
+import ContactUs from "./components/ContactUs";
+import TestFieldDescription from "./components/single-tests/TestFieldDescription";
+import GlobalCodeResult from "./components/single-tests/GlobalCodeResult";
+import ControlsResult from "./components/single-tests/ControlsResult.js";
+import StructuralResult from "./components/single-tests/StructuralResult.js";
 class Routes extends Component {
   // componentDidMount() {
   //   this.props.loadInitialData()
@@ -22,7 +22,7 @@ class Routes extends Component {
         <Route path="/testresults/:urlKey" component={TestResults} />
         <Route path="/imagesresult/:urlKey" component={ImagesResult} />
         <Route path="/headingresult/:urlKey" component={HeadingsResult} />
-        <Route path="/about" component={AboutUs} />
+        <Route path="/about" component={About} />
         <Route path="/contactus" component={ContactUs} />
         <Route
           path="/testfielddescription/:urlKey"
