@@ -57,7 +57,9 @@ const navStyles = (theme) => ({
     marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
-
+  },
+  description: {
+    color:'#757575'
   }
 })
 
@@ -165,49 +167,49 @@ class HeadingsResult extends Component {
 
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> App follows Logic Sequence for H tags : </TableCell>
+                            <TableCell className={classes.tableBody}> App follows Logic Sequence for H tags :
+                            <Typography variant="body1" className={classes.description}>
+                            <br/>
+                            {data.headingsResult.logicSequence.logicSequence ? (
+                            passingFeedback.logicSequence
+                          ) : (
+                                failingSuggestions.logicSequence                            )}
+                            </Typography>
+                            </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.logicSequence.logicSequence}</TableCell>
-
                           </TableRow>
-                          {data.headingsResult.logicSequence.logicSequence ? (
-                            <TableRow>{passingFeedback.logicSequence}</TableRow>
-                          ) : (
-                              <TableRow>
-                                {failingSuggestions.logicSequence}
-                              </TableRow>
-                            )}
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
+                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag :
+                            <Typography variant="body1" className={classes.description}>
+                            <br/>
+                            {data.headingsResult.h1OnlyOne.h1OnlyOne ? (
+                              passingFeedback.h1Tag
+                          ) : (
+                              failingSuggestions.h1Tag                            )}
+                            </Typography>
+                            </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.h1OnlyOne.h1OnlyOne}</TableCell>
-
                           </TableRow>
-                          {data.headingsResult.h1OnlyOne.h1OnlyOne ? (
-                            <TableRow>{passingFeedback.h1Tag}</TableRow>
-                          ) : (
-                              <TableRow>
-                                {failingSuggestions.h1Tag}
-                              </TableRow>
-                            )}
+
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Don't skip order of H Tags : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip}</TableCell>
-
-                          </TableRow>
-                          {data.headingsResult.hTagSkip.hTagSkip ? (
-                            <TableRow>{passingFeedback.skipHTag}</TableRow>
+                            <TableCell className={classes.tableBody}> Don't skip order of H Tags :
+                            <Typography variant="body1" className={classes.description}>
+                            <br/>
+                            {data.headingsResult.hTagSkip.hTagSkip ? (
+                              passingFeedback.skipHTag
                           ) : (
-                              <TableRow>
-                                {failingSuggestions.skipHTag}
-                              </TableRow>
-                            )}
+                              failingSuggestions.skipHTag                            )}
+                            </Typography>
+                            </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip}</TableCell>
+                          </TableRow>
 
                           <TableRow>
                             <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
                             <TableCell align="right" className={classes.tableBody}>3</TableCell>
-
-
                           </TableRow>
+
                           <TableRow>
                             <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.passed ? 'Passed' : 'Failed'}</TableCell>
