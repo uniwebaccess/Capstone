@@ -4,15 +4,10 @@ import { connect } from "react-redux";
 import StructuralPieChart from '../../visual/StructuralPieChart'
 import StructuralBarChart from '../../visual/StructuralBarChart'
 import { fetchData, selectField } from "../../store/data";
-
 import CheckboxCheck from '../../visual/animation/CheckboxCheck'
 import CheckboxX from '../../visual/animation/CheckboxX'
 import FrictionGroup from '../../visual/animation/Arrow'
 import { failingSuggestions, passingFeedback } from '../../constants';
-
-
-
-
 import {
   Button,
   Icon,
@@ -41,7 +36,7 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: '4%',
-    marginBottom: '3%',
+    marginBottom: '5%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
@@ -75,7 +70,8 @@ const navStyles = (theme) => ({
     marginTop: '2%',
   },
   card: {
-    marginTop: '10%',
+    marginTop: '5%',
+    marginBottom: '5%'
     //background: '#fefae0',
     //background: '#0097a7'
   },
@@ -119,7 +115,8 @@ class StructuralResult extends Component {
 
             <Typography
               className={classes.header}> <br />
-              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br /></Typography>
+              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br />
+            </Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
 
@@ -133,17 +130,16 @@ class StructuralResult extends Component {
 
               <Grid item xs={12} md={6}>
                 <Box>
-
                   <StructuralPieChart data={data.structuralResult} average={average} />
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={10}>
+              <Grid item xs={12}>
                 <Box
                   className={classes.checkboxes}
                   display="flex"
                   flexDirection="row"
-                >
+                  mx={45}>
                   <div>
                     {data.structuralResult.sectionTag.sectionTag ? (
                       <CheckboxCheck delay="one" />

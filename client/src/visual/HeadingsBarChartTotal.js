@@ -45,6 +45,7 @@ export default function BarChartTotal(props) {
               ticks: {
                 beginAtZero: true,
                 suggestedMax: 100,
+                callback: (v) => `${v}%`
               },
             },
             ],

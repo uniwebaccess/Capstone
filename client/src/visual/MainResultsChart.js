@@ -81,6 +81,7 @@ export default function MainResultsChart(props) {
                 ticks: {
                   beginAtZero: true,
                   suggestedMax: 100,
+                  callback: (v) => `${v}%`
                 },
               },
             ],

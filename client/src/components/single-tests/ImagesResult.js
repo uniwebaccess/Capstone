@@ -11,6 +11,12 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { withStyles } from '@material-ui/core/styles';
 import history from '../../history';
 import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
+import ImgPieChart from '../../visual/ImgPieChart';
+import ImgBarChart from '../../visual/ImgBarChart';
+import CheckboxX from '../../visual/animation/CheckboxX';
+import CheckboxCheck from '../../visual/animation/CheckboxCheck';
+import FrictionGroup from '../../visual/animation/Arrow';
+import { failingSuggestions, passingFeedback } from '../../constants';
 
 const navStyles = (theme) => ({
 
@@ -20,13 +26,12 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: '4%',
-    marginBottom: '3%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
   },
   graphContainer1: {
-
+    marginTop: '4%',
   },
 
   tableheader:{
@@ -44,16 +49,34 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop:'10%',
+    marginBottom: '5%',
+    marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
+  },
 
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
   }
+
 })
 
 class ImagesResult extends Component {
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
+  }
+
+  pieData() {
+    let data = this.props.data.imagesResult;
+    return [
+      { title: 'Images without `alt`', value: data.noAlt, color: '#2c6283'},
+      { title: 'Images with `alt`' , value: data.imagesWithAlt, color: '#C13C37' },
+      { title: 'Images wit empty `alt`', value: data.withEmptyAlt, color: '#fdc500' },
+    ]
   }
 
   render() {
@@ -73,20 +96,86 @@ class ImagesResult extends Component {
             </Box>
 
             <Typography
-               className={classes.header}>Results for images and 'alt' tags</Typography>
+              className={classes.header}> <br />
+              {data.imagesResult.passed ? <b>Images Category <span className={classes.green}>Passed</span></b> : <b>Images Category <span className={classes.red}>Failed</span></b>} <br />
+            </Typography>
+
+
 
             <Grid container spacing={3} className={classes.graphContainer1}>
 
-            <Grid item xs={12}  md={7}>
-              <Box> <PieChart data={data.imagesResult}/></Box>
+            <Grid item xs={12} md={6}>
+              <ImgBarChart data={data.imagesResult}/>
             </Grid>
 
-            <Grid item xs={12}  md={5}>
+            <Grid item xs={12} md={6}>
+              <PieChart data={data.imagesResult}/>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Box
+                  className={classes.checkboxes}
+                  display="flex"
+                  flexDirection="row"
+                  mx={45}>
+                  <div>
+                    {data.structuralResult.sectionTag.sectionTag ? (
+                      <CheckboxCheck delay="one" />
+                    ) : (
+                        <CheckboxX delay="one" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Section Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.structuralResult.headerTag.headerTag ? (
+                      <CheckboxCheck delay="two" />
+                    ) : (
+                        <CheckboxX delay="two" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Header Tag
+                    </Typography>
+                  </div>
+                  <div>
+                    {data.structuralResult.inputAndLabel.inputAndLabel ? (
+                      <CheckboxCheck delay="three" />
+                    ) : (
+                        <CheckboxX delay="three" />
+                      )}
+                    <Typography className="checkbox-label">
+                      Input and Label Tags
+                    </Typography>
+                  </div>
+
+                  <div>
+                    {data.structuralResult.passed ? (
+                      <CheckboxCheck delay="four" />
+                    ) : (
+                        <CheckboxX delay="four" />
+                      )}
+                    <Typography className="checkbox-label">Overall</Typography>
+                  </div>
+                </Box>
+            </Grid>
+
+
+
+            <Grid item xs={6} md={4}>
+              <Box className={classes.pie}>
+                <ImgPieChart data={this.pieData()}/>
+              </Box>
+            </Grid>
+
+
+            <Grid item xs={12}  md={12}>
             <Card className={classes.card}>
             <CardContent>
               <TableContainer  className={classes.tableContainer} >
                 <Table  aria-label="simple table">
                   <TableBody>
+
                     <TableRow>
                       <TableCell className={classes.tableBody}>Total images: </TableCell>
                       <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
