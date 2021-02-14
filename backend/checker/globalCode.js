@@ -57,10 +57,10 @@ async function globalCodeCheck(page) {
   //total percent and weight of each test calculation:
   const percent = () => {
     let totalScore = 0;
-    if (langAttr === true) {
+    if (langAttr) {
       totalScore += 30;
     }
-    if (isMainTag.mainTag === true) {
+    if (isMainTag.mainTag) {
       if (isMainTag.onlyOne) {
         if (isMainTag.onlyOne === true) {
           totalScore += 10;
@@ -87,7 +87,7 @@ async function globalCodeCheck(page) {
     isMainTag: isMainTag,
     autofocusAttr: autofocus,
     useListElement: useListElement,
-    passed: percent >= 70,
+    passed: total >= 70,
     percent: total,
   };
 }
