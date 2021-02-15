@@ -1,21 +1,25 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import StructuralPieChart from '../../visual/StructuralPieChart'
-import StructuralBarChart from '../../visual/StructuralBarChart'
+import StructuralPieChart from "../../visual/StructuralPieChart";
+import StructuralBarChart from "../../visual/StructuralBarChart";
 import { fetchData, selectField } from "../../store/data";
-import CheckboxCheck from '../../visual/animation/CheckboxCheck'
-import CheckboxX from '../../visual/animation/CheckboxX'
-import FrictionGroup from '../../visual/animation/Arrow'
-import { failingSuggestions, passingFeedback } from '../../constants';
+import CheckboxCheck from "../../visual/animation/CheckboxCheck";
+import CheckboxX from "../../visual/animation/CheckboxX";
+import FrictionGroup from "../../visual/animation/Arrow";
+import { failingSuggestions, passingFeedback } from "../../constants";
 import {
   Button,
   Icon,
-  TableRow, TableContainer, TableCell, TableBody, Table
-} from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { withStyles } from '@material-ui/core/styles';
-import history from '../../history';
+  TableRow,
+  TableContainer,
+  TableCell,
+  TableBody,
+  Table,
+} from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { withStyles } from "@material-ui/core/styles";
+import history from "../../history";
 import {
   Grid,
   Typography,
@@ -26,111 +30,125 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 const navStyles = (theme) => ({
-
   backButton: {
-    marginTop: '5%',
-    color: '#0097a7'
+    marginTop: "5%",
+    color: "#0097a7",
   },
   header: {
-    marginTop: '4%',
-    marginBottom: '5%',
-    color: '#1D3557',
-    fontWeight: 'bold',
-    fontSize: '28px',
+    marginTop: "4%",
+    marginBottom: "5%",
+    color: "#1D3557",
+    fontWeight: "bold",
+    fontSize: "28px",
   },
-  graphContainer1: {
-
-  },
+  graphContainer1: {},
   link: {
-    fontSize: '20px',
-    '&:hover': {
-      color: '#3a7ca5',
+    fontSize: "20px",
+    "&:hover": {
+      color: "#3a7ca5",
     },
   },
 
   tableheader: {
-    fontSize: '26px',
-    color: '#1D3557',
-    fontWeight: 'bold',
+    fontSize: "26px",
+    color: "#1D3557",
+    fontWeight: "bold",
   },
 
   tableBody: {
-    fontSize: '17px',
+    fontSize: "17px",
     //color: '#ffffff',
     //color: '#1D3557',
     //color:'#0097a7',
-    color: '#2c6283',
-    fontWeight: 'bold',
+    color: "#2c6283",
+    fontWeight: "bold",
   },
   boxList: {
-    marginBottom: '4%',
-    marginTop: '2%',
+    marginBottom: "4%",
+    marginTop: "2%",
   },
   card: {
-    marginTop: '5%',
-    marginBottom: '5%'
+    marginTop: "5%",
+    marginBottom: "5%",
     //background: '#fefae0',
     //background: '#0097a7'
   },
   green: {
-    color: 'green'
+    color: "green",
   },
   red: { color: "red" },
   description: {
-    color: '#343a40'
-  }
-})
+    color: "#343a40",
+  },
+});
 
 class StructuralResult extends Component {
-
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
-
   }
 
   render() {
-
     const { status, url, data, average } = this.props;
     const classes = this.props.classes;
-    console.log()
+    console.log();
     return (
       <div>
-        {status === 'loading' && (
+        {status === "loading" && (
           <div className="single-page-loading">
             <FrictionGroup />
           </div>
         )}
-        {status === 'success' && url && data && (
-          <Container >
+        {status === "success" && url && data && (
+          <Container>
             <Box position="absolute" left="1%" zIndex="tooltip">
               <Button
                 type="moveback"
-                startIcon={<Icon><ArrowBackIosIcon /></Icon>}
+                startIcon={
+                  <Icon>
+                    <ArrowBackIosIcon />
+                  </Icon>
+                }
                 className={classes.backButton}
-                onClick={history.goBack}></Button>
+                onClick={history.goBack}
+              ></Button>
             </Box>
 
-            <Typography
-              className={classes.header}> <br />
-              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br />
+            <Typography className={classes.header}>
+              {" "}
+              <br />
+              {data.structuralResult.passed ? (
+                <b>
+                  Structural HTML Category{" "}
+                  <span className={classes.green}>Passed</span>
+                </b>
+              ) : (
+                <b>
+                  Structural HTML Category{" "}
+                  <span className={classes.red}>Failed</span>
+                </b>
+              )}{" "}
+              <br />
             </Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
-
               <Grid item xs={12} md={6}>
                 <Box>
-                  <StructuralBarChart data={data.structuralResult} average={average} />
-
+                  <StructuralBarChart
+                    data={data.structuralResult}
+                    average={average}
+                  />
                 </Box>
-
               </Grid>
 
               <Grid item xs={12} md={6}>
                 <Box>
-                  <StructuralPieChart data={data.structuralResult} average={average} />
+                  <StructuralPieChart
+                    data={data.structuralResult}
+                    average={average}
+                  />
                 </Box>
               </Grid>
 
@@ -139,13 +157,14 @@ class StructuralResult extends Component {
                   className={classes.checkboxes}
                   display="flex"
                   flexDirection="row"
-                  mx={45}>
+                  mx={45}
+                >
                   <div>
                     {data.structuralResult.sectionTag.sectionTag ? (
                       <CheckboxCheck delay="one" />
                     ) : (
-                        <CheckboxX delay="one" />
-                      )}
+                      <CheckboxX delay="one" />
+                    )}
                     <Typography className="checkbox-label">
                       Section Tag
                     </Typography>
@@ -154,8 +173,8 @@ class StructuralResult extends Component {
                     {data.structuralResult.headerTag.headerTag ? (
                       <CheckboxCheck delay="two" />
                     ) : (
-                        <CheckboxX delay="two" />
-                      )}
+                      <CheckboxX delay="two" />
+                    )}
                     <Typography className="checkbox-label">
                       Header Tag
                     </Typography>
@@ -164,8 +183,8 @@ class StructuralResult extends Component {
                     {data.structuralResult.inputAndLabel.inputAndLabel ? (
                       <CheckboxCheck delay="three" />
                     ) : (
-                        <CheckboxX delay="three" />
-                      )}
+                      <CheckboxX delay="three" />
+                    )}
                     <Typography className="checkbox-label">
                       Input and Label Tags
                     </Typography>
@@ -175,8 +194,8 @@ class StructuralResult extends Component {
                     {data.structuralResult.passed ? (
                       <CheckboxCheck delay="four" />
                     ) : (
-                        <CheckboxX delay="four" />
-                      )}
+                      <CheckboxX delay="four" />
+                    )}
                     <Typography className="checkbox-label">Overall</Typography>
                   </div>
                 </Box>
@@ -185,84 +204,131 @@ class StructuralResult extends Component {
               <Grid item xs={12} md={12}>
                 <Card className={classes.card}>
                   <CardContent>
-                    <TableContainer className={classes.tableContainer} >
+                    <TableContainer className={classes.tableContainer}>
                       <Table aria-label="simple table">
                         <TableBody>
-
-
                           <TableRow>
-                            <TableCell className={classes.tableBody}> HTML includes Section Tag:
-                            <Typography variant="body1" className={classes.description}>
+                            <TableCell className={classes.tableBody}>
+                              {" "}
+                              HTML includes Section Tag:
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.structuralResult.sectionTag.sectionTag ? (passingFeedback.sectionTag) :
-                                  (failingSuggestions.sectionTag
-                                  )}
+                                {data.structuralResult.sectionTag.sectionTag
+                                  ? passingFeedback.sectionTag
+                                  : failingSuggestions.sectionTag}
                               </Typography>
                             </TableCell>
 
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag ? 'Passed' : 'Failed'}</TableCell>
-
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.structuralResult.sectionTag.sectionTag
+                                ? "Passed"
+                                : "Failed"}
+                            </TableCell>
                           </TableRow>
 
-
-
                           <TableRow>
-                            <TableCell className={classes.tableBody}> HTML includes Header Tag:
-                            <Typography variant="body1" className={classes.description}>
+                            <TableCell className={classes.tableBody}>
+                              {" "}
+                              HTML includes Header Tag:
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.structuralResult.headerTag.headerTag ? (passingFeedback.headerTag) :
-                                  (failingSuggestions.headerTag
-                                  )}
+                                {data.structuralResult.headerTag.headerTag
+                                  ? passingFeedback.headerTag
+                                  : failingSuggestions.headerTag}
                               </Typography>
                             </TableCell>
 
-
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag ? 'Passed' : 'Failed'}</TableCell>
-
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.structuralResult.headerTag.headerTag
+                                ? "Passed"
+                                : "Failed"}
+                            </TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags
-                            <Typography variant="body1" className={classes.description}>
+                            <TableCell className={classes.tableBody}>
+                              {" "}
+                              Forms with Input Tags contain Matching Label Tags
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.structuralResult.inputAndLabel.inputAndLabel ? (passingFeedback.formLabels) :
-                                  (failingSuggestions.formLabels
-                                  )}
+                                {data.structuralResult.inputAndLabel
+                                  .inputAndLabel
+                                  ? passingFeedback.formLabels
+                                  : failingSuggestions.formLabels}
                               </Typography>
                             </TableCell>
 
-
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel ? 'Passed' : 'Failed'}</TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.structuralResult.inputAndLabel.inputAndLabel
+                                ? "Passed"
+                                : "Failed"}
+                            </TableCell>
                           </TableRow>
-
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.passed ? 'Passed' : 'Failed'}</TableCell>
+                            <TableCell className={classes.tableBody}>
+                              {" "}
+                              Pass this test (minimun 70%){" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.structuralResult.passed
+                                ? "Passed"
+                                : "Failed"}
+                            </TableCell>
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
-
+                            <TableCell className={classes.tableBody}>
+                              Total sub-tests performed:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              3
+                            </TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.percent}%</TableCell>
+                            <TableCell className={classes.tableBody}>
+                              Total score for this Test:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.structuralResult.percent}%
+                            </TableCell>
                           </TableRow>
-
-
                         </TableBody>
                       </Table>
                     </TableContainer>
                   </CardContent>
                 </Card>
-
               </Grid>
             </Grid>
           </Container>
-        )
-        }
+        )}
       </div>
     );
   }
@@ -281,14 +347,11 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchData: (urlKey) => dispatch(fetchData(urlKey)),
-
   };
 };
 
-
-const styledComponent = withStyles(navStyles, { withTheme: true })(StructuralResult);
+const styledComponent = withStyles(navStyles, { withTheme: true })(
+  StructuralResult
+);
 
 export default connect(mapState, mapDispatch)(styledComponent);
-
-
-

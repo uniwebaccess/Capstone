@@ -1,18 +1,14 @@
 async function imagesCheck(page) {
-  // page.on('console', (msg) => {
-  //   for (let i = 0; i < msg._args.length; ++i)
-  //     console.log(`${i}: ${msg._args[i]}`);
-  // });
-  let result = await page.$$eval('img', (imgs) => {
+  let result = await page.$$eval("img", (imgs) => {
     let count = imgs.length;
     let withEmptyAlt = 0;
     let withAlt = 0;
 
     for (let img of imgs) {
-      if (img.getAttribute('alt') === '') {
+      if (img.getAttribute("alt") === "") {
         withEmptyAlt++;
       }
-      if (img.getAttribute('alt')) {
+      if (img.getAttribute("alt")) {
         withAlt++;
       }
     }
@@ -29,14 +25,12 @@ async function imagesCheck(page) {
   if (result.totalImages === 0) {
     percent = 100;
   } else {
-    percent = Math.floor((
-      result.withAlt + result.withEmptyAlt
-    )/result.totalImages) * 100;
+    percent =
+      Math.floor((result.withAlt + result.withEmptyAlt) / result.totalImages) *
+      100;
   }
 
-
-  //console.log('images w/ empty alt: ', result.withEmptyAlt);
-
+  percent = Math.round(percent * 100) / 100;
 
   return {
     allImages: result.totalImages,
@@ -47,9 +41,9 @@ async function imagesCheck(page) {
     passed: percent >= 75,
     imagesData: [result.noAlt, result.withAlt, result.withEmptyAlt],
     imagesName: [
-      'Images without alt attribute',
-      'Images with alt attribute',
-      'Decorative Images',
+      "Images without alt attribute",
+      "Images with alt attribute",
+      "Decorative Images",
     ],
   };
 }

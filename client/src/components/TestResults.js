@@ -1,74 +1,72 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchData, selectField } from '../store/data';
-import { checkerDescriptions } from '../constants';
-import TestFieldDescription from './single-tests/TestFieldDescription';
-import MainResultsChart from '../visual/MainResultsChart';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchData, selectField } from "../store/data";
+import { checkerDescriptions } from "../constants";
+import MainResultsChart from "../visual/MainResultsChart";
 import {
   Grid,
   Typography,
   Container,
   Box,
-  LinearProgress,
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Icon,
-} from '@material-ui/core';
-import CheckIcon from '@material-ui/icons/Check';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { withStyles } from '@material-ui/core/styles';
-import { Link as RouterLink } from 'react-router-dom';
+} from "@material-ui/core";
+import CheckIcon from "@material-ui/icons/Check";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { withStyles } from "@material-ui/core/styles";
+import { Link as RouterLink } from "react-router-dom";
+import FrictionGroup from "../visual/animation/Arrow";
 
 const navStyles = (theme) => ({
   header: {
-    text: 'bold',
-    color: '#1D3557',
-    marginTop: '2%',
-    marginBottom: '5%',
+    text: "bold",
+    color: "#1D3557",
+    marginTop: "2%",
+    marginBottom: "5%",
   },
 
   link: {
-    fontSize: '20px',
-    '&:hover': {
-      color: '#3a7ca5',
+    fontSize: "20px",
+    "&:hover": {
+      color: "#3a7ca5",
     },
   },
 
   list: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    color: '#3a7ca5',
-    textDecoration: 'none',
-    '&:hover': {
-      color: '#2c6283',
-      textDecoration: 'underline',
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#3a7ca5",
+    textDecoration: "none",
+    "&:hover": {
+      color: "#2c6283",
+      textDecoration: "underline",
     },
   },
   paragraph: {
-    color: '#757575',
+    color: "#757575",
   },
 
   boxList: {
-    marginBottom: '4%',
-    marginTop: '2%',
+    marginBottom: "4%",
+    marginTop: "2%",
   },
   checkIcon: {
-    color: '#388e3c',
+    color: "#388e3c",
   },
   green: {
-    color: 'green'
+    color: "green",
   },
   red: { color: "red" },
   score: {
-    fontSize: '20px',
-    color: '#343a40'
-
-  }
+    fontSize: "20px",
+    color: "#343a40",
+  },
 });
 /*
-* Page to render results of tests
-*/
+ * Page to render results of tests
+ */
 //Through the route /testresults/:urlKey
 class TestResult extends Component {
   constructor(props) {
@@ -105,11 +103,12 @@ class TestResult extends Component {
 
     return (
       <div>
-        {
-          status === 'loading' && <h1>Loading Results</h1>
-          //  <LinearProgress />
-        }
-        {status === 'success' && url && data && avgData && (
+        {status === "loading" && (
+          <div className="single-page-loading">
+            <FrictionGroup />
+          </div>
+        )}
+        {status === "success" && url && data && avgData && (
           <Container maxWidth="md">
             <Typography
               variant="h4"
@@ -118,10 +117,23 @@ class TestResult extends Component {
               className={classes.header}
             >
               <br />
-              {this.props.data.score.percent > 80 ? <b>Web-Accessibility Test <span className={classes.green}>Passed</span> for :</b> : <b>Web-Accessibility Test <span className={classes.red}>Failed</span> for :</b>} <br />
+              {this.props.data.score.percent > 80 ? (
+                <b>
+                  Web-Accessibility Test{" "}
+                  <span className={classes.green}>Passed</span> for :
+                </b>
+              ) : (
+                <b>
+                  Web-Accessibility Test{" "}
+                  <span className={classes.red}>Failed</span> for :
+                </b>
+              )}{" "}
+              <br />
               <span className={classes.link}>{url}</span>
               <br />
-              <span className={classes.score}>Your Score is : {this.props.data.score.percent}%</span>
+              <span className={classes.score}>
+                Your Score is : {this.props.data.score.percent}%
+              </span>
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12}>
@@ -134,10 +146,9 @@ class TestResult extends Component {
 
               <Grid item xs={12} className={classes.boxList}>
                 <Box className={classes.boxList} boxShadow={2}>
-
                   <Accordion
-                    expanded={expanded === 'panel1'}
-                    onChange={() => this.openAccordeon('panel1')}
+                    expanded={expanded === "panel1"}
+                    onChange={() => this.openAccordeon("panel1")}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -146,13 +157,13 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/controlresult/' + urlKey}
+                        to={"/controlresult/" + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
-                        </Icon>{' '}
-                       Controls
-                     </Typography>
+                        </Icon>{" "}
+                        Controls
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.controls}</Typography>
@@ -160,8 +171,8 @@ class TestResult extends Component {
                   </Accordion>
 
                   <Accordion
-                    expanded={expanded === 'panel2'}
-                    onChange={() => this.openAccordeon('panel2')}
+                    expanded={expanded === "panel2"}
+                    onChange={() => this.openAccordeon("panel2")}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -170,23 +181,22 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/globalcode/' + urlKey}
+                        to={"/globalcode/" + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
-                        </Icon>{' '}
-                       Global Code
-                     </Typography>
+                        </Icon>{" "}
+                        Global Code
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.globalCode}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
-
                   <Accordion
-                    expanded={expanded === 'panel3'}
-                    onChange={() => this.openAccordeon('panel3')}
+                    expanded={expanded === "panel3"}
+                    onChange={() => this.openAccordeon("panel3")}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -195,24 +205,22 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/headingresult/' + urlKey}
+                        to={"/headingresult/" + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
-                        </Icon>{' '}
-                       Headings
-                     </Typography>
+                        </Icon>{" "}
+                        Headings
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.headings}</Typography>
                     </AccordionDetails>
                   </Accordion>
 
-
-
                   <Accordion
-                    expanded={expanded === 'panel4'}
-                    onChange={() => this.openAccordeon('panel4')}
+                    expanded={expanded === "panel4"}
+                    onChange={() => this.openAccordeon("panel4")}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -221,12 +229,12 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={'/imagesresult/' + urlKey}
+                        to={"/imagesresult/" + urlKey}
                       >
                         <Icon className={classes.checkIcon}>
                           <CheckIcon />
-                        </Icon>{' '}
-                       Images{' '}
+                        </Icon>{" "}
+                        Images{" "}
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
@@ -235,8 +243,8 @@ class TestResult extends Component {
                   </Accordion>
 
                   <Accordion
-                    expanded={expanded === 'panel5'}
-                    onChange={() => this.openAccordeon('panel5')}
+                    expanded={expanded === "panel5"}
+                    onChange={() => this.openAccordeon("panel5")}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -245,7 +253,13 @@ class TestResult extends Component {
                       <Typography
                         className={classes.list}
                         component={RouterLink}
-                        to={"/structuralresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
+                        to={"/structuralresult/" + urlKey}
+                      >
+                        <Icon className={classes.checkIcon}>
+                          <CheckIcon />
+                        </Icon>{" "}
+                        Structural HTML
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.paragraph}>
                       <Typography>
@@ -258,7 +272,7 @@ class TestResult extends Component {
             </Grid>
           </Container>
         )}
-        {status === 'error' && (
+        {status === "error" && (
           <div>
             <h1>There was an error</h1>
             <p>{error}</p>
@@ -293,4 +307,3 @@ const styledComponent = withStyles(navStyles, { withTheme: true })(TestResult);
 export default connect(mapState, mapDispatch)(styledComponent);
 
 //<TestFieldDescription descriptions={checkerDescriptions} />
-

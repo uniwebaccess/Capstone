@@ -6,85 +6,96 @@ import { fetchData } from "../../store/data";
 import {
   Button,
   Icon,
-  TableRow, TableContainer, TableCell, TableBody, Table} from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { withStyles } from '@material-ui/core/styles';
-import history from '../../history';
-import {Grid, Typography, Container, Box, Card, CardContent} from '@material-ui/core';
-import ImgPieChart from '../../visual/ImgPieChart';
-import ImgBarChart from '../../visual/ImgBarChart';
-import CheckboxX from '../../visual/animation/CheckboxX';
-import CheckboxCheck from '../../visual/animation/CheckboxCheck';
-import FrictionGroup from '../../visual/animation/Arrow';
-import { failingSuggestions, passingFeedback } from '../../constants';
+  TableRow,
+  TableContainer,
+  TableCell,
+  TableBody,
+  Table,
+} from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { withStyles } from "@material-ui/core/styles";
+import history from "../../history";
+import {
+  Grid,
+  Typography,
+  Container,
+  Box,
+  Card,
+  CardContent,
+} from "@material-ui/core";
+import ImgPieChart from "../../visual/ImgPieChart";
+import ImgBarChart from "../../visual/ImgBarChart";
+import CheckboxX from "../../visual/animation/CheckboxX";
+import CheckboxCheck from "../../visual/animation/CheckboxCheck";
+import FrictionGroup from "../../visual/animation/Arrow";
+import { failingSuggestions, passingFeedback } from "../../constants";
 
 const navStyles = (theme) => ({
-
   backButton: {
-    marginTop: '5%',
-    color:'#0097a7'
+    marginTop: "5%",
+    color: "#0097a7",
   },
   header: {
-    marginTop:'2%',
-    color: '#1D3557',
-    fontWeight: 'bold',
-    fontSize: '28px',
+    marginTop: "2%",
+    color: "#1D3557",
+    fontWeight: "bold",
+    fontSize: "28px",
   },
   graphContainer1: {
-    marginTop: '4%',
+    marginTop: "4%",
   },
 
-  tableheader:{
-    fontSize: '26px',
-    color: '#1D3557',
-    fontWeight: 'bold',
+  tableheader: {
+    fontSize: "26px",
+    color: "#1D3557",
+    fontWeight: "bold",
   },
 
-  tableBody:{
-    fontSize: '17px',
+  tableBody: {
+    fontSize: "17px",
     //color: '#ffffff',
     //color: '#1D3557',
     //color:'#0097a7',
-    color: '#2c6283',
-    fontWeight: 'bold',
+    color: "#2c6283",
+    fontWeight: "bold",
   },
   card: {
-    marginBottom: '5%',
-    marginBottom: '5%',
+    marginBottom: "5%",
+    marginBottom: "5%",
     //background: '#fefae0',
     //background: '#0097a7'
   },
 
   green: {
-    color: 'green'
+    color: "green",
   },
   red: { color: "red" },
   description: {
-    color: '#343a40'
+    color: "#343a40",
   },
 
   checkmarkContainer: {
-    overflow:'hidden',
-    width:'30%',
-    margin:'auto',
-    marginTop: '6%'
+    overflow: "hidden",
+    width: "30%",
+    margin: "auto",
+    marginTop: "6%",
   },
 
   checkmark: {
-    position:'relative',
-    marginTop:'-3em'
+    position: "relative",
+    marginTop: "-3em",
   },
-  passing:{
-    color: '#1D3557',
+  passing: {
+    color: "#1D3557",
   },
-  piechart:{
-    marginTop: '1.2%',
+  piechart: {
+    marginTop: "1.2%",
   },
 
-  barchart:{
-    marginTop: '0.5%',
-  }
-})
+  barchart: {
+    marginTop: "0.5%",
+  },
+});
 
 class ImagesResult extends Component {
   componentDidMount() {
@@ -94,9 +105,9 @@ class ImagesResult extends Component {
   pieData() {
     let data = this.props.data.imagesResult;
     return [
-      { title: 'Passing pages', value:453, color: '#2c6283'},
-      { title: 'Failing pages' , value:123, color: '#fdc500' }
-    ]
+      { title: "Passing pages", value: 453, color: "#2c6283" },
+      { title: "Failing pages", value: 123, color: "#fdc500" },
+    ];
   }
 
   render() {
@@ -104,128 +115,178 @@ class ImagesResult extends Component {
     const classes = this.props.classes;
     return (
       <div>
-        {status === 'loading' && <h1>Loading Results</h1>}
-        {status === 'success' && url && data && (
+        {status === "loading" && (
+          <div className="single-page-loading">
+            <FrictionGroup />
+          </div>
+        )}
+        {status === "success" && url && data && (
           <Container fixed maxWidth="lg">
-            <Box  position="absolute"  left="1%" zIndex="tooltip">
+            <Box position="absolute" left="1%" zIndex="tooltip">
               <Button
                 type="moveback"
-                startIcon={<Icon><ArrowBackIosIcon/></Icon>}
+                startIcon={
+                  <Icon>
+                    <ArrowBackIosIcon />
+                  </Icon>
+                }
                 className={classes.backButton}
-                onClick={history.goBack}></Button>
+                onClick={history.goBack}
+              ></Button>
             </Box>
 
             <Grid container spacing={1} className={classes.graphContainer1}>
-            <Grid item xs={12} md={6}>
-            <Typography
-              className={classes.header}>
-              {data.imagesResult.passed ? <b>Images Category <span className={classes.green}>Passed</span></b> : <b>Images Category <span className={classes.red}>Failed</span></b>} <br />
-            </Typography>
-            <Typography>
-                <br/>
-                All images should have an <i>alt</i> attribute providing textual representation of the picture.
-                Images that are decorative should have an explicit empty alt value. You need to have less than 25% of images without alt attribute to pass.
-              </Typography>
-            <div className={classes.checkmarkContainer}>
-            <Box className={classes.checkmark}>
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.header}>
+                  {data.imagesResult.passed ? (
+                    <b>
+                      Images Category{" "}
+                      <span className={classes.green}>Passed</span>
+                    </b>
+                  ) : (
+                    <b>
+                      Images Category{" "}
+                      <span className={classes.red}>Failed</span>
+                    </b>
+                  )}{" "}
+                  <br />
+                </Typography>
+                <Typography>
+                  <br />
+                  All images should have an <i>alt</i> attribute providing
+                  textual representation of the picture. Images that are
+                  decorative should have an explicit empty alt value. You need
+                  to have less than 25% of images without alt attribute to pass.
+                </Typography>
+                <div className={classes.checkmarkContainer}>
+                  <Box className={classes.checkmark}>
                     {data.imagesResult.passed ? (
                       <CheckboxCheck delay="one" />
                     ) : (
-                        <CheckboxX delay="one" />
-                      )}
-
-                </Box>
+                      <CheckboxX delay="one" />
+                    )}
+                  </Box>
                 </div>
-            </Grid>
-            <Grid item xs={12} md={6} className={classes.piechart}>
-              <PieChart data={data.imagesResult}/>
-            </Grid>
+              </Grid>
+              <Grid item xs={12} md={6} className={classes.piechart}>
+                <PieChart data={data.imagesResult} />
+              </Grid>
             </Grid>
             <Box mt={5}>
-            <Grid container>
-            <Grid item xs={12}>
-            <Box mb={2}>
-              <Typography
-                className={classes.header}> Global statistics
-              </Typography>
-            </Box>
-            </Grid>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Box mb={2}>
+                    <Typography className={classes.header}>
+                      {" "}
+                      Global statistics
+                    </Typography>
+                  </Box>
+                </Grid>
 
-            <Grid item xs={12} md={6} className={classes.barchart}>
-              <ImgBarChart data={data.imagesResult}/>
-            </Grid>
+                <Grid item xs={12} md={6} className={classes.barchart}>
+                  <ImgBarChart data={data.imagesResult} />
+                </Grid>
 
+                <Grid item xs={12} md={6}>
+                  <Box px={10}>
+                    <Typography variant="h5" className={classes.passing}>
+                      <b>Passing pages</b>
+                    </Typography>
+                    <ImgPieChart data={this.pieData()} />
+                  </Box>
+                </Grid>
 
+                <Grid item xs={12} md={12}>
+                  <Card className={classes.card}>
+                    <CardContent>
+                      <TableContainer className={classes.tableContainer}>
+                        <Table aria-label="simple table">
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className={classes.tableBody}>
+                                Total images in a page:{" "}
+                              </TableCell>
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.imagesResult.allImages}
+                              </TableCell>
+                            </TableRow>
 
-            <Grid item xs={12} md={6}>
-            <Box px={10}>
-              <Typography variant="h5" className={classes.passing}>
-                    <b>Passing pages</b>
-              </Typography>
-                <ImgPieChart data={this.pieData()}/>
-            </Box>
-            </Grid>
+                            <TableRow>
+                              <TableCell className={classes.tableBody}>
+                                {" "}
+                                Images with valid atribute 'alt':{" "}
+                                <Typography
+                                  variant="body1"
+                                  className={classes.description}
+                                >
+                                  <br />
+                                  {data.imagesResult.imagesWithAlt
+                                    ? passingFeedback.alt
+                                    : failingSuggestions.alt}
+                                </Typography>
+                              </TableCell>
 
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.imagesResult.imagesWithAlt}&nbsp;/
+                                {data.imagesResult.passed ? "Passed" : "Failed"}
+                              </TableCell>
+                            </TableRow>
 
-            <Grid item xs={12}  md={12}>
-            <Card className={classes.card}>
-            <CardContent>
-              <TableContainer  className={classes.tableContainer} >
-                <Table  aria-label="simple table">
-                  <TableBody>
+                            <TableRow>
+                              <TableCell className={classes.tableBody}>
+                                Decorative images:
+                                <Typography
+                                  variant="body1"
+                                  className={classes.description}
+                                >
+                                  <br />
+                                  {passingFeedback.emptyAlt}
+                                </Typography>
+                              </TableCell>
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.imagesResult.withEmptyAlt}
+                              </TableCell>
+                            </TableRow>
 
-                  <TableRow>
-                      <TableCell className={classes.tableBody}>Total images in a page: </TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
-                    </TableRow>
+                            <TableRow>
+                              <TableCell className={classes.tableBody}>
+                                Passed images:{" "}
+                              </TableCell>
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.imagesResult.percent}%
+                              </TableCell>
+                            </TableRow>
 
-                  <TableRow>
-                        <TableCell className={classes.tableBody}> Images with valid atribute 'alt':{' '}
-                        <Typography variant="body1" className={classes.description}>
-                            <br />
-                            {data.imagesResult.imagesWithAlt ? (passingFeedback.alt) :
-                              (failingSuggestions.alt
-                              )}
-                          </Typography>
-                        </TableCell>
-
-                        <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}&nbsp;/{data.imagesResult.passed ? 'Passed' : 'Failed'}</TableCell>
-                      </TableRow>
-
-
-                      <TableRow>
-                            <TableCell className={classes.tableBody}>Decorative images:
-                            <Typography variant="body1" className={classes.description}>
-                                <br />
-                                {passingFeedback.emptyAlt}
-                              </Typography>
-                            </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.withEmptyAlt}</TableCell>
-                          </TableRow>
-
-                      <TableRow>
-                        <TableCell className={classes.tableBody}>Passed images: </TableCell>
-                        <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}%
-                        </TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                      <TableCell className={classes.tableBody}>Total Score: </TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{Math.round(data.score.percent)}%</TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                      <TableCell className={classes.tableBody}>Test: </TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
-                    </TableRow>
-
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              </CardContent>
-              </Card>
-            </Grid>
-            </Grid>
+                            <TableRow>
+                              <TableCell className={classes.tableBody}>
+                                Test:{" "}
+                              </TableCell>
+                              <TableCell
+                                align="right"
+                                className={classes.tableBody}
+                              >
+                                {data.imagesResult.passed ? "passed" : "failed"}
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
             </Box>
           </Container>
         )}
@@ -249,7 +310,8 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-
-const styledComponent = withStyles(navStyles, { withTheme: true })(ImagesResult);
+const styledComponent = withStyles(navStyles, { withTheme: true })(
+  ImagesResult
+);
 
 export default connect(mapState, mapDispatch)(styledComponent);
