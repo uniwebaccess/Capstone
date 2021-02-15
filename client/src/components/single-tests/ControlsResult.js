@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchData } from '../../store/data';
-import { failingSuggestions, passingFeedback } from '../../constants';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchData } from "../../store/data";
+import { failingSuggestions, passingFeedback } from "../../constants";
 import {
   HrefChart,
   TargetChart,
   ButtonsChart,
   ControlsScoreChart,
-} from '../../visual/ControlsChart';
+} from "../../visual/ControlsChart";
+
 import {
   Button,
   Icon,
@@ -22,55 +23,55 @@ import {
   Box,
   Card,
   CardContent,
-} from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import history from '../../history';
-
-import { withStyles } from '@material-ui/core/styles';
+} from "@material-ui/core";
+import FrictionGroup from "../../visual/animation/Arrow";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import history from "../../history";
+import { withStyles } from "@material-ui/core/styles";
 
 const navStyles = (theme) => ({
   backButton: {
-    marginTop: '5%',
-    color: '#0097a7',
+    marginTop: "5%",
+    color: "#0097a7",
   },
   header: {
-    marginTop: '4%',
-    marginBottom: '3%',
-    color: '#1D3557',
-    fontWeight: 'bold',
-    fontSize: '28px',
+    marginTop: "4%",
+    marginBottom: "3%",
+    color: "#1D3557",
+    fontWeight: "bold",
+    fontSize: "28px",
   },
   graphContainer1: {
-    alignItems: 'center',
-    align: 'center',
-    justifyContent: 'center',
-    marginTop: '5%',
+    alignItems: "center",
+    align: "center",
+    justifyContent: "center",
+    marginTop: "5%",
   },
 
   tableheader: {
-    fontSize: '26px',
-    color: '#1D3557',
-    fontWeight: 'bold',
+    fontSize: "26px",
+    color: "#1D3557",
+    fontWeight: "bold",
   },
 
   tableBody: {
-    fontSize: '17px',
-    color: '#2c6283',
-    fontWeight: 'bold',
+    fontSize: "17px",
+    color: "#2c6283",
+    fontWeight: "bold",
   },
   card: {
-    marginTop: '5%',
-    marginBottom: '5%',
+    marginTop: "5%",
+    marginBottom: "5%",
   },
   messageCell: {
-    align: 'left',
+    align: "left",
   },
   green: {
-    color: 'green',
+    color: "green",
   },
-  red: { color: 'red' },
+  red: { color: "red" },
   description: {
-    color: '#343a40',
+    color: "#343a40",
   },
 });
 
@@ -89,8 +90,12 @@ class ControlsResult extends Component {
 
     return (
       <div>
-        {status === 'loading' && <h1>Loading Results</h1>}
-        {status === 'success' && url && data && (
+        {status === "loading" && (
+          <div className="single-page-loading">
+            <FrictionGroup />
+          </div>
+        )}
+        {status === "success" && url && data && (
           <div>
             <Container>
               <Box position="absolute" left="1%" zIndex="tooltip">
@@ -110,15 +115,15 @@ class ControlsResult extends Component {
                 <br />
                 {data.controlsResult.passed ? (
                   <b>
-                    Controls (Links & Buttons) Category{' '}
+                    Controls (Links & Buttons) Category{" "}
                     <span className={classes.green}>Passed</span>
                   </b>
                 ) : (
                   <b>
-                    Controls (Links & Buttons) Category{' '}
+                    Controls (Links & Buttons) Category{" "}
                     <span className={classes.red}>Failed</span>
                   </b>
-                )}{' '}
+                )}{" "}
                 <br />
               </Typography>
 
@@ -151,7 +156,7 @@ class ControlsResult extends Component {
                           <TableBody>
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Total links:{' '}
+                                Total links:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -163,13 +168,14 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                {' '}
-                                Links with href attribute:{' '}
+                                {" "}
+                                Links with href attribute:{" "}
                                 <Typography
                                   variant="body1"
                                   className={classes.description}
                                 >
                                   <br />
+
                                   {data.controlsResult.hrefPassed
                                     ? passingFeedback.hrefAttr
                                     : failingSuggestions.hrefAttr}
@@ -185,7 +191,7 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Links that open in a new tab or window:{' '}
+                                Links that open in a new tab or window:{" "}
                                 <Typography
                                   variant="body1"
                                   className={classes.description}
@@ -209,7 +215,7 @@ class ControlsResult extends Component {
                             </TableRow>
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Total buttons:{' '}
+                                Total buttons:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -242,7 +248,7 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Score for this Category:{' '}
+                                Total score for this test:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -254,13 +260,16 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Total Score:{' '}
+                                {" "}
+                                Overall:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.score.percent.toFixed(1)}%
+                                {data.controlsResult.passed
+                                  ? "Passed"
+                                  : "Failed"}
                               </TableCell>
                             </TableRow>
                           </TableBody>
