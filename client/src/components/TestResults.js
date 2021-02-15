@@ -154,7 +154,7 @@ class TestResult extends Component {
                        Controls
                      </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.controls}</Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -178,7 +178,7 @@ class TestResult extends Component {
                        Global Code
                      </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.globalCode}</Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -247,7 +247,7 @@ class TestResult extends Component {
                         component={RouterLink}
                         to={"/structuralresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.paragraph}>
                       <Typography>
                         {checkerDescriptions.structuralHTML}
                       </Typography>
