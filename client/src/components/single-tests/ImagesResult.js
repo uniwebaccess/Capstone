@@ -25,7 +25,7 @@ const navStyles = (theme) => ({
     color:'#0097a7'
   },
   header: {
-    marginTop: '4%',
+    marginTop:'2%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
@@ -61,8 +61,29 @@ const navStyles = (theme) => ({
   red: { color: "red" },
   description: {
     color: '#343a40'
-  }
+  },
 
+  checkmarkContainer: {
+    overflow:'hidden',
+    width:'30%',
+    margin:'auto',
+    marginTop: '6%'
+  },
+
+  checkmark: {
+    position:'relative',
+    marginTop:'-3em'
+  },
+  passing:{
+    color: '#1D3557',
+  },
+  piechart:{
+    marginTop: '1.2%',
+  },
+
+  barchart:{
+    marginTop: '0.5%',
+  }
 })
 
 class ImagesResult extends Component {
@@ -73,9 +94,8 @@ class ImagesResult extends Component {
   pieData() {
     let data = this.props.data.imagesResult;
     return [
-      { title: 'Images without `alt`', value: data.noAlt, color: '#2c6283'},
-      { title: 'Images with `alt`' , value: data.imagesWithAlt, color: '#C13C37' },
-      { title: 'Images wit empty `alt`', value: data.withEmptyAlt, color: '#fdc500' },
+      { title: 'Passing pages', value:453, color: '#2c6283'},
+      { title: 'Failing pages' , value:123, color: '#fdc500' }
     ]
   }
 
@@ -86,7 +106,7 @@ class ImagesResult extends Component {
       <div>
         {status === 'loading' && <h1>Loading Results</h1>}
         {status === 'success' && url && data && (
-          <Container >
+          <Container fixed maxWidth="lg">
             <Box  position="absolute"  left="1%" zIndex="tooltip">
               <Button
                 type="moveback"
@@ -95,77 +115,55 @@ class ImagesResult extends Component {
                 onClick={history.goBack}></Button>
             </Box>
 
+            <Grid container spacing={1} className={classes.graphContainer1}>
+            <Grid item xs={12} md={6}>
             <Typography
-              className={classes.header}> <br />
+              className={classes.header}>
               {data.imagesResult.passed ? <b>Images Category <span className={classes.green}>Passed</span></b> : <b>Images Category <span className={classes.red}>Failed</span></b>} <br />
             </Typography>
-
-
-
-            <Grid container spacing={3} className={classes.graphContainer1}>
-
-            <Grid item xs={12} md={6}>
-              <ImgBarChart data={data.imagesResult}/>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <PieChart data={data.imagesResult}/>
-            </Grid>
-
-            <Grid item xs={12}>
-                <Box
-                  className={classes.checkboxes}
-                  display="flex"
-                  flexDirection="row"
-                  mx={45}>
-                  <div>
-                    {data.structuralResult.sectionTag.sectionTag ? (
+            <Typography>
+                <br/>
+                All images should have an <i>alt</i> attribute providing textual representation of the picture.
+                Images that are decorative should have an explicit empty alt value. You need to have less than 25% of images without alt attribute to pass.
+              </Typography>
+            <div className={classes.checkmarkContainer}>
+            <Box className={classes.checkmark}>
+                    {data.imagesResult.passed ? (
                       <CheckboxCheck delay="one" />
                     ) : (
                         <CheckboxX delay="one" />
                       )}
-                    <Typography className="checkbox-label">
-                      Section Tag
-                    </Typography>
-                  </div>
-                  <div>
-                    {data.structuralResult.headerTag.headerTag ? (
-                      <CheckboxCheck delay="two" />
-                    ) : (
-                        <CheckboxX delay="two" />
-                      )}
-                    <Typography className="checkbox-label">
-                      Header Tag
-                    </Typography>
-                  </div>
-                  <div>
-                    {data.structuralResult.inputAndLabel.inputAndLabel ? (
-                      <CheckboxCheck delay="three" />
-                    ) : (
-                        <CheckboxX delay="three" />
-                      )}
-                    <Typography className="checkbox-label">
-                      Input and Label Tags
-                    </Typography>
-                  </div>
 
-                  <div>
-                    {data.structuralResult.passed ? (
-                      <CheckboxCheck delay="four" />
-                    ) : (
-                        <CheckboxX delay="four" />
-                      )}
-                    <Typography className="checkbox-label">Overall</Typography>
-                  </div>
                 </Box>
+                </div>
+            </Grid>
+            <Grid item xs={12} md={6} className={classes.piechart}>
+              <PieChart data={data.imagesResult}/>
+            </Grid>
+            </Grid>
+            <Box mt={5}>
+            <Grid container>
+            <Grid item xs={12}>
+            <Box mb={2}>
+              <Typography
+                className={classes.header}> Global statistics
+              </Typography>
+            </Box>
+            </Grid>
+
+            <Grid item xs={12} md={6} className={classes.barchart}>
+              <ImgBarChart data={data.imagesResult}/>
             </Grid>
 
 
 
-            <Grid item xs={6} md={4}>
-              <Box className={classes.pie}>
+            <Grid item xs={12} md={6}>
+            <Box px={10}>
+              <Typography variant="h5" className={classes.passing}>
+                    <b>Passing pages</b>
+              </Typography>
                 <ImgPieChart data={this.pieData()}/>
-              </Box>
+            </Box>
             </Grid>
 
 
@@ -176,29 +174,49 @@ class ImagesResult extends Component {
                 <Table  aria-label="simple table">
                   <TableBody>
 
-                    <TableRow>
-                      <TableCell className={classes.tableBody}>Total images: </TableCell>
+                  <TableRow>
+                      <TableCell className={classes.tableBody}>Total images in a page: </TableCell>
                       <TableCell align="right" className={classes.tableBody}>{data.imagesResult.allImages}</TableCell>
                     </TableRow>
 
+                  <TableRow>
+                        <TableCell className={classes.tableBody}> Images with valid atribute 'alt':{' '}
+                        <Typography variant="body1" className={classes.description}>
+                            <br />
+                            {data.imagesResult.imagesWithAlt ? (passingFeedback.alt) :
+                              (failingSuggestions.alt
+                              )}
+                          </Typography>
+                        </TableCell>
+
+                        <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}&nbsp;/{data.imagesResult.passed ? 'Passed' : 'Failed'}</TableCell>
+                      </TableRow>
+
+
+                      <TableRow>
+                            <TableCell className={classes.tableBody}>Decorative images:
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {passingFeedback.emptyAlt}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.imagesResult.withEmptyAlt}</TableCell>
+                          </TableRow>
+
+                      <TableRow>
+                        <TableCell className={classes.tableBody}>Passed images: </TableCell>
+                        <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}%
+                        </TableCell>
+                    </TableRow>
+
                     <TableRow>
-                      <TableCell className={classes.tableBody}> Images with valid atribute alt:{' '}</TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.imagesWithAlt}</TableCell>
+                      <TableCell className={classes.tableBody}>Total Score: </TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{Math.round(data.score.percent)}%</TableCell>
                     </TableRow>
 
                     <TableRow>
                       <TableCell className={classes.tableBody}>Test: </TableCell>
                       <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                      <TableCell className={classes.tableBody}>Percent passed images: </TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.percent}</TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                      <TableCell className={classes.tableBody}>Total Score: </TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{data.score.percent}</TableCell>
                     </TableRow>
 
                   </TableBody>
@@ -208,6 +226,7 @@ class ImagesResult extends Component {
               </Card>
             </Grid>
             </Grid>
+            </Box>
           </Container>
         )}
       </div>

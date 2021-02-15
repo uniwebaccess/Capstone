@@ -14,7 +14,6 @@ const navStyles = (theme) => ({
     marginLeft: "10%",
     padding: "4%",
     paddingLeft: "8%",
-    paddingLeft: "8%",
   },
   paragraph: {
     textAlign: "left",
