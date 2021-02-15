@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  VictoryArea, VictoryChart, VictoryAxis,
+  VictoryArea, VictoryChart,
   VictoryTheme, VictoryStack
 } from 'victory';
 import _ from 'lodash'
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 
 
 //npm install victory in client folder
@@ -55,13 +55,17 @@ class HomeAnimation extends React.Component {
   render() {
     return (
       <div>
+      <Box position="absolute"  right="17%" zIndex="tooltip">
+        <Button style={{color:'#1D3557'}} onClick={this.toggleBw}>
+        Colorblind vision</Button>
+      </Box>
+      <Box width={555}>
       <VictoryChart
         theme={VictoryTheme.material}
-        animate={{ duration: 1000 }}
-      >
+        animate={{duration: 1000}}>
+
         <VictoryStack
-          colorScale={this.colors()}
-        >
+          colorScale={this.colors()}>
           {this.state.data.map((data, i) => {
             return (
               <VictoryArea
@@ -72,7 +76,7 @@ class HomeAnimation extends React.Component {
           })}
         </VictoryStack>
       </VictoryChart>
-      <Button onClick={this.toggleBw}>change </Button>
+      </Box>
       </div>
     );
   }
