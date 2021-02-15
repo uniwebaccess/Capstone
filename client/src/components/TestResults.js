@@ -59,7 +59,12 @@ const navStyles = (theme) => ({
   green: {
     color: 'green'
   },
-  red: { color: "red" }
+  red: { color: "red" },
+  score: {
+    fontSize: '20px',
+    color: '#343a40'
+
+  }
 });
 /*
 * Page to render results of tests
@@ -115,6 +120,8 @@ class TestResult extends Component {
               <br />
               {this.props.data.score.percent > 80 ? <b>Web-Accessibility Test <span className={classes.green}>Passed</span> for :</b> : <b>Web-Accessibility Test <span className={classes.red}>Failed</span> for :</b>} <br />
               <span className={classes.link}>{url}</span>
+              <br />
+              <span className={classes.score}>Your Score is : {this.props.data.score.percent}%</span>
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12}>
