@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Container, Typography, Box, Grid } from "@material-ui/core";
-import SearchBar from "./Input";
-import { withStyles } from "@material-ui/core/styles";
+import SearchBar from './Input';
+import { withStyles } from '@material-ui/core/styles';
+import HomeAnimation from './../visual/animation/HomeAnimation';
 
 const navStyles = (theme) => ({
   root: {
@@ -25,6 +26,7 @@ const navStyles = (theme) => ({
   },
 });
 class Home extends Component {
+
   render() {
     const classes = this.props.classes;
     return (
@@ -42,9 +44,9 @@ class Home extends Component {
         <Box justifyContent="center">
           <SearchBar />
         </Box>
-        <Grid container direction="row" spacing={6}>
-          <Grid item xs={6}>
-            <Typography className={classes.paragraph} gutterBottom>
+        <Grid container direction="row" >
+          <Grid item xs={5}>
+            <Typography className={classes.paragraph} gutterBottom width="50%">
               Welcome to Uniweb-Access! Our tool tests websites against
               standards of web accessibility. Simply input a url above to get
               started. You'll be taken to another page where you can explore
@@ -52,11 +54,7 @@ class Home extends Component {
               you can learn more about some of the most important qualities of a
               website that anyone and everyone can use. Let's work together to
               create more inclusive world!
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography className={classes.paragraph} gutterBottom>
-              At Uniweb-Access, we believe that accommodating disabled users
+                At Uniweb-Access, we believe that accommodating disabled users
               should be a priority for every website. In the United States,
               there are approximately 57 million people with disabilities.
               That's nearly one in every five people. Web accessibility is
@@ -64,6 +62,9 @@ class Home extends Component {
               Disabilities act, and there were 11,053 federal lawsuits filed on
               this basis in 2019 alone.
             </Typography>
+          </Grid>
+          <Grid item xs={7}>
+            <Box width="90%"><HomeAnimation/></Box>
           </Grid>
         </Grid>
       </Container>

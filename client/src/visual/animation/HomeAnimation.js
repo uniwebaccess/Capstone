@@ -5,6 +5,7 @@ import {
   VictoryTheme, VictoryStack
 } from 'victory';
 import _ from 'lodash'
+import { Button } from '@material-ui/core';
 
 
 //npm install victory in client folder
@@ -14,13 +15,24 @@ import _ from 'lodash'
 class HomeAnimation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data: this.getData() };
+    this.state = { data: this.getData(), isBw: false };
+    this.toggleBw = this.toggleBw.bind(this);
   }
 
   componentDidMount() {
     this.setStateInterval = window.setInterval(() => {
-      this.setState({ data: this.getData() });
+      this.setState(oldState => ({
+        ...oldState,
+        data: this.getData()
+      }));
     }, 4000);
+  }
+
+  toggleBw() {
+    this.setState(oldState => ({
+      ...oldState,
+      isBw: !oldState.isBw
+    }));
   }
 
   getData() {
@@ -34,27 +46,34 @@ class HomeAnimation extends React.Component {
       ];
     });
   }
-
+  colors() {
+    if(this.state.isBw) {
+      return ["#6c757d", "#fff","#adb5bd", "#343a40", ]
+    }
+    return ["#e63946", "#ffb703", "#a8dadc", "#457b9d"]
+  }
   render() {
     return (
+      <div>
       <VictoryChart
         theme={VictoryTheme.material}
         animate={{ duration: 1000 }}
       >
         <VictoryStack
-          colorScale={["#e63946", "#ffb703", "#a8dadc", "#457b9d",]}
+          colorScale={this.colors()}
         >
           {this.state.data.map((data, i) => {
             return (
               <VictoryArea
                 key={i}
                 data={data}
-                interpolation={"basis"}
-              />
+                interpolation={"basis"}/>
             );
           })}
         </VictoryStack>
       </VictoryChart>
+      <Button onClick={this.toggleBw}>change </Button>
+      </div>
     );
   }
 }
