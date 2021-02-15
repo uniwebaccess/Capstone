@@ -19,11 +19,11 @@ async function checkPage(url) {
 
   // calculating algorithm :
   const percent =
-    imagesResult.percent * 0.25 +
+    imagesResult.percent * 0.2 +
     headingsResult.percent * 0.15 +
     globalCodeResult.percent * 0.2 +
     structuralResult.percent * 0.25 +
-    controlsResult.percent * 0.15;
+    controlsResult.percent * 0.2;
 
   /*
     Weights:
