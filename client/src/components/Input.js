@@ -51,7 +51,7 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputUrl: 'https://en.wikipedia.org/wiki/Penguin',
+      inputUrl: '',
     };
     this.onInput = this.onInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -99,7 +99,7 @@ class SearchBar extends React.Component {
           <form onSubmit={this.onInput}>
             <TextField
               name="inputUrl"
-              placeholder="Search by URL "
+              placeholder="Analyze URL"
               className={clsx(classes.margin, classes.textField)}
               InputProps={{
                 startAdornment: (
