@@ -3,13 +3,11 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import StructuralPieChart from '../../visual/StructuralPieChart'
 import StructuralBarChart from '../../visual/StructuralBarChart'
-import { fetchData } from "../../store/data";
-
+import { fetchData, selectField } from "../../store/data";
 import CheckboxCheck from '../../visual/animation/CheckboxCheck'
 import CheckboxX from '../../visual/animation/CheckboxX'
 import FrictionGroup from '../../visual/animation/Arrow'
-
-
+import { failingSuggestions, passingFeedback } from '../../constants';
 import {
   Button,
   Icon,
@@ -18,7 +16,17 @@ import {
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { withStyles } from '@material-ui/core/styles';
 import history from '../../history';
-import { Grid, Typography, Container, Box, Card, CardContent } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Container,
+  Box,
+  Card,
+  CardContent,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+} from '@material-ui/core';
 
 const navStyles = (theme) => ({
 
@@ -28,13 +36,19 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: '4%',
-    marginBottom: '3%',
+    marginBottom: '5%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
   },
   graphContainer1: {
 
+  },
+  link: {
+    fontSize: '20px',
+    '&:hover': {
+      color: '#3a7ca5',
+    },
   },
 
   tableheader: {
@@ -51,11 +65,22 @@ const navStyles = (theme) => ({
     color: '#2c6283',
     fontWeight: 'bold',
   },
+  boxList: {
+    marginBottom: '4%',
+    marginTop: '2%',
+  },
   card: {
-    marginTop: '10%',
+    marginTop: '5%',
+    marginBottom: '5%'
     //background: '#fefae0',
     //background: '#0097a7'
-
+  },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
   }
 })
 
@@ -70,6 +95,7 @@ class StructuralResult extends Component {
 
     const { status, url, data, average } = this.props;
     const classes = this.props.classes;
+    console.log()
     return (
       <div>
         {status === 'loading' && (
@@ -88,7 +114,9 @@ class StructuralResult extends Component {
             </Box>
 
             <Typography
-              className={classes.header}>Structural HTML Test</Typography>
+              className={classes.header}> <br />
+              {data.structuralResult.passed ? <b>Structural HTML Category <span className={classes.green}>Passed</span></b> : <b>Structural HTML Category <span className={classes.red}>Failed</span></b>} <br />
+            </Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
 
@@ -102,17 +130,16 @@ class StructuralResult extends Component {
 
               <Grid item xs={12} md={6}>
                 <Box>
-
                   <StructuralPieChart data={data.structuralResult} average={average} />
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={7}>
+              <Grid item xs={12}>
                 <Box
                   className={classes.checkboxes}
                   display="flex"
                   flexDirection="row"
-                >
+                  mx={45}>
                   <div>
                     {data.structuralResult.sectionTag.sectionTag ? (
                       <CheckboxCheck delay="one" />
@@ -161,28 +188,63 @@ class StructuralResult extends Component {
                     <TableContainer className={classes.tableContainer} >
                       <Table aria-label="simple table">
                         <TableBody>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
-                          </TableRow>
+
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> HTML includes Section Tag: </TableCell>
+                            <TableCell className={classes.tableBody}> HTML includes Section Tag:
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.structuralResult.sectionTag.sectionTag ? (passingFeedback.sectionTag) :
+                                  (failingSuggestions.sectionTag
+                                  )}
+                              </Typography>
+                            </TableCell>
+
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.sectionTag.sectionTag ? 'Passed' : 'Failed'}</TableCell>
+
+                          </TableRow>
+
+
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}> HTML includes Header Tag:
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.structuralResult.headerTag.headerTag ? (passingFeedback.headerTag) :
+                                  (failingSuggestions.headerTag
+                                  )}
+                              </Typography>
+                            </TableCell>
+
+
+                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag ? 'Passed' : 'Failed'}</TableCell>
+
                           </TableRow>
 
                           <TableRow>
-                            <TableCell className={classes.tableBody}> HTML includes Header Tag: </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.structuralResult.headerTag.headerTag ? 'Passed' : 'Failed'}</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags </TableCell>
+                            <TableCell className={classes.tableBody}> Forms with Input Tags contain Matching Label Tags
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.structuralResult.inputAndLabel.inputAndLabel ? (passingFeedback.formLabels) :
+                                  (failingSuggestions.formLabels
+                                  )}
+                              </Typography>
+                            </TableCell>
+
+
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel ? 'Passed' : 'Failed'}</TableCell>
                           </TableRow>
+
 
                           <TableRow>
                             <TableCell className={classes.tableBody}> Pass this test (minimun 70%)  </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.passed ? 'Passed' : 'Failed'}</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>3</TableCell>
+
                           </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
@@ -195,6 +257,7 @@ class StructuralResult extends Component {
                     </TableContainer>
                   </CardContent>
                 </Card>
+
               </Grid>
             </Grid>
           </Container>
@@ -218,6 +281,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchData: (urlKey) => dispatch(fetchData(urlKey)),
+
   };
 };
 
@@ -225,3 +289,6 @@ const mapDispatch = (dispatch) => {
 const styledComponent = withStyles(navStyles, { withTheme: true })(StructuralResult);
 
 export default connect(mapState, mapDispatch)(styledComponent);
+
+
+

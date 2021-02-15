@@ -23,7 +23,7 @@ const navStyles = (theme) => ({
   },
   email: {
     fontSize:'14px'
-  }
+  },
 });
 
 class NavBar extends Component {

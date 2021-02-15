@@ -26,22 +26,25 @@ async function imagesCheck(page) {
   });
 
   let percent;
-  if (result.noAlt === 0) {
+  if (result.totalImages === 0) {
     percent = 100;
   } else {
-    percent = Math.floor(
-      ((result.withAlt + result.withEmptyAlt) / result.totalImages) * 100
-    );
+    percent = Math.floor((
+      result.withAlt + result.withEmptyAlt
+    )/result.totalImages) * 100;
   }
 
-  console.log('images w/ empty alt: ', result.withEmptyAlt);
+
+  //console.log('images w/ empty alt: ', result.withEmptyAlt);
+
 
   return {
     allImages: result.totalImages,
     imagesWithAlt: result.withAlt,
     withEmptyAlt: result.withEmptyAlt,
+    noAlt: result.noAlt,
     percent: percent,
-    passed: percent > 80,
+    passed: percent >= 75,
     imagesData: [result.noAlt, result.withAlt, result.withEmptyAlt],
     imagesName: [
       'Images without alt attribute',

@@ -53,6 +53,11 @@ export default function HeadingsBarChart(props) {
             xAxes: [{
               gridLines: {
                 offsetGridLines: true
+              },
+              ticks: {
+                callback: (v) => `${v}%`,
+                beginAtZero: true,
+                suggestedMax: 50,
               }
             }],
           },
@@ -67,7 +72,7 @@ export default function HeadingsBarChart(props) {
           },
           title: {
             display: true,
-            text: 'Sub-test result in % :',
+            text: 'Maximum score possible by Sub-Test:',
             color: "#fb8500",
             fontSize: 20,
           },

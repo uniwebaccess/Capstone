@@ -25,7 +25,7 @@ export default function MainResultsChart(props) {
           ],
           datasets: [
             {
-              label: `Your Overall Score: ${score.percent}`,
+              label: "Your Score",
               data: [
                 structuralResult.percent,
                 imagesResult.percent,
@@ -45,7 +45,7 @@ export default function MainResultsChart(props) {
               ],
             },
             {
-              label: `Average Overall Score: ${averages.score.percent}`,
+              label: "Average Score",
               data: [
                 averages.structuralResult.percent,
                 averages.imagesResult.percent,
@@ -81,6 +81,7 @@ export default function MainResultsChart(props) {
                 ticks: {
                   beginAtZero: true,
                   suggestedMax: 100,
+                  callback: (v) => `${v}%`
                 },
               },
             ],

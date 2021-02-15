@@ -9,6 +9,7 @@ import CheckboxCheck from '../../visual/animation/CheckboxCheck'
 import CheckboxX from '../../visual/animation/CheckboxX'
 import FrictionGroup from '../../visual/animation/Arrow'
 
+import { failingSuggestions, passingFeedback } from '../../constants';
 
 import {
   Button,
@@ -28,13 +29,10 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: '4%',
-    marginBottom: '3%',
+    marginBottom: '5%',
     color: '#1D3557',
     fontWeight: 'bold',
     fontSize: '28px',
-  },
-  graphContainer1: {
-
   },
 
   tableheader: {
@@ -52,11 +50,17 @@ const navStyles = (theme) => ({
     fontWeight: 'bold',
   },
   card: {
-    marginTop: '10%',
+    marginTop: '5%',
     marginBottom: '5%',
     //background: '#fefae0',
     //background: '#0097a7'
-
+  },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  description: {
+    color: '#343a40'
   }
 })
 
@@ -89,32 +93,34 @@ class HeadingsResult extends Component {
             </Box>
 
             <Typography
-              className={classes.header}>Headings Test</Typography>
+              className={classes.header}><br />
+              {data.headingsResult.passed ? <b>Headings Category <span className={classes.green}>Passed</span></b> : <b>Headings Category <span className={classes.red}>Failed</span></b>} <br /></Typography>
 
             <Grid container spacing={4} className={classes.graphContainer1}>
 
               <Grid item xs={12} md={6}>
                 <Box>
                   <HeadingsBarChart data={data.headingsResult} average={average} />
-
                 </Box>
 
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Box>
 
+                <Box>
                   <BarChartTotal data={data.headingsResult} average={average} />
                 </Box>
               </Grid>
-              <Grid item xs={12} md={7}>
+
+              <Grid item xs={12} >
                 <Box
                   className={classes.checkboxes}
                   display="flex"
                   flexDirection="row"
+                  mx={45}
                 >
                   <div>
-                    {(data.headingsResult.h1OnlyOne.h1OnlyOne === "Passed") ? (
+                    {data.headingsResult.h1OnlyOne.h1OnlyOne ? (
                       <CheckboxCheck delay="one" />
                     ) : (
                         <CheckboxX delay="one" />
@@ -124,7 +130,7 @@ class HeadingsResult extends Component {
                     </Typography>
                   </div>
                   <div>
-                    {(data.headingsResult.logicSequence.logicSequence === "Passed") ? (
+                    {data.headingsResult.logicSequence.logicSequence ? (
                       <CheckboxCheck delay="two" />
                     ) : (
                         <CheckboxX delay="two" />
@@ -134,7 +140,7 @@ class HeadingsResult extends Component {
                     </Typography>
                   </div>
                   <div>
-                    {(data.headingsResult.hTagSkip.hTagSkip === "Passed") ? (
+                    {data.headingsResult.hTagSkip.hTagSkip ? (
                       <CheckboxCheck delay="three" />
                     ) : (
                         <CheckboxX delay="three" />
@@ -161,23 +167,50 @@ class HeadingsResult extends Component {
                     <TableContainer className={classes.tableContainer} >
                       <Table aria-label="simple table">
                         <TableBody>
+
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}> App follows Logic Sequence for H tags :
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.headingsResult.logicSequence.logicSequence ? (
+                                  passingFeedback.logicSequence
+                                ) : (
+                                    failingSuggestions.logicSequence)}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.logicSequence.logicSequence ? 'Passed' : 'Failed'}</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag :
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.headingsResult.h1OnlyOne.h1OnlyOne ? (
+                                  passingFeedback.h1Tag
+                                ) : (
+                                    failingSuggestions.h1Tag)}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.h1OnlyOne.h1OnlyOne ? 'Passed' : 'Failed'}</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}> Don't skip order of H Tags :
+                            <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.headingsResult.hTagSkip.hTagSkip ? (
+                                  passingFeedback.skipHeadings
+                                ) : (
+                                    failingSuggestions.skipHeadings)}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip ? 'Passed' : 'Failed'}</TableCell>
+                          </TableRow>
+
                           <TableRow>
                             <TableCell className={classes.tableBody}>Total sub-tests performed: </TableCell>
                             <TableCell align="right" className={classes.tableBody}>3</TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className={classes.tableBody}> App follows Logic Sequence for H tags : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.logicSequence.logicSequence}</TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className={classes.tableBody}> Has only 1 H1 Tag : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.h1OnlyOne.h1OnlyOne}</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}> Don't skip order of H Tags : </TableCell>
-                            <TableCell align="right" className={classes.tableBody}>{data.headingsResult.hTagSkip.hTagSkip}</TableCell>
                           </TableRow>
 
                           <TableRow>
@@ -188,8 +221,6 @@ class HeadingsResult extends Component {
                             <TableCell className={classes.tableBody}>Total score for this Test: </TableCell>
                             <TableCell align="right" className={classes.tableBody}>{data.headingsResult.percent}%</TableCell>
                           </TableRow>
-
-
                         </TableBody>
                       </Table>
                     </TableContainer>

@@ -56,6 +56,15 @@ const navStyles = (theme) => ({
   checkIcon: {
     color: '#388e3c',
   },
+  green: {
+    color: 'green'
+  },
+  red: { color: "red" },
+  score: {
+    fontSize: '20px',
+    color: '#343a40'
+
+  }
 });
 /*
 * Page to render results of tests
@@ -109,8 +118,10 @@ class TestResult extends Component {
               className={classes.header}
             >
               <br />
-              <b>Analyzed page: </b>
+              {this.props.data.score.percent > 80 ? <b>Web-Accessibility Test <span className={classes.green}>Passed</span> for :</b> : <b>Web-Accessibility Test <span className={classes.red}>Failed</span> for :</b>} <br />
               <span className={classes.link}>{url}</span>
+              <br />
+              <span className={classes.score}>Your Score is : {this.props.data.score.percent}%</span>
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12}>
@@ -143,7 +154,7 @@ class TestResult extends Component {
                        Controls
                      </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.controls}</Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -167,7 +178,7 @@ class TestResult extends Component {
                        Global Code
                      </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.paragraph}>
                       <Typography>{checkerDescriptions.globalCode}</Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -236,7 +247,7 @@ class TestResult extends Component {
                         component={RouterLink}
                         to={"/structuralresult/" + urlKey}><Icon className={classes.checkIcon}><CheckIcon /></Icon> Structural HTML</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.paragraph}>
                       <Typography>
                         {checkerDescriptions.structuralHTML}
                       </Typography>

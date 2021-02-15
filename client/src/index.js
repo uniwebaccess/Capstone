@@ -7,6 +7,9 @@ import { Router } from "react-router-dom";
 import history from "./history";
 import { Provider } from "react-redux";
 import store from "./store";
+import Chart from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+Chart.pluginService.unregister(ChartDataLabels);
 
 ReactDOM.render(
   <Provider store={store}>
