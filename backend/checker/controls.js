@@ -34,36 +34,97 @@ async function controlsCheck(page) {
     };
   });
 
-  let buttons = await page.$$eval('button', (buttons) => {
-    let count = buttons.length;
-    let withButtonType = 0;
-    for (let button of buttons) {
-      if (button.getAttribute('role') === 'button') {
-        withButtonType++;
+  let buttons = await page.$$eval(
+    'button, span, div, a, p',
+    (possibleButtons) => {
+      let buttonElemsWithType = 0;
+      let buttonElemsNoType = 0;
+      let withButtonRoleFocusable = 0;
+      let withButtonRoleNOTFocusable = 0;
+      for (let possibleButton of possibleButtons) {
+        if (possibleButton.outerHTML.includes('<button ')) {
+          if (
+            possibleButton.outerHTML.includes('<button ') &&
+            possibleButton.outerHTML.includes('type=')
+          ) {
+            buttonElemsWithType++;
+          } else buttonElemsNoType++;
+        }
+        if (
+          possibleButton.outerHTML.includes('role=') &&
+          possibleButton.outerHTML.includes('tabindex=')
+        ) {
+          withButtonRoleFocusable++;
+        }
+
+        if (
+          possibleButton.outerHTML.includes('role=button') &&
+          !possibleButton.outerHTML.includes('tabindex=')
+        ) {
+          withButtonRoleNOTFocusable++;
+        }
       }
+
+      const allButtons =
+        buttonElemsWithType +
+        buttonElemsNoType +
+        withButtonRoleNOTFocusable +
+        withButtonRoleFocusable;
+
+      const buttonElemPercent =
+        Math.ceil(
+          (buttonElemsWithType / (buttonElemsWithType + buttonElemsNoType)) *
+            100
+        ) || 0;
+      const buttonRolePercent =
+        Math.ceil(
+          (withButtonRoleFocusable /
+            (withButtonRoleFocusable + withButtonRoleNOTFocusable)) *
+            100
+        ) || 0;
+
+      const buttonsPercent = (buttonElemPercent + buttonRolePercent) / 2 || 0;
+
+      let result = {
+        buttonElemsWithType,
+        buttonElemsNoType,
+        buttonsPercent,
+        withButtonRoleFocusable,
+        withButtonRoleNOTFocusable,
+        allButtons,
+      };
+
+      return {
+        buttonElemsWithType,
+        buttonElemsNoType,
+        buttonsPercent,
+        withButtonRoleFocusable,
+        withButtonRoleNOTFocusable,
+        allButtons,
+        result,
+      };
     }
-    let buttonsPercent = Math.floor((withButtonType * 100) / count);
-    return {
-      count,
-      withButtonType,
-      buttonsPercent,
-    };
-  });
+  );
 
   let ControlsCategoryPercent =
-    (links.linksPercent + buttons.buttonsPercent) / 2;
+    (links.linksPercent * 3 + buttons.buttonsPercent) / 4;
+
+  //console.log(buttons.result);
 
   return {
     allLinks: links.count,
     linksWithHref: links.withHref,
-    hrefPercent: links.hrefPercent,
-    hrefPassed: links.hrefPercent > 75,
+    hrefPercent: links.hrefPercent || 0,
+    hrefPassed: links.hrefPercent > 70,
     linksToNewTab: links.opensNewTabCount,
-    allButtons: buttons.count,
-    buttonsWithType: buttons.withButtonType,
+    allButtons: buttons.allButtons,
+    buttonsWithType: buttons.buttonElemsWithType,
+    buttonsWithoutType: buttons.buttonElemsNoType,
+    withButtonRoleFocusable: buttons.withButtonRoleFocusable,
+    withButtonRoleNOTFocusable: buttons.withButtonRoleNOTFocusable,
     buttonsPercent: buttons.buttonsPercent,
-    buttonsPassed: buttons.buttonsPercent > 75,
-    passed: ControlsCategoryPercent > 75,
+    buttonsPassed: buttons.buttonsPercent > 70,
+    passed: ControlsCategoryPercent > 70,
     percent: ControlsCategoryPercent,
   };
 }
