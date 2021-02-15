@@ -207,7 +207,7 @@ export function ButtonsChart(props) {
     },
     title: {
       display: true,
-      text: 'Buttons with Type Attribute',
+      text: 'Accessible Buttons',
       fontSize: 15,
     },
     animation: {
@@ -236,7 +236,7 @@ export function ButtonsChart(props) {
       <div>
         <Doughnut
           data={{
-            labels: ['Buttons with Type Attribute'],
+            labels: ['Accessible Buttons'],
             datasets: [
               {
                 data: [buttonsPercent, 100 - buttonsPercent],
