@@ -36,7 +36,6 @@ const navStyles = (theme) => ({
     color: "#0097a7",
   },
   header: {
-    marginTop: "2%",
     color: "#1D3557",
     fontWeight: "bold",
     fontSize: "28px",
@@ -85,13 +84,13 @@ const navStyles = (theme) => ({
 
   checkmark: {
     position: "relative",
-    marginTop: "-1.5em",
+
   },
   passing: {
     color: "#1D3557",
   },
   piechart: {
-    marginTop: "-1.2%",
+    marginTop: "3%",
   },
 
   barchart: {
@@ -137,7 +136,7 @@ class ImagesResult extends Component {
               ></Button>
             </Box>
 
-            <Grid container spacing={3} className={classes.graphContainer1}>
+            <Grid container  className={classes.graphContainer1}>
               <Grid item xs={12} md={6}>
                 <Typography className={classes.header}>
                   {data.imagesResult.passed ? (
@@ -170,17 +169,19 @@ class ImagesResult extends Component {
                   </Box>
                 </div>
               </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Grid container spacing={3} className={classes.graphContainer1}>
-                <Grid
+
+              <Grid
                   item
                   xs={12}
                   md={6}
                   className={classes.piechart}
                   align="center"
-                ></Grid>
-                <PieChart data={data.imagesResult} />
+                ><PieChart data={data.imagesResult} /></Grid>
+            </Grid>
+            <Box mt={5}>
+
+              <Grid container spacing={3} className={classes.graphContainer1}>
+
                 <Grid item xs={12}>
                   <Box mb={2}>
                     <Typography className={classes.header}>
