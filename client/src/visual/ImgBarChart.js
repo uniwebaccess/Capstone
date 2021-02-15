@@ -15,14 +15,14 @@ export default function ImgBarChart(props) {
               data: props.data.imagesData,
               backgroundColor: [
                 'rgba(33, 158,188, 1)',
-                'rgba(255, 183, 3, 1)',
+                'rgb(253, 197, 0)',
                 'rgba(251, 133, 0, 1)',
                 'rgba(142, 202, 230, 1)',
                 'rgba(2,48,205, 1)',
               ],
               borderColor: [
                 'rgba(33, 158,188, 1)',
-                'rgba(255, 183, 3, 1)',
+                'rgb(253, 197, 0)',
                 'rgba(251, 133, 0, 1)'
 
               ],

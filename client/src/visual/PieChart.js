@@ -33,14 +33,8 @@ export default function PieChart(props) {
                 'rgba(251, 133, 0, 0.7)',
                 'rgba(166, 255, 245, 1)',
               ],
-              borderColor: [
-                'rgba(186, 24, 27, 1)',
-                'rgb(253, 197, 0)',
-                'rgb(44, 98, 131)',
-                'rgba(251, 133, 0, 1)',
-                'rgba(255, 159, 64, 1)',
-              ],
-              borderWidth: 1,
+              borderColor: 'rgba(255, 255, 255, 1)',
+              borderWidth: 2,
             },
             // {
 

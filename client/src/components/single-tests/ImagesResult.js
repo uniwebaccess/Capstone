@@ -95,7 +95,7 @@ class ImagesResult extends Component {
     let data = this.props.data.imagesResult;
     return [
       { title: 'Passing pages', value:453, color: '#2c6283'},
-      { title: 'Failing pages' , value:123, color: '#C13C37' }
+      { title: 'Failing pages' , value:123, color: '#fdc500' }
     ]
   }
 
