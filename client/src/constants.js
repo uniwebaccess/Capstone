@@ -39,6 +39,10 @@ export const failingSuggestions = {
     'Avoid using the autofocus attribute. People who are blind or who have low vision may be disoriented when page focus is moved without their permission. Additionally, autofocus can be problematic for people with motor control disabilities, as it may create extra work for them to navigate out from the autofocused area and to other locations on the page/view.',
   skipHeadings:
     "Do not skip heading levels.  For example, don't jump from a h2 to a h4, skipping an h3 element. If a level is skipped, the user may be confused and think that they have missed a section of content. If your heading levels are being skipped for a specific visual treatment, use CSS classes or change the text size instead.",
+  mainTag:
+    'Include only one <main> element in your html. This will allow assistive technology to quickly identify and navigate to large sections of the document. By classifying and labeling sections of a page, structural information conveyed visually through layout can be represented programmatically.',
+  listElem:
+    'Use semantic markup for lists to identify the type of list container (ordered, unordered or description list) and to group its related list item elements.	When the correct list elements are used semantically, assistive technologies are able to convey information to users as they navigate to and within lists and prevent confusion about the content of the list.',
 };
 
 export const passingFeedback = {
@@ -68,4 +72,8 @@ export const passingFeedback = {
     'People who are blind or who have low vision may be disoriented when page focus is moved without their permission. Additionally, autofocus can be problematic for people with motor control disabilities, as it may create extra work for them to navigate out from the autofocused area and to other locations on the page/view.',
   skipHeadings:
     'Heading elements help users understand what information is contained in webpages and how that information is organized. When headings are clear and descriptive, users can find the information they seek more easily, and they can understand the relationships between different parts of the content more easily.',
+  mainTag:
+    'The main content area consists of content that is directly related to or expands upon the central topic of a document or central functionality of an application. This will help screen readers and other assistive technologies understand where the main content begins.',
+  listElem:
+    'Lists elements let people know a collection of items are related and if they are sequential, and how many items are present in the list grouping.',
 };

@@ -192,6 +192,12 @@ class GlobalCodeResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               List Elements:{" "}
+                              <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.globalCodeResult.useListElement ? (passingFeedback.listElem) :
+                                  (failingSuggestions.listElem
+                                  )}
+                              </Typography>
                             </TableCell>
                             <TableCell
                               align="right"
@@ -206,6 +212,12 @@ class GlobalCodeResult extends Component {
                             <TableCell className={classes.tableBody}>
                               {" "}
                               Language:{" "}
+                              <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.globalCodeResult.langAttr ? (passingFeedback.langAttr) :
+                                  (failingSuggestions.langAttr
+                                  )}
+                              </Typography>
                             </TableCell>
                             <TableCell
                               align="right"
@@ -220,6 +232,12 @@ class GlobalCodeResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               Main Tag:{" "}
+                              <Typography variant="body1" className={classes.description}>
+                                <br />
+                                {data.globalCodeResult.isMainTag.mainTag ? (passingFeedback.mainTag) :
+                                  (failingSuggestions.mainTag
+                                  )}
+                              </Typography>
                             </TableCell>
                             <TableCell
                               align="right"
