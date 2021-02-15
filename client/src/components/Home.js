@@ -55,7 +55,7 @@ class Home extends Component {
         <Grid container direction="row" >
           <Grid item xs={12} md={6}>
           <Box width={450} zIndex="tooltip" className={classes.textBox}  position='right'>
-              <Typography className={classes.paragraph} gutterBottom alignSelf='left'>
+              <Typography className={classes.paragraph} gutterBottom >
                 Welcome to Uniweb-Access! Our tool tests websites against
                 standards of web accessibility. Simply input a url above to get
                 started. You'll be taken to another page where you can explore

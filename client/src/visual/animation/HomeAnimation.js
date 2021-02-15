@@ -6,9 +6,14 @@ import {
 } from 'victory';
 import _ from 'lodash'
 import { Button, Box } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/';
 
 
-//npm install victory in client folder
+const navStyles = (theme) => ({
+  container:{
+    marginBottom: "3%"
+  }
+})
 
 
 
@@ -61,7 +66,7 @@ class HomeAnimation extends React.Component {
       <div>
       <Box position="absolute"  right="17%" zIndex="tooltip">
         <Button style={{color:'#1D3557'}} onClick={this.toggleBw}>
-        Colorblind vision</Button>
+        Click to see Colorblind view</Button>
       </Box>
       <Box width={555}>
       <VictoryChart
@@ -86,4 +91,4 @@ class HomeAnimation extends React.Component {
   }
 }
 
-export default HomeAnimation
+export default withStyles(navStyles, { withTheme: true })(HomeAnimation);
