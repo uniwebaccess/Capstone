@@ -216,7 +216,7 @@ class ImagesResult extends Component {
 
                     <TableRow>
                       <TableCell className={classes.tableBody}>Test: </TableCell>
-                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'passed' : 'failed'}</TableCell>
+                      <TableCell align="right" className={classes.tableBody}>{data.imagesResult.passed ? 'Passed' : 'Failed'}</TableCell>
                     </TableRow>
 
                   </TableBody>
