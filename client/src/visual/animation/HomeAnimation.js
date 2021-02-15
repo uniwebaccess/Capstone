@@ -7,7 +7,7 @@ import {
 import _ from 'lodash'
 
 
-//npm install victory
+//npm install victory in client folder
 
 
 
@@ -42,7 +42,7 @@ class HomeAnimation extends React.Component {
         animate={{ duration: 1000 }}
       >
         <VictoryStack
-          colorScale={"green"}
+          colorScale={["#e63946", "#ffb703", "#a8dadc", "#457b9d",]}
         >
           {this.state.data.map((data, i) => {
             return (
@@ -60,4 +60,3 @@ class HomeAnimation extends React.Component {
 }
 
 export default HomeAnimation
-
