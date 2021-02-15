@@ -55,17 +55,17 @@ class NavBar extends Component {
               <Button component={RouterLink} to={"/contactus"} color="inherit">
                 Contact Us
               </Button>
-
+              {/*
               <IconButton
                 aria-label="send data to email"
                 aria-controls="email"
                 aria-haspopup="true"
                 //onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
+                color="inherit">
                 <Typography className={classes.email}></Typography>
                 <MailIcon />
               </IconButton>
+              */}
             </div>
           </Toolbar>
         </AppBar>
