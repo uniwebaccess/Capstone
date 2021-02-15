@@ -168,8 +168,8 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                {" "}
-                                Links with href attribute:{" "}
+                                {' '}
+                                Percent of Links with href attribute:{' '}
                                 <Typography
                                   variant="body1"
                                   className={classes.description}
@@ -185,7 +185,7 @@ class ControlsResult extends Component {
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.controlsResult.linksWithHref}
+                                {data.controlsResult.hrefPercent}%
                               </TableCell>
                             </TableRow>
 
@@ -227,7 +227,7 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Buttons that include a type attribute:
+                                Percent of Accessible Buttons:
                                 <Typography
                                   variant="body1"
                                   className={classes.description}
@@ -242,7 +242,7 @@ class ControlsResult extends Component {
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.controlsResult.buttonsWithType}
+                                {data.controlsResult.buttonsPercent}%
                               </TableCell>
                             </TableRow>
 

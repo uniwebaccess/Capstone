@@ -23,8 +23,7 @@ export const failingSuggestions = {
   targetAttr:
     "Avoid links that open in a new tab or window. If this is unavoidable, ensure the link's behavior will be communicated in a way that is apparent to all users. Doing this will help people understand what will happen before activating the link. While this technique is technically not required for compliance, it is an often-cited area of frustration for many different kinds of assistive technology users.",
   buttons:
-    'Use the <button> element for buttons.  Buttons are used to submit data or perform an on-screen action which does not shift keyboard focus. You can add type="button" to a button element to prevent the browser from attempting to submit form information when activated.',
-
+    'Use the <button> element for buttons, and include a type="" attribute to indicate the behavior of the button when it is activated by a user. If you are unable to use this specific element tag, add an ARIA "role="button"" attribute to the element you are using as a button.  Keep in mind that if you use this method, you must also include a "tabindex" attribute to make the button focusable for assistive technology.',
   h1Tag:
     "The h1 element should be used to communicate the overall purpose of the page or view at a high-level. Do not use the h1 element for a heading that persists between pages or views (for example, the site's title or a navigation bar component).",
   logicSequence:
@@ -57,7 +56,7 @@ export const passingFeedback = {
   targetAttr:
     "Including a 'target' attribute on links declared with an anchor element will help users understand what will happen before activating the link. While this technique is technically not required for compliance, it is an often-cited area of frustration for many different kinds of assistive technology users.",
   buttons:
-    'Buttons created using the <button> element are used to submit data or perform an on-screen action which does not shift keyboard focus. You can add type="button" to a button element to prevent the browser from attempting to submit form information when activated.',
+    'Buttons created using the <button> element are used to submit data or perform an on-screen action which does not shift keyboard focus.  This is best practice, but using an ARIA "role="button"" attribute on the element you are using as a button is also acceptable, provided that you also include a "tabindex" attribute to make the button focusable for assistive technology.',
   h1Tag:
     "The h1 element should be used to communicate the overall purpose of the page or view at a high-level. Do not use the h1 element for a heading that persists between pages or views (for example, the site's title or a navigation bar component).",
   logicSequence:
