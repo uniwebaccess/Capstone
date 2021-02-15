@@ -41,8 +41,8 @@ export function HrefChart(props) {
       },
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 500,
+      easing: 'easeInExpo',
       from: 1,
       to: 0,
       loop: false,
@@ -54,6 +54,13 @@ export function HrefChart(props) {
     //     delay: 0,
     //   },
     // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(hrefPercent)}%`;
+        },
+      },
+    },
   };
 
   return (
@@ -65,7 +72,7 @@ export function HrefChart(props) {
             datasets: [
               {
                 data: [hrefPercent, 100 - hrefPercent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: hrefPercent,
@@ -121,20 +128,24 @@ export function TargetChart(props) {
       },
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 1000,
+      easing: 'easeInExpo',
       loop: false,
       delay: 250,
     },
     tooltips: {
-      label: `Your score is ${Math.ceil(newTabPercent)}%`,
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(100 - newTabPercent)}%`;
+        },
+      },
+      // plugins: {
+      //   deferred: {
+      //     enabled: true,
+      //     delay: 250,
+      //   },
+      // },
     },
-    // plugins: {
-    //   deferred: {
-    //     enabled: true,
-    //     delay: 250,
-    //   },
-    // },
   };
 
   return (
@@ -146,7 +157,7 @@ export function TargetChart(props) {
             datasets: [
               {
                 data: [100 - newTabPercent, newTabPercent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: newTabPercent,
@@ -200,8 +211,8 @@ export function ButtonsChart(props) {
       fontSize: 15,
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 1250,
+      easing: 'easeInExpo',
       loop: false,
       delay: 500,
     },
@@ -211,6 +222,13 @@ export function ButtonsChart(props) {
     //     delay: 500,
     //   },
     // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(buttonsPercent)}%`;
+        },
+      },
+    },
   };
 
   return (
@@ -222,7 +240,7 @@ export function ButtonsChart(props) {
             datasets: [
               {
                 data: [buttonsPercent, 100 - buttonsPercent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: Math.ceil(buttonsPercent),
@@ -276,8 +294,8 @@ export function ControlsScoreChart(props) {
       },
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 1500,
+      easing: 'easeInExpo',
       loop: false,
       delay: 250,
     },
@@ -287,6 +305,13 @@ export function ControlsScoreChart(props) {
     //     delay: 750,
     //   },
     // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(percent)}%`;
+        },
+      },
+    },
   };
 
   return (
@@ -298,7 +323,7 @@ export function ControlsScoreChart(props) {
             datasets: [
               {
                 data: [percent, 100 - percent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: percent,
