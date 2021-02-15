@@ -8,6 +8,7 @@ import {
   ButtonsChart,
   ControlsScoreChart,
 } from "../../visual/ControlsChart";
+
 import {
   Button,
   Icon,
@@ -17,21 +18,15 @@ import {
   TableBody,
   Table,
   Grid,
-  FormRow,
   Typography,
   Container,
   Box,
   Card,
   CardContent,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
 } from "@material-ui/core";
+import FrictionGroup from "../../visual/animation/Arrow";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import history from "../../history";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import FrictionGroup from "../../visual/animation/Arrow";
-
 import { withStyles } from "@material-ui/core/styles";
 
 const navStyles = (theme) => ({
@@ -84,32 +79,14 @@ class ControlsResult extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleChange = this.handleChange.bind(this);
-    this.openAccordion = this.openAccordion.bind(this);
   }
   componentDidMount() {
     this.props.fetchData(this.props.match.params.urlKey);
   }
 
-  handleChange(evt) {
-    evt.preventDefault();
-    this.setState({ selected: evt.target.value });
-    this.props.selectField(evt.target.value);
-  }
-
-  openAccordion = (panel) => {
-    this.setState((oldState) => {
-      return {
-        ...oldState,
-        expanded: panel !== oldState.expanded ? panel : null,
-      };
-    });
-  };
-
   render() {
     const { status, url, data } = this.props;
     const classes = this.props.classes;
-    const expanded = this.state.expanded;
 
     return (
       <div>
@@ -198,6 +175,7 @@ class ControlsResult extends Component {
                                   className={classes.description}
                                 >
                                   <br />
+
                                   {data.controlsResult.hrefPassed
                                     ? passingFeedback.hrefAttr
                                     : failingSuggestions.hrefAttr}
@@ -235,7 +213,6 @@ class ControlsResult extends Component {
                                 {data.controlsResult.linksToNewTab}
                               </TableCell>
                             </TableRow>
-
                             <TableRow>
                               <TableCell className={classes.tableBody}>
                                 Total buttons:{" "}
@@ -250,7 +227,7 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Buttons that include a type attribute:{" "}
+                                Buttons that include a type attribute:
                                 <Typography
                                   variant="body1"
                                   className={classes.description}
@@ -271,25 +248,28 @@ class ControlsResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Score for this Category:{" "}
+                                Total score for this test:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.controlsResult.percent}%
+                                {data.controlsResult.percent.toFixed(1)}%
                               </TableCell>
                             </TableRow>
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Total Score:{" "}
+                                {" "}
+                                Overall:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.score.percent}%
+                                {data.controlsResult.passed
+                                  ? "Passed"
+                                  : "Failed"}
                               </TableCell>
                             </TableRow>
                           </TableBody>

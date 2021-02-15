@@ -46,6 +46,9 @@ const navStyles = (theme) => ({
   },
   paragraph: {
     color: "#757575",
+    textAlign: "left",
+    marginLeft: "2%",
+    marginRight: "2%",
   },
 
   boxList: {

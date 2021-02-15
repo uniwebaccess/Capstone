@@ -44,13 +44,17 @@ const navStyles = (theme) => ({
     fontWeight: "bold",
     fontSize: "28px",
   },
-
+  graphContainer1: {
+    alignItems: "center",
+    align: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+  },
   tableheader: {
     fontSize: "26px",
     color: "#1D3557",
     fontWeight: "bold",
   },
-
   tableBody: {
     fontSize: "17px",
     //color: '#ffffff',
@@ -123,7 +127,13 @@ class HeadingsResult extends Component {
               <br />
             </Typography>
 
-            <Grid container spacing={4} className={classes.graphContainer1}>
+            <Grid
+              container
+              item={true}
+              spacing={4}
+              className={classes.graphContainer1}
+              xs={12}
+            >
               <Grid item xs={12} md={6}>
                 <Box>
                   <HeadingsBarChart
@@ -185,7 +195,7 @@ class HeadingsResult extends Component {
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={12}>
+              <Grid item xs={8} align="center">
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer}>
@@ -242,7 +252,7 @@ class HeadingsResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              Order of heading tags :
+                              Order of heading tags:
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -264,7 +274,7 @@ class HeadingsResult extends Component {
                           </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}>
-                              Total:{" "}
+                              Total score for this test:{" "}
                             </TableCell>
                             <TableCell
                               align="right"
@@ -276,7 +286,7 @@ class HeadingsResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              Test{" "}
+                              Overall:{" "}
                             </TableCell>
                             <TableCell
                               align="right"

@@ -27,9 +27,6 @@ import {
   Box,
   Card,
   CardContent,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
 } from "@material-ui/core";
 
 const navStyles = (theme) => ({
@@ -44,14 +41,22 @@ const navStyles = (theme) => ({
     fontWeight: "bold",
     fontSize: "28px",
   },
-  graphContainer1: {},
+  graphContainer1: {
+    alignItems: "center",
+    align: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+  },
   link: {
     fontSize: "20px",
     "&:hover": {
       color: "#3a7ca5",
     },
   },
-
+  checkboxes: {
+    marginLeft: "15%",
+    marginRight: "15%",
+  },
   tableheader: {
     fontSize: "26px",
     color: "#1D3557",
@@ -157,7 +162,6 @@ class StructuralResult extends Component {
                   className={classes.checkboxes}
                   display="flex"
                   flexDirection="row"
-                  mx={45}
                 >
                   <div>
                     {data.structuralResult.sectionTag.sectionTag ? (
@@ -201,7 +205,7 @@ class StructuralResult extends Component {
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={12}>
+              <Grid item xs={8} align="center">
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer}>
@@ -210,7 +214,7 @@ class StructuralResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              HTML includes Section Tag:
+                              HTML includes section tag:
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -235,7 +239,7 @@ class StructuralResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              HTML includes Header Tag:
+                              HTML includes header tag:
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -260,7 +264,7 @@ class StructuralResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              Forms with Input Tags contain Matching Label Tags
+                              Forms have matching label tags:
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -285,8 +289,19 @@ class StructuralResult extends Component {
 
                           <TableRow>
                             <TableCell className={classes.tableBody}>
+                              Total score for this test:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.structuralResult.percent}%
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>
                               {" "}
-                              Pass this test (minimun 70%){" "}
+                              Overall:{" "}
                             </TableCell>
                             <TableCell
                               align="right"
@@ -295,29 +310,6 @@ class StructuralResult extends Component {
                               {data.structuralResult.passed
                                 ? "Passed"
                                 : "Failed"}
-                            </TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>
-                              Total sub-tests performed:{" "}
-                            </TableCell>
-                            <TableCell
-                              align="right"
-                              className={classes.tableBody}
-                            >
-                              3
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>
-                              Total score for this Test:{" "}
-                            </TableCell>
-                            <TableCell
-                              align="right"
-                              className={classes.tableBody}
-                            >
-                              {data.structuralResult.percent}%
                             </TableCell>
                           </TableRow>
                         </TableBody>

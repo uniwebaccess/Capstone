@@ -42,7 +42,10 @@ const navStyles = (theme) => ({
     fontSize: "28px",
   },
   graphContainer1: {
-    marginTop: "4%",
+    alignItems: "center",
+    align: "center",
+    justifyContent: "center",
+    marginTop: "5%",
   },
 
   tableheader: {
@@ -60,7 +63,6 @@ const navStyles = (theme) => ({
     fontWeight: "bold",
   },
   card: {
-    marginBottom: "5%",
     marginBottom: "5%",
     //background: '#fefae0',
     //background: '#0097a7'
@@ -83,13 +85,13 @@ const navStyles = (theme) => ({
 
   checkmark: {
     position: "relative",
-    marginTop: "-3em",
+    marginTop: "-1.5em",
   },
   passing: {
     color: "#1D3557",
   },
   piechart: {
-    marginTop: "1.2%",
+    marginTop: "-1.2%",
   },
 
   barchart: {
@@ -135,7 +137,7 @@ class ImagesResult extends Component {
               ></Button>
             </Box>
 
-            <Grid container spacing={1} className={classes.graphContainer1}>
+            <Grid container spacing={3} className={classes.graphContainer1}>
               <Grid item xs={12} md={6}>
                 <Typography className={classes.header}>
                   {data.imagesResult.passed ? (
@@ -155,8 +157,8 @@ class ImagesResult extends Component {
                   <br />
                   All images should have an <i>alt</i> attribute providing
                   textual representation of the picture. Images that are
-                  decorative should have an explicit empty alt value. You need
-                  to have less than 25% of images without alt attribute to pass.
+                  decorative should have an explicit empty alt value. At least
+                  75% of images must have alt tags in order to pass.
                 </Typography>
                 <div className={classes.checkmarkContainer}>
                   <Box className={classes.checkmark}>
@@ -168,12 +170,17 @@ class ImagesResult extends Component {
                   </Box>
                 </div>
               </Grid>
-              <Grid item xs={12} md={6} className={classes.piechart}>
-                <PieChart data={data.imagesResult} />
-              </Grid>
             </Grid>
             <Box mt={5}>
-              <Grid container>
+              <Grid container spacing={3} className={classes.graphContainer1}>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  className={classes.piechart}
+                  align="center"
+                ></Grid>
+                <PieChart data={data.imagesResult} />
                 <Grid item xs={12}>
                   <Box mb={2}>
                     <Typography className={classes.header}>
@@ -196,7 +203,7 @@ class ImagesResult extends Component {
                   </Box>
                 </Grid>
 
-                <Grid item xs={12} md={12}>
+                <Grid item xs={8} align="center">
                   <Card className={classes.card}>
                     <CardContent>
                       <TableContainer className={classes.tableContainer}>
@@ -233,8 +240,7 @@ class ImagesResult extends Component {
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.imagesResult.imagesWithAlt}&nbsp;/
-                                {data.imagesResult.passed ? "Passed" : "Failed"}
+                                {data.imagesResult.imagesWithAlt}
                               </TableCell>
                             </TableRow>
 
@@ -259,7 +265,7 @@ class ImagesResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Passed images:{" "}
+                                Total score for this test:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
@@ -271,13 +277,13 @@ class ImagesResult extends Component {
 
                             <TableRow>
                               <TableCell className={classes.tableBody}>
-                                Test:{" "}
+                                Overall:{" "}
                               </TableCell>
                               <TableCell
                                 align="right"
                                 className={classes.tableBody}
                               >
-                                {data.imagesResult.passed ? "passed" : "failed"}
+                                {data.imagesResult.passed ? "Passed" : "Failed"}
                               </TableCell>
                             </TableRow>
                           </TableBody>

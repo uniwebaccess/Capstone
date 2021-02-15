@@ -17,7 +17,7 @@ import { clearStatus } from '../store/status';
 import Alert from '@material-ui/lab/Alert';
 //import Snackbar from "@material-ui/core/Snackbar";
 
-import FrictionGroup from '../visual/animation/Arrow'
+import FrictionGroup from '../visual/animation/Arrow';
 
 const navStyles = (theme) => ({
   root: {
@@ -82,7 +82,10 @@ class SearchBar extends React.Component {
   keyifyUrl(inputUrl) {
     //replace . with ,
     //replace / with =
-    let urlKey = inputUrl.replace(/\./g, ',').replace(/\//g, '=');
+    let urlKey = inputUrl
+      .replace(/\./g, ',')
+      .replace(/\//g, '=')
+      .replace(/#/g, '&');
     return urlKey;
   }
 
