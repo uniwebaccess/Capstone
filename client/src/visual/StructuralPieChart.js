@@ -28,7 +28,7 @@ export default function StructuralPieChart(props) {
               borderWidth:4,
               backgroundColor: [
                 'rgba(255, 183, 3, 1)',
-                'rgba(186, 24, 27, 1)',
+                'rgba(194, 75, 39, 1)',
                 'rgba(33, 158,188, 1)',
 
               ],

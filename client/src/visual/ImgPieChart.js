@@ -42,11 +42,11 @@ function ImgPieChart(props) {
           return '';
         }
 
-        return percentage + '%';
+        return `${dataEntry.value} (${percentage}%)`;
       }
            }
       labelPosition={100 - lineWidth / 2}
-      center={[40, 50]}
+      center={[50, 45]}
       labelStyle={{
         fill: '#fff',
         opacity: 0.70,

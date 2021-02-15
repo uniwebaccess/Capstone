@@ -233,7 +233,6 @@ class StructuralResult extends Component {
 
 
                             <TableCell align="right" className={classes.tableBody}>{data.structuralResult.inputAndLabel.inputAndLabel ? 'Passed' : 'Failed'}</TableCell>
-
                           </TableRow>
 
 

@@ -3,13 +3,15 @@ import { Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 function formatPercent(value, context) {
-  if (value == 0) {
-    return '';
-  }
   let values = context.dataset.data;
   let sum = values.reduce((a, b) => a + b);
 
-  return Math.round(value*100/sum) + ' %';
+  let percent = Math.round(value*100/sum);
+  if (percent < 10) {
+    return '';
+  }
+
+  return percent + ' %';
 }
 
 export default function PieChart(props) {
@@ -25,18 +27,16 @@ export default function PieChart(props) {
               label: ' Total Images',
               data: props.data.imagesData,
               backgroundColor: [
-                'rgba(33, 158, 188, 0.7)',
+                'rgba(186, 24, 27, 1)',
                 'rgb(253, 197, 0)',
                 'rgb(44, 98, 131)',
-                'rgba(142, 202, 230, 0.7)',
                 'rgba(251, 133, 0, 0.7)',
                 'rgba(166, 255, 245, 1)',
               ],
               borderColor: [
-                'rgba(33, 158, 188, 1)',
+                'rgba(186, 24, 27, 1)',
                 'rgb(253, 197, 0)',
                 'rgb(44, 98, 131)',
-                'rgba(142, 202, 230,1)',
                 'rgba(251, 133, 0, 1)',
                 'rgba(255, 159, 64, 1)',
               ],
@@ -63,14 +63,7 @@ export default function PieChart(props) {
               },
             },
           },
-          scales: {
-            // yAxes: [{
-            //   ticks: {
-            //     beginAtZero: true,
-            //     // suggestedMax: 100
-            //   }
-            // }]
-          },
+
           legend: {
             labels: {
               fontColor: '#1D3557',

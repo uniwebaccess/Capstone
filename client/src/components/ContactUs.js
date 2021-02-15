@@ -6,7 +6,6 @@ import {
   Grid,
   Link,
   Card,
-  CardActionArea,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import BethHS from "../visual/headshots/Beth.png";

@@ -15,7 +15,7 @@ export const failingSuggestions = {
   alt:
     "Add more alt attributes to your <img> elements.  Alt attributes (also called alt text) give a description of an image for people who may not be able to view them. When an alt attribute isn't present on an image, a screen reader may announce the image's file name and path instead. This fails to communicate the image’s content.",
   emptyAlt:
-    "Null, or empty, alt attributes are made by including no information between the opening and closing quotes of an alt attribute and are used to indicate that images are for decorative purposes. Decorative images do not communicate information that is required to understand the website's overall meaning. Historically they were used for flourishes and spacer gif images, but tend to be less relevant for modern websites and web apps.",
+    "Decorative images are null, or empty, alt attributes are made by including no information between the opening and closing quotes of an alt attribute and are used to indicate that images are for decorative purposes. Decorative images do not communicate information that is required to understand the website's overall meaning. Historically they were used for flourishes and spacer gif images, but tend to be less relevant for modern websites and web apps.",
   langAttr:
     'Include a lang attribute on the <html> element.  This helps assistive technology such as screen readers to pronounce content correctly.',
   hrefAttr:
