@@ -26,7 +26,7 @@ import FrictionGroup from "../../visual/animation/Arrow";
 import CheckboxX from "../../visual/animation/CheckboxX";
 import CheckboxCheck from "../../visual/animation/CheckboxCheck";
 
-import { failingSuggestions, passingFeedback } from '../../constants';
+import { failingSuggestions, passingFeedback } from "../../constants";
 
 const navStyles = (theme) => ({
   backButton: {
@@ -35,14 +35,18 @@ const navStyles = (theme) => ({
   },
   header: {
     marginTop: "4%",
-    marginBottom: "3%",
     color: "#1D3557",
     fontWeight: "bold",
     fontSize: "28px",
   },
-  graphContainer1: {},
+  graphContainer1: {
+    alignItems: "center",
+    align: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+  },
   checkboxes: {
-    marginTop: "10%",
+    margin: "5%",
   },
   tableheader: {
     fontSize: "26px",
@@ -60,17 +64,17 @@ const navStyles = (theme) => ({
   },
   card: {
     marginTop: "10%",
-    marginBottom: '5%',
+    marginBottom: "5%",
     //background: '#fefae0',
     //background: '#0097a7'
   },
   green: {
-    color: 'green'
+    color: "green",
   },
   red: { color: "red" },
   description: {
-    color: '#343a40'
-  }
+    color: "#343a40",
+  },
 });
 
 class GlobalCodeResult extends Component {
@@ -105,11 +109,22 @@ class GlobalCodeResult extends Component {
 
             <Typography className={classes.header}>
               <br />
-              {data.globalCodeResult.passed ? <b>Global Code Category <span className={classes.green}>Passed</span></b> : <b>Global Code Category <span className={classes.red}>Failed</span></b>} <br />
+              {data.globalCodeResult.passed ? (
+                <b>
+                  Global Code Category{" "}
+                  <span className={classes.green}>Passed</span>
+                </b>
+              ) : (
+                <b>
+                  Global Code Category{" "}
+                  <span className={classes.red}>Failed</span>
+                </b>
+              )}{" "}
+              <br />
             </Typography>
 
             <Grid container spacing={3} className={classes.graphContainer1}>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <Box
                   className={classes.checkboxes}
                   display="flex"
@@ -119,8 +134,8 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.autofocusAttr ? (
                       <CheckboxCheck delay="one" />
                     ) : (
-                        <CheckboxX delay="one" />
-                      )}
+                      <CheckboxX delay="one" />
+                    )}
                     <Typography className="checkbox-label">
                       Autofocus
                     </Typography>
@@ -129,8 +144,8 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.useListElement ? (
                       <CheckboxCheck delay="two" />
                     ) : (
-                        <CheckboxX delay="two" />
-                      )}
+                      <CheckboxX delay="two" />
+                    )}
                     <Typography className="checkbox-label">
                       List Element
                     </Typography>
@@ -139,8 +154,8 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.langAttr ? (
                       <CheckboxCheck delay="three" />
                     ) : (
-                        <CheckboxX delay="three" />
-                      )}
+                      <CheckboxX delay="three" />
+                    )}
                     <Typography className="checkbox-label">
                       Language Attribute
                     </Typography>
@@ -149,22 +164,22 @@ class GlobalCodeResult extends Component {
                     {data.globalCodeResult.isMainTag.mainTag ? (
                       <CheckboxCheck delay="four" />
                     ) : (
-                        <CheckboxX delay="four" />
-                      )}
+                      <CheckboxX delay="four" />
+                    )}
                     <Typography className="checkbox-label">Main Tag</Typography>
                   </div>
                   <div>
                     {data.globalCodeResult.passed ? (
                       <CheckboxCheck delay="five" />
                     ) : (
-                        <CheckboxX delay="five" />
-                      )}
+                      <CheckboxX delay="five" />
+                    )}
                     <Typography className="checkbox-label">Overall</Typography>
                   </div>
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={12}>
+              <Grid item xs={8} align="center">
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer}>
@@ -172,12 +187,15 @@ class GlobalCodeResult extends Component {
                         <TableBody>
                           <TableRow>
                             <TableCell className={classes.tableBody}>
-                              Auto Focus:{" "}
-                              <Typography variant="body1" className={classes.description}>
+                              Autofocus:{" "}
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.globalCodeResult.autofocusAttr ? (passingFeedback.sectionTag) :
-                                  (failingSuggestions.sectionTag
-                                  )}
+                                {data.globalCodeResult.autofocusAttr
+                                  ? passingFeedback.sectionTag
+                                  : failingSuggestions.sectionTag}
                               </Typography>
                             </TableCell>
                             <TableCell
@@ -191,12 +209,15 @@ class GlobalCodeResult extends Component {
                           </TableRow>
                           <TableRow>
                             <TableCell className={classes.tableBody}>
-                              List Elements:{" "}
-                              <Typography variant="body1" className={classes.description}>
+                              List elements:{" "}
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.globalCodeResult.useListElement ? (passingFeedback.listElem) :
-                                  (failingSuggestions.listElem
-                                  )}
+                                {data.globalCodeResult.useListElement
+                                  ? passingFeedback.listElem
+                                  : failingSuggestions.listElem}
                               </Typography>
                             </TableCell>
                             <TableCell
@@ -211,12 +232,15 @@ class GlobalCodeResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              Language:{" "}
-                              <Typography variant="body1" className={classes.description}>
+                              Language attribute:{" "}
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.globalCodeResult.langAttr ? (passingFeedback.langAttr) :
-                                  (failingSuggestions.langAttr
-                                  )}
+                                {data.globalCodeResult.langAttr
+                                  ? passingFeedback.langAttr
+                                  : failingSuggestions.langAttr}
                               </Typography>
                             </TableCell>
                             <TableCell
@@ -231,12 +255,15 @@ class GlobalCodeResult extends Component {
 
                           <TableRow>
                             <TableCell className={classes.tableBody}>
-                              Main Tag:{" "}
-                              <Typography variant="body1" className={classes.description}>
+                              Main tag:{" "}
+                              <Typography
+                                variant="body1"
+                                className={classes.description}
+                              >
                                 <br />
-                                {data.globalCodeResult.isMainTag.mainTag ? (passingFeedback.mainTag) :
-                                  (failingSuggestions.mainTag
-                                  )}
+                                {data.globalCodeResult.isMainTag.mainTag
+                                  ? passingFeedback.mainTag
+                                  : failingSuggestions.mainTag}
                               </Typography>
                             </TableCell>
                             <TableCell
@@ -251,6 +278,18 @@ class GlobalCodeResult extends Component {
 
                           <TableRow>
                             <TableCell className={classes.tableBody}>
+                              Total score for this test:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.globalCodeResult.percent}%
+                            </TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>
                               Overall:{" "}
                             </TableCell>
                             <TableCell
@@ -260,18 +299,6 @@ class GlobalCodeResult extends Component {
                               {data.globalCodeResult.passed
                                 ? "Passed"
                                 : "Failed"}
-                            </TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>
-                              Overall Score:{" "}
-                            </TableCell>
-                            <TableCell
-                              align="right"
-                              className={classes.tableBody}
-                            >
-                              {data.globalCodeResult.percent}%
                             </TableCell>
                           </TableRow>
                         </TableBody>

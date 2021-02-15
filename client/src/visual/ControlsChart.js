@@ -22,7 +22,6 @@ export function HrefChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
         fontSize: 15,
       },
     },
@@ -33,9 +32,8 @@ export function HrefChart(props) {
     },
     elements: {
       center: {
-        text: `${hrefPercent}%`,
+        text: `${Math.ceil(hrefPercent)}%`,
         color: bgColor,
-        fontStyle: 'Arial',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -43,8 +41,8 @@ export function HrefChart(props) {
       },
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 500,
+      easing: 'easeInExpo',
       from: 1,
       to: 0,
       loop: false,
@@ -56,6 +54,13 @@ export function HrefChart(props) {
     //     delay: 0,
     //   },
     // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(hrefPercent)}%`;
+        },
+      },
+    },
   };
 
   return (
@@ -67,7 +72,7 @@ export function HrefChart(props) {
             datasets: [
               {
                 data: [hrefPercent, 100 - hrefPercent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: hrefPercent,
@@ -104,7 +109,6 @@ export function TargetChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
         fontSize: 15,
       },
     },
@@ -117,7 +121,6 @@ export function TargetChart(props) {
       center: {
         text: `${100 - newTabPercent}%`,
         color: bgColor,
-        fontStyle: 'Arial',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -125,17 +128,24 @@ export function TargetChart(props) {
       },
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 1000,
+      easing: 'easeInExpo',
       loop: false,
       delay: 250,
     },
-    // plugins: {
-    //   deferred: {
-    //     enabled: true,
-    //     delay: 250,
-    //   },
-    // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(100 - newTabPercent)}%`;
+        },
+      },
+      // plugins: {
+      //   deferred: {
+      //     enabled: true,
+      //     delay: 250,
+      //   },
+      // },
+    },
   };
 
   return (
@@ -147,7 +157,7 @@ export function TargetChart(props) {
             datasets: [
               {
                 data: [100 - newTabPercent, newTabPercent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: newTabPercent,
@@ -179,9 +189,8 @@ export function ButtonsChart(props) {
     cutoutPercentage: 65,
     elements: {
       center: {
-        text: `${buttonsPercent}%`,
+        text: `${Math.ceil(buttonsPercent)}%`,
         color: bgColor,
-        fontStyle: 'Arial',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -193,7 +202,6 @@ export function ButtonsChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
         fontSize: 15,
       },
     },
@@ -203,8 +211,8 @@ export function ButtonsChart(props) {
       fontSize: 15,
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 1250,
+      easing: 'easeInExpo',
       loop: false,
       delay: 500,
     },
@@ -214,6 +222,13 @@ export function ButtonsChart(props) {
     //     delay: 500,
     //   },
     // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(buttonsPercent)}%`;
+        },
+      },
+    },
   };
 
   return (
@@ -225,10 +240,10 @@ export function ButtonsChart(props) {
             datasets: [
               {
                 data: [buttonsPercent, 100 - buttonsPercent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
-            text: buttonsPercent,
+            text: Math.ceil(buttonsPercent),
           }}
           height={200}
           width={300}
@@ -260,7 +275,6 @@ export function ControlsScoreChart(props) {
       display: false,
       labels: {
         fontColor: '#2E2E3A',
-        fontFamily: 'arial',
         fontSize: 15,
       },
     },
@@ -271,9 +285,8 @@ export function ControlsScoreChart(props) {
     },
     elements: {
       center: {
-        text: `${percent}%`,
+        text: `${Math.ceil(percent)}%`,
         color: bgColor,
-        fontStyle: 'Arial',
         sidePadding: 20, // Default is 20 (as a percentage)
         minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
         maxFontSize: 35,
@@ -281,8 +294,8 @@ export function ControlsScoreChart(props) {
       },
     },
     animation: {
-      duration: 750,
-      easing: 'linear',
+      duration: 1500,
+      easing: 'easeInExpo',
       loop: false,
       delay: 250,
     },
@@ -292,6 +305,13 @@ export function ControlsScoreChart(props) {
     //     delay: 750,
     //   },
     // },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return `Your score is ${Math.ceil(percent)}%`;
+        },
+      },
+    },
   };
 
   return (
@@ -303,7 +323,7 @@ export function ControlsScoreChart(props) {
             datasets: [
               {
                 data: [percent, 100 - percent],
-                backgroundColor: [bgColor, 'rgba(173, 173, 173, 1)'],
+                backgroundColor: [bgColor, 'rgba(173, 173, 173, 0.5)'],
               },
             ],
             text: percent,
@@ -325,7 +345,7 @@ Chart.pluginService.register({
 
       // Get options from the center object in options
       var centerConfig = chart.config.options.elements.center;
-      var fontStyle = centerConfig.fontStyle || 'Arial';
+      var fontStyle = centerConfig.fontStyle || 'Helvetica Neue';
       var txt = centerConfig.text;
       var color = centerConfig.color || '#000';
       var maxFontSize = centerConfig.maxFontSize || 75;

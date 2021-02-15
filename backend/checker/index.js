@@ -1,11 +1,11 @@
-const puppeteer = require('puppeteer');
-const imagesCheck = require('./images');
-const headingsCheck = require('./headings');
-const globalCodeCheck = require('./globalCode');
-const controlsCheck = require('./controls');
-const structuralCheck = require('./structural');
+const puppeteer = require("puppeteer");
+const imagesCheck = require("./images");
+const headingsCheck = require("./headings");
+const globalCodeCheck = require("./globalCode");
+const controlsCheck = require("./controls");
+const structuralCheck = require("./structural");
 async function checkPage(url) {
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
   await page.goto(url);
   //add different tasks
@@ -18,7 +18,7 @@ async function checkPage(url) {
   await browser.close();
 
   // calculating algorithm :
-  const percent =
+  let percent =
     imagesResult.percent * 0.2 +
     headingsResult.percent * 0.15 +
     globalCodeResult.percent * 0.2 +
@@ -34,6 +34,8 @@ async function checkPage(url) {
       controls: 15%
 
     */
+
+  percent = Math.round(percent * 100) / 100;
 
   const passed = percent > 70;
 

@@ -44,13 +44,17 @@ const navStyles = (theme) => ({
     fontWeight: "bold",
     fontSize: "28px",
   },
-
+  graphContainer1: {
+    alignItems: "center",
+    align: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+  },
   tableheader: {
     fontSize: "26px",
     color: "#1D3557",
     fontWeight: "bold",
   },
-
   tableBody: {
     fontSize: "17px",
     //color: '#ffffff',
@@ -123,7 +127,13 @@ class HeadingsResult extends Component {
               <br />
             </Typography>
 
-            <Grid container spacing={4} className={classes.graphContainer1}>
+            <Grid
+              container
+              item={true}
+              spacing={4}
+              className={classes.graphContainer1}
+              xs={12}
+            >
               <Grid item xs={12} md={6}>
                 <Box>
                   <HeadingsBarChart
@@ -185,7 +195,7 @@ class HeadingsResult extends Component {
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={12}>
+              <Grid item xs={8} align="center">
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer}>
@@ -194,7 +204,7 @@ class HeadingsResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              App follows Logic Sequence for H tags :
+                              Logic sequence for heading tags:
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -218,7 +228,7 @@ class HeadingsResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              Has only 1 H1 Tag :
+                              Only one H1 tag :
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -242,7 +252,7 @@ class HeadingsResult extends Component {
                           <TableRow>
                             <TableCell className={classes.tableBody}>
                               {" "}
-                              Don't skip order of H Tags :
+                              Order of heading tags:
                               <Typography
                                 variant="body1"
                                 className={classes.description}
@@ -262,40 +272,27 @@ class HeadingsResult extends Component {
                                 : "Failed"}
                             </TableCell>
                           </TableRow>
-
                           <TableRow>
                             <TableCell className={classes.tableBody}>
-                              Total sub-tests performed:{" "}
-                            </TableCell>
-                            <TableCell
-                              align="right"
-                              className={classes.tableBody}
-                            >
-                              3
-                            </TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>
-                              {" "}
-                              Pass this test (minimun 70%){" "}
-                            </TableCell>
-                            <TableCell
-                              align="right"
-                              className={classes.tableBody}
-                            >
-                              {data.headingsResult.passed ? "Passed" : "Failed"}
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className={classes.tableBody}>
-                              Total score for this Test:{" "}
+                              Total score for this test:{" "}
                             </TableCell>
                             <TableCell
                               align="right"
                               className={classes.tableBody}
                             >
                               {data.headingsResult.percent}%
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell className={classes.tableBody}>
+                              {" "}
+                              Overall:{" "}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={classes.tableBody}
+                            >
+                              {data.headingsResult.passed ? "Passed" : "Failed"}
                             </TableCell>
                           </TableRow>
                         </TableBody>
