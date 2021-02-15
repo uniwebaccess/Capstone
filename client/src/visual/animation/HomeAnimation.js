@@ -28,6 +28,10 @@ class HomeAnimation extends React.Component {
     }, 4000);
   }
 
+  componentWillUnmount() {
+    window.clearInterval(this.setStateInterval)
+  }
+
   toggleBw() {
     this.setState(oldState => ({
       ...oldState,
