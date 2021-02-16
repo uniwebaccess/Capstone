@@ -10,9 +10,10 @@ import { withStyles } from '@material-ui/core/';
 
 
 const navStyles = (theme) => ({
-  container:{
-    marginBottom: "3%"
+  button:{
+
   }
+
 })
 
 
@@ -62,13 +63,14 @@ class HomeAnimation extends React.Component {
     return ["#e63946", "#ffb703", "#a8dadc", "#457b9d"]
   }
   render() {
+    const classes = this.props.classes;
     return (
       <div>
-      <Box position="absolute"  right="17%" zIndex="tooltip">
-        <Button style={{color:'#1D3557'}} onClick={this.toggleBw}>
+      <Box display="flex" justifyContent="flex-end" zIndex="tooltip" pr={11}>
+        <Button style={{color:'#1D3557'}} onClick={this.toggleBw} right='2%' position='sticky'>
         Click to see Colorblind view</Button>
       </Box>
-      <Box width={555}>
+      <Box>
       <VictoryChart
         theme={VictoryTheme.material}
         animate={{duration: 1000}}>

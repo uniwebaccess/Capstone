@@ -95,7 +95,7 @@ const navStyles = (theme) => ({
 
   barchart: {
     marginTop: "0.5%",
-  },
+  }
 });
 
 class ImagesResult extends Component {
@@ -204,7 +204,7 @@ class ImagesResult extends Component {
                   </Box>
                 </Grid>
 
-                <Grid item xs={8} align="center">
+                <Grid item xs={11} align="center">
                   <Card className={classes.card}>
                     <CardContent>
                       <TableContainer className={classes.tableContainer}>

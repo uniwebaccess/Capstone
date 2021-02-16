@@ -205,7 +205,7 @@ class StructuralResult extends Component {
                 </Box>
               </Grid>
 
-              <Grid item xs={8} align="center">
+              <Grid item xs={11} align="center">
                 <Card className={classes.card}>
                   <CardContent>
                     <TableContainer className={classes.tableContainer}>

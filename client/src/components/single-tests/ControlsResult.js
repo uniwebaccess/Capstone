@@ -148,7 +148,7 @@ class ControlsResult extends Component {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={8} align="center">
+                <Grid item xs={11} align="center">
                   <Card className={classes.card} align="center">
                     <CardContent align="center">
                       <TableContainer className={classes.tableContainer}>

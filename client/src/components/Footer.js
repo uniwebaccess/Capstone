@@ -21,7 +21,7 @@ class Footer extends Component {
 
     return (
       <footer className={classes.footer}>
-        <Box >
+        <Box position='sticky'>
           <Typography variant="body1"  className={classes.copyright}>
           Copyright © 2021 Uniweb-Access Inc. United States
           </Typography>

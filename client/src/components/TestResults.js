@@ -128,7 +128,7 @@ class TestResult extends Component {
               ) : (
                 <b>
                   Web-Accessibility Test{" "}
-                  <span className={classes.red}>Failed</span> for :
+                  <span  className={classes.red}>Failed</span> for :
                 </b>
               )}{" "}
               <br />
