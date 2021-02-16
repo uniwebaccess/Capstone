@@ -20,7 +20,7 @@ function ImgPieChart(props) {
     return entry;
   });
 
-  const lineWidth = 60;
+  const lineWidth = 68;
 
   return (
     <div data-tip="" data-for="chart">
@@ -42,7 +42,7 @@ function ImgPieChart(props) {
           return '';
         }
 
-        return `${dataEntry.value} (${percentage}%)`;
+        return `${dataEntry.value}(${percentage}%)`;
       }
            }
       labelPosition={100 - lineWidth / 2}

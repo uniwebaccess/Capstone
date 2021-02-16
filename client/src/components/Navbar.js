@@ -33,7 +33,7 @@ class NavBar extends Component {
     const menuId = "primary-mail";
     return (
       <div className={classes.root}>
-        <AppBar color="primary" position="static">
+        <AppBar position='sticky' color="primary" position="static">
           <Toolbar>
             <IconButton
               href="/"
